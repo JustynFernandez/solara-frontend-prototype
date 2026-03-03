@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+  <!-- Waving hand palm -->
+  <path d="M28 42c-5 0-9-4-9-9v-14c0-2 1.5-3.5 3.5-3.5s3.5 1.5 3.5 3.5v8" stroke="#ffd37a" stroke-opacity="0.75" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Fingers -->
+  <path d="M26 26v-10c0-2 1.5-3.5 3.5-3.5s3.5 1.5 3.5 3.5v10" stroke="#ffd37a" stroke-opacity="0.75" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M33 26v-8c0-2 1.5-3.5 3.5-3.5s3.5 1.5 3.5 3.5v11" stroke="#ffd37a" stroke-opacity="0.7" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <path d="M40 29v-4c0-1.5 1-2.5 2.5-2.5s2.5 1 2.5 2.5v8c0 5-4 9-9 9h-8" stroke="#ffd37a" stroke-opacity="0.65" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+  <!-- Wave motion lines -->
+  <path d="M10 18c2 0 3-1 5-1s3 1 5 1" stroke="#7bb8ff" stroke-opacity="0.55" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M8 24c2 0 3-1 5-1s3 1 5 1" stroke="#7bb8ff" stroke-opacity="0.45" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Accent dots -->
+  <circle cx="8" cy="12" r="1.5" fill="#ffd37a" fill-opacity="0.6"/>
+  <circle cx="48" cy="10" r="1.4" fill="#7bb8ff" fill-opacity="0.5"/>
+</svg>

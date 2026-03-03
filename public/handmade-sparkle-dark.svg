@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56" fill="none">
+  <!-- Main sparkle star -->
+  <path d="M28 8v12" stroke="#ffd37a" stroke-opacity="0.8" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M28 36v12" stroke="#ffd37a" stroke-opacity="0.8" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M8 28h12" stroke="#ffd37a" stroke-opacity="0.8" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="M36 28h12" stroke="#ffd37a" stroke-opacity="0.8" stroke-width="2.4" stroke-linecap="round"/>
+  <!-- Diagonal rays -->
+  <path d="M14 14l7 7" stroke="#7bb8ff" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <path d="M35 35l7 7" stroke="#7bb8ff" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <path d="M14 42l7-7" stroke="#7bb8ff" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <path d="M35 21l7-7" stroke="#7bb8ff" stroke-opacity="0.6" stroke-width="2" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="28" cy="28" r="3" fill="#ffd37a" fill-opacity="0.7"/>
+  <!-- Small accent dots -->
+  <circle cx="45" cy="11" r="1.5" fill="#7bb8ff" fill-opacity="0.55"/>
+  <circle cx="11" cy="45" r="1.5" fill="#ffd37a" fill-opacity="0.55"/>
+</svg>
