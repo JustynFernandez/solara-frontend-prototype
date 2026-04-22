@@ -1,0 +1,126 @@
+# copy these straight into thunder client
+# main ten-minute demo order:
+# 1. get projects
+# 2. get one project
+# 3. add guide resource
+# 4. pin guide resource
+# 5. create help request
+# 6. get notifications
+#
+# backup only if you have time:
+# - get notification preferences
+# - update notification preferences
+# - duplicate add guide resource
+# - mark notification as read
+# - get project dashboard
+#
+# every request uses this header unless stated otherwise:
+# X-User-Id: user-demo-1
+
+### core 1. get projects
+# method: GET
+# url:
+# http://127.0.0.1:8080/api/projects?page=1&size=20
+GET http://127.0.0.1:8080/api/projects?page=1&size=20
+X-User-Id: user-demo-1
+
+### core 2. get one project
+# method: GET
+# url:
+# http://127.0.0.1:8080/api/projects/1
+GET http://127.0.0.1:8080/api/projects/1
+X-User-Id: user-demo-1
+
+### backup 1. get notification preferences
+# method: GET
+# url:
+# http://127.0.0.1:8080/api/notification-preferences
+GET http://127.0.0.1:8080/api/notification-preferences
+X-User-Id: user-demo-1
+
+### backup 2. update notification preferences
+# method: PUT
+# url:
+# http://127.0.0.1:8080/api/notification-preferences
+PUT http://127.0.0.1:8080/api/notification-preferences
+Content-Type: application/json
+X-User-Id: user-demo-1
+
+{
+  "inAppEnabled": true,
+  "helpRequestsEnabled": true,
+  "projectResourcesEnabled": true,
+  "teamActivityEnabled": false
+}
+
+### core 3. add guide resource
+# method: POST
+# url:
+# http://127.0.0.1:8080/api/projects/1/resources/guides/rooftop-safety-basics
+POST http://127.0.0.1:8080/api/projects/1/resources/guides/rooftop-safety-basics
+X-User-Id: user-demo-1
+
+### backup 3. duplicate add guide resource
+# method: POST
+# url:
+# http://127.0.0.1:8080/api/projects/1/resources/guides/rooftop-safety-basics
+# send the same request again on purpose to show the conflict response
+POST http://127.0.0.1:8080/api/projects/1/resources/guides/rooftop-safety-basics
+X-User-Id: user-demo-1
+
+### core 4. pin guide resource
+# method: PATCH
+# url:
+# http://127.0.0.1:8080/api/projects/1/resources/guides/rooftop-safety-basics/pin
+PATCH http://127.0.0.1:8080/api/projects/1/resources/guides/rooftop-safety-basics/pin
+Content-Type: application/json
+X-User-Id: user-demo-1
+
+{
+  "pinned": true
+}
+
+### core 5. create help request
+# method: POST
+# url:
+# http://127.0.0.1:8080/api/help-requests
+POST http://127.0.0.1:8080/api/help-requests
+Content-Type: application/json
+X-User-Id: user-demo-1
+
+{
+  "whatNeeded": "Need a backend integration review",
+  "whenNeeded": "This week",
+  "description": "I need someone to review the project workspace backend flow and confirm that the guide resource, help request, and notification endpoints are working correctly.",
+  "contactMethod": "justyn@solara.dev",
+  "projectId": 1,
+  "guideSlug": "rooftop-safety-basics",
+  "context": "individual backend demo request"
+}
+
+### core 6. get notifications
+# method: GET
+# url:
+# http://127.0.0.1:8080/api/notifications?page=1&size=20
+GET http://127.0.0.1:8080/api/notifications?page=1&size=20
+X-User-Id: user-demo-1
+
+### backup 4. mark notification as read
+# method: PATCH
+# url:
+# http://127.0.0.1:8080/api/notifications/1/read
+# if notification id 1 does not exist, replace the 1 with a real id from the get notifications response
+PATCH http://127.0.0.1:8080/api/notifications/1/read
+Content-Type: application/json
+X-User-Id: user-demo-1
+
+{
+  "read": true
+}
+
+### backup 5. get project dashboard
+# method: GET
+# url:
+# http://127.0.0.1:8080/api/projects/1/dashboard
+GET http://127.0.0.1:8080/api/projects/1/dashboard
+X-User-Id: user-demo-1
