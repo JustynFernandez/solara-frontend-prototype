@@ -1,0 +1,433 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Projects
+            - generic [ref=e53]:
+              - heading "Community builds, active workspaces, and the helpers needed next." [level=1] [ref=e54]
+              - generic [ref=e55]: Explore neighborhood projects, review guide recommendations, and pull qualified help into work that is already moving.
+            - generic [ref=e57]:
+              - link "Browse helpers ->" [ref=e58] [cursor=pointer]:
+                - /url: /connect/helpers
+              - link "Open guides ->" [ref=e59] [cursor=pointer]:
+                - /url: /learn
+          - generic [ref=e61]:
+            - generic [ref=e67]: Project board
+            - generic [ref=e68]:
+              - paragraph [ref=e69]: Current project mix
+              - heading "See what is live before you open a workspace." [level=3] [ref=e70]
+              - paragraph [ref=e71]: Each project keeps status, volunteer demand, and the next route visible.
+            - generic [ref=e73]:
+              - article [ref=e74]:
+                - generic [ref=e75]:
+                  - generic [ref=e76]:
+                    - heading "Brixton Solar Rooftops" [level=3] [ref=e77]
+                    - paragraph [ref=e78]: Brixton, London
+                  - generic [ref=e79]: Recruiting
+              - article [ref=e80]:
+                - generic [ref=e81]:
+                  - generic [ref=e82]:
+                    - heading "Camden Solar Co-op" [level=3] [ref=e83]
+                    - paragraph [ref=e84]: Camden, London
+                  - generic [ref=e85]: In Progress
+              - article [ref=e86]:
+                - generic [ref=e87]:
+                  - generic [ref=e88]:
+                    - heading "Greenwich Garden Canopy" [level=3] [ref=e89]
+                    - paragraph [ref=e90]: Greenwich, London
+                  - generic [ref=e91]: Planning
+        - generic [ref=e92]:
+          - article [ref=e93]:
+            - paragraph [ref=e94]: Active workspaces
+            - paragraph [ref=e95]: "4"
+            - paragraph [ref=e96]: Projects currently in motion.
+          - article [ref=e97]:
+            - paragraph [ref=e98]: Volunteer demand
+            - paragraph [ref=e99]: "42"
+            - paragraph [ref=e100]: Open volunteer slots across the board.
+          - article [ref=e101]:
+            - paragraph [ref=e102]: Guide handoff
+            - paragraph [ref=e103]: "8"
+            - paragraph [ref=e104]: Learning links available from projects.
+      - generic [ref=e105]:
+        - generic [ref=e107]:
+          - generic [ref=e108]:
+            - generic [ref=e109]:
+              - paragraph [ref=e110]: Project map
+              - heading "See active builds before choosing a workspace." [level=2] [ref=e111]
+            - link "Need people for a project? ->" [ref=e112] [cursor=pointer]:
+              - /url: /connect
+          - generic [ref=e115]:
+            - generic:
+              - region "Map" [ref=e116]
+              - button "Map marker" [ref=e117] [cursor=pointer]:
+                - button "Open Brixton Solar Rooftops" [ref=e118]:
+                  - img [ref=e121]
+              - button "Map marker" [ref=e124] [cursor=pointer]:
+                - button "Open Camden Solar Co-op" [ref=e125]:
+                  - img [ref=e128]
+              - button "Map marker" [ref=e131] [cursor=pointer]:
+                - button "Open Greenwich Garden Canopy" [ref=e132]:
+                  - img [ref=e135]
+              - button "Map marker" [ref=e138] [cursor=pointer]:
+                - button "Open Hackney Battery Hub" [ref=e139]:
+                  - img [ref=e142]
+              - button "Map marker" [ref=e145] [cursor=pointer]:
+                - button "Open Kings Cross EV Canopy" [ref=e146]:
+                  - img [ref=e149]
+            - generic:
+              - generic:
+                - generic [ref=e152]:
+                  - button "Zoom in" [ref=e153] [cursor=pointer]
+                  - button "Zoom out" [ref=e155] [cursor=pointer]
+                - group [ref=e157]:
+                  - generic "Toggle attribution" [ref=e158] [cursor=pointer]
+                  - link "MapLibre" [ref=e160] [cursor=pointer]:
+                    - /url: https://maplibre.org/
+        - generic [ref=e163]:
+          - article [ref=e164]:
+            - generic [ref=e165]:
+              - generic [ref=e166]:
+                - heading "Brixton Solar Rooftops" [level=3] [ref=e167]
+                - paragraph [ref=e168]: Row homes retrofits with rooftop kits plus tenant mentorship.
+              - generic [ref=e169]: Recruiting
+            - generic [ref=e170]:
+              - img [ref=e171]
+              - text: Brixton, London
+            - generic [ref=e174]:
+              - generic [ref=e175]: Rooftop
+              - generic [ref=e176]: Mentorship
+            - generic [ref=e178]:
+              - generic [ref=e179]:
+                - img [ref=e180]
+                - text: 18/25 volunteers
+              - generic [ref=e182]: 72%
+            - generic [ref=e185]:
+              - generic [ref=e186]:
+                - img [ref=e187]
+                - text: GBP 6,200 / GBP 12,000
+              - button "Open workspace ->" [ref=e189] [cursor=pointer]
+            - generic [ref=e190]:
+              - paragraph [ref=e191]: Recommended guides
+              - link "Maintenance Basics ->" [ref=e193] [cursor=pointer]:
+                - /url: /learn/maintenance-basics
+          - article [ref=e194]:
+            - generic [ref=e195]:
+              - generic [ref=e196]:
+                - heading "Camden Solar Co-op" [level=3] [ref=e197]
+                - paragraph [ref=e198]: Co-owned 150kW array with youth training at two centers.
+              - generic [ref=e199]: In Progress
+            - generic [ref=e200]:
+              - img [ref=e201]
+              - text: Camden, London
+            - generic [ref=e204]:
+              - generic [ref=e205]: Co-op
+              - generic [ref=e206]: Training
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - img [ref=e210]
+                - text: 22/35 volunteers
+              - generic [ref=e212]: 63%
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - img [ref=e217]
+                - text: GBP 21,500 / GBP 38,000
+              - button "Open workspace ->" [ref=e219] [cursor=pointer]
+            - generic [ref=e220]:
+              - paragraph [ref=e221]: Recommended guides
+              - link "Maintenance Basics ->" [ref=e223] [cursor=pointer]:
+                - /url: /learn/maintenance-basics
+          - article [ref=e224]:
+            - generic [ref=e225]:
+              - generic [ref=e226]:
+                - heading "Greenwich Garden Canopy" [level=3] [ref=e227]
+                - paragraph [ref=e228]: Solar pergola for an urban garden with battery lighting.
+              - generic [ref=e229]: Planning
+            - generic [ref=e230]:
+              - img [ref=e231]
+              - text: Greenwich, London
+            - generic [ref=e234]:
+              - generic [ref=e235]: Canopy
+              - generic [ref=e236]: Battery
+            - generic [ref=e238]:
+              - generic [ref=e239]:
+                - img [ref=e240]
+                - text: 9/20 volunteers
+              - generic [ref=e242]: 45%
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - img [ref=e247]
+                - text: GBP 4,200 / GBP 15,000
+              - button "Open workspace ->" [ref=e249] [cursor=pointer]
+            - generic [ref=e250]:
+              - paragraph [ref=e251]: Recommended guides
+              - link "Maintenance Basics ->" [ref=e253] [cursor=pointer]:
+                - /url: /learn/maintenance-basics
+          - article [ref=e254]:
+            - generic [ref=e255]:
+              - generic [ref=e256]:
+                - heading "Hackney Battery Hub" [level=3] [ref=e257]
+                - paragraph [ref=e258]: Shared battery + monitoring workshops for renters in flats.
+              - generic [ref=e259]: Scoping
+            - generic [ref=e260]:
+              - img [ref=e261]
+              - text: Hackney, London
+            - generic [ref=e264]:
+              - generic [ref=e265]: Battery
+              - generic [ref=e266]: Renters
+            - generic [ref=e268]:
+              - generic [ref=e269]:
+                - img [ref=e270]
+                - text: 7/18 volunteers
+              - generic [ref=e272]: 39%
+            - generic [ref=e275]:
+              - generic [ref=e276]:
+                - img [ref=e277]
+                - text: GBP 2,500 / GBP 10,000
+              - button "Open workspace ->" [ref=e279] [cursor=pointer]
+            - generic [ref=e280]:
+              - paragraph [ref=e281]: Recommended guides
+              - link "Maintenance Basics ->" [ref=e283] [cursor=pointer]:
+                - /url: /learn/maintenance-basics
+          - article [ref=e284]:
+            - generic [ref=e285]:
+              - generic [ref=e286]:
+                - heading "Kings Cross EV Canopy" [level=3] [ref=e287]
+                - paragraph [ref=e288]: Solar EV charging canopy with shade seating and Wi‑Fi.
+              - generic [ref=e289]: Completed
+            - generic [ref=e290]:
+              - img [ref=e291]
+              - text: Kings Cross, London
+            - generic [ref=e294]:
+              - generic [ref=e295]: EV
+              - generic [ref=e296]: Canopy
+            - generic [ref=e298]:
+              - generic [ref=e299]:
+                - img [ref=e300]
+                - text: 28/28 volunteers
+              - generic [ref=e302]: 100%
+            - generic [ref=e305]:
+              - generic [ref=e306]:
+                - img [ref=e307]
+                - text: GBP 42,000 / GBP 42,000
+              - button "Open workspace ->" [ref=e309] [cursor=pointer]
+            - generic [ref=e310]:
+              - paragraph [ref=e311]: Recommended guides
+              - link "Maintenance Basics ->" [ref=e313] [cursor=pointer]:
+                - /url: /learn/maintenance-basics
+        - generic [ref=e315]:
+          - generic [ref=e316]:
+            - generic [ref=e317]:
+              - heading "Need hands-on help?" [level=2] [ref=e318]
+              - link "Open Connect ->" [ref=e319] [cursor=pointer]:
+                - /url: /connect
+            - paragraph [ref=e320]: Top available helpers you can invite into any workspace.
+            - generic [ref=e321]:
+              - generic [ref=e322]:
+                - generic [ref=e323]:
+                  - generic [ref=e324]:
+                    - paragraph [ref=e325]: Ava Mensah
+                    - paragraph [ref=e326]: trained
+                  - generic [ref=e327]: available
+                - generic [ref=e328]:
+                  - generic [ref=e329]: Rooftop
+                  - generic [ref=e330]: Shade survey
+                  - generic [ref=e331]: DC wiring
+                - generic [ref=e332]:
+                  - generic [ref=e333]: Rating 4.8
+                  - link "Request support ->" [ref=e334] [cursor=pointer]:
+                    - /url: /connect?requestHelp=1&helperId=h1
+              - generic [ref=e335]:
+                - generic [ref=e336]:
+                  - generic [ref=e337]:
+                    - paragraph [ref=e338]: Elliot P.
+                    - paragraph [ref=e339]: certified
+                  - generic [ref=e340]: limited
+                - generic [ref=e341]:
+                  - generic [ref=e342]: Mains wiring
+                  - generic [ref=e343]: Commissioning
+                  - generic [ref=e344]: Battery
+                - generic [ref=e345]:
+                  - generic [ref=e346]: Rating 4.9
+                  - link "Request support ->" [ref=e347] [cursor=pointer]:
+                    - /url: /connect?requestHelp=1&helperId=h2
+              - generic [ref=e348]:
+                - generic [ref=e349]:
+                  - generic [ref=e350]:
+                    - paragraph [ref=e351]: Samir K.
+                    - paragraph [ref=e352]: community
+                  - generic [ref=e353]: available
+                - generic [ref=e354]:
+                  - generic [ref=e355]: Planning
+                  - generic [ref=e356]: Monitoring
+                  - generic [ref=e357]: Tool-share
+                - generic [ref=e358]:
+                  - generic [ref=e359]: Rating 4.6
+                  - link "Request support ->" [ref=e360] [cursor=pointer]:
+                    - /url: /connect?requestHelp=1&helperId=h3
+              - generic [ref=e361]:
+                - generic [ref=e362]:
+                  - generic [ref=e363]:
+                    - paragraph [ref=e364]: Lina Patel
+                    - paragraph [ref=e365]: trained
+                  - generic [ref=e366]: available
+                - generic [ref=e367]:
+                  - generic [ref=e368]: Co-op
+                  - generic [ref=e369]: Permitting
+                  - generic [ref=e370]: Docs
+                - generic [ref=e371]:
+                  - generic [ref=e372]: Rating 4.7
+                  - link "Request support ->" [ref=e373] [cursor=pointer]:
+                    - /url: /connect?requestHelp=1&helperId=h4
+          - generic [ref=e374]:
+            - generic [ref=e375]:
+              - generic "Helper role tiers" [ref=e376]:
+                - generic [ref=e377]: Community volunteer
+                - generic [ref=e378]: Trained volunteer
+                - generic [ref=e379]: Certified installer
+              - generic [ref=e380]:
+                - paragraph [ref=e381]: Any mains work requires a certified professional. Match the right level before you open a request.
+                - generic [ref=e382]:
+                  - link "Safety ->" [ref=e383] [cursor=pointer]:
+                    - /url: /safety
+                  - link "Guidelines ->" [ref=e384] [cursor=pointer]:
+                    - /url: /community-guidelines
+            - generic [ref=e385]:
+              - paragraph [ref=e386]: How it works
+              - list [ref=e387]:
+                - listitem [ref=e388]: Pick a project workspace.
+                - listitem [ref=e389]: Invite helpers with the right level.
+                - listitem [ref=e390]: Track tasks and resources together.
+              - button "Browse all helpers ->" [ref=e391] [cursor=pointer]
+  - generic [ref=e392]:
+    - button "Eco mode Low battery" [pressed] [ref=e393] [cursor=pointer]:
+      - text: Eco mode
+      - generic [ref=e396]: Low battery
+    - button "Toggle theme" [ref=e397] [cursor=pointer]:
+      - img [ref=e398]
+  - contentinfo [ref=e401]:
+    - generic [ref=e402]:
+      - generic [ref=e403]:
+        - generic [ref=e404]:
+          - generic [ref=e405]: "19"
+          - generic [ref=e406]: Verified helpers
+        - generic [ref=e407]:
+          - generic [ref=e408]: "2"
+          - generic [ref=e409]: Active projects
+        - generic [ref=e410]:
+          - generic [ref=e411]: "8"
+          - generic [ref=e412]: Guides available
+      - generic [ref=e413]:
+        - generic [ref=e414]:
+          - generic [ref=e415]:
+            - img "Solara logo" [ref=e417]
+            - generic [ref=e418]:
+              - generic [ref=e419]: Solara
+              - paragraph [ref=e420]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e421]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e422]:
+          - generic [ref=e423]:
+            - heading "Product" [level=4] [ref=e424]
+            - list [ref=e425]:
+              - listitem [ref=e426]:
+                - link "Find Helpers" [ref=e427] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e428]:
+                - link "Plan Your Solar" [ref=e429] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e430]:
+                - link "3D Configurator" [ref=e431] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e432]:
+                - link "Projects" [ref=e433] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e434]:
+            - heading "Learn" [level=4] [ref=e435]
+            - list [ref=e436]:
+              - listitem [ref=e437]:
+                - link "Getting Started" [ref=e438] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e439]:
+                - link "Solar Navigator" [ref=e440] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e441]:
+                - link "Safety Guide" [ref=e442] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e443]:
+                - link "Services" [ref=e444] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e445]:
+            - heading "Community" [level=4] [ref=e446]
+            - list [ref=e447]:
+              - listitem [ref=e448]:
+                - link "Request Help" [ref=e449] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e450]:
+                - link "Become a Helper" [ref=e451] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e452]:
+                - link "Guidelines" [ref=e453] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e454]:
+                - link "Projects Board" [ref=e455] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e456]:
+            - heading "Account" [level=4] [ref=e457]
+            - list [ref=e458]:
+              - listitem [ref=e459]:
+                - link "Sign In" [ref=e460] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e461]:
+                - link "Register" [ref=e462] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e463]:
+                - link "My Account" [ref=e464] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e465]:
+                - link "Dashboard" [ref=e466] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e469]:
+          - generic [ref=e470]:
+            - heading "Get product updates" [level=3] [ref=e471]
+            - paragraph [ref=e472]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e473]:
+            - textbox "you@example.com" [ref=e474]
+            - button "Join update list" [ref=e475] [cursor=pointer]
+          - paragraph [ref=e476]: Unsubscribe any time.
+      - generic [ref=e477]:
+        - generic [ref=e478]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e480]: © 2026 Solara Community

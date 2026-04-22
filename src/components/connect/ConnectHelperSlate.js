@@ -1,0 +1,15 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { ShieldCheck } from "lucide-react";
+import HelperAvatar from "./HelperAvatar";
+const levelLabel = {
+    community: "Community volunteer",
+    trained: "Trained volunteer",
+    certified: "Certified installer",
+};
+const ConnectHelperSlate = ({ helpers, availableCount, areasCoveredCount }) => {
+    const [lead, ...supporting] = helpers;
+    if (!lead)
+        return null;
+    return (_jsxs("section", { className: "solara-connect-slate", "aria-label": "Verified helpers available now", children: [_jsxs("div", { className: "solara-connect-slate__header", children: [_jsx("p", { className: "solara-connect-slate__eyebrow", children: "Current screening pass" }), _jsxs("p", { className: "solara-connect-slate__summary", children: [availableCount, " available across ", areasCoveredCount, " areas"] })] }), _jsxs("article", { className: "solara-connect-slate__lead", children: [_jsx("p", { className: "solara-connect-slate__badge", children: "Best fit now" }), _jsxs("div", { className: "solara-connect-slate__identity", children: [_jsx(HelperAvatar, { name: lead.name, src: lead.avatar, className: "solara-connect-slate__avatar" }), _jsxs("div", { className: "solara-connect-slate__identity-copy", children: [_jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [_jsx("h3", { className: "solara-connect-slate__name", children: lead.name }), lead.verified ? _jsx(ShieldCheck, { className: "h-3.5 w-3.5 text-[var(--solara-accent)]", "aria-label": "Verified helper" }) : null] }), _jsx("p", { className: "solara-connect-slate__level", children: levelLabel[lead.level] })] })] }), _jsxs("div", { className: "solara-connect-slate__proof", children: [_jsxs("div", { children: [_jsx("p", { className: "solara-connect-slate__proof-label", children: "Location" }), _jsx("p", { children: lead.coarseLocationLabel })] }), _jsxs("div", { children: [_jsx("p", { className: "solara-connect-slate__proof-label", children: "Response" }), _jsx("p", { children: lead.responseTimeLabel })] })] })] }), _jsx("div", { className: "solara-connect-slate__list", children: supporting.map((helper, index) => (_jsxs("article", { className: "solara-connect-slate__row", children: [_jsx("p", { className: "solara-connect-slate__index", children: String(index + 2).padStart(2, "0") }), _jsx(HelperAvatar, { name: helper.name, src: helper.avatar, className: "solara-connect-slate__row-avatar" }), _jsxs("div", { className: "solara-connect-slate__row-copy", children: [_jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [_jsx("p", { className: "solara-connect-slate__row-name", children: helper.name }), helper.verified ? _jsx(ShieldCheck, { className: "h-3 w-3 text-[var(--solara-accent)]", "aria-label": "Verified helper" }) : null] }), _jsx("p", { className: "solara-connect-slate__row-level", children: levelLabel[helper.level] })] }), _jsxs("div", { className: "solara-connect-slate__row-proof", children: [_jsx("p", { children: helper.coarseLocationLabel }), _jsx("p", { children: helper.responseTimeLabel })] })] }, helper.id))) })] }));
+};
+export default ConnectHelperSlate;

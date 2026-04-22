@@ -11,20 +11,56 @@ type FilterState = {
   minRating: number;
 };
 
+type SortOption = "relevance" | "rating" | "projects" | "response";
+
 type Props = {
   value: FilterState;
   onChange: (v: FilterState) => void;
+  skillPool: string[];
+  selectedSkill: string;
+  onSelectedSkillChange: (skill: string) => void;
+  sortBy: SortOption;
+  onSortByChange: (sort: SortOption) => void;
+  activeSummary: string[];
+  savedOnly?: boolean;
+  onClear: () => void;
 };
 
-const HelperFilters: React.FC<Props> = ({ value, onChange }) => {
+const searchFieldClassName =
+  "solara-filter-search__input";
+
+const renderChipButton = (label: string, active: boolean, onClick: () => void) => (
+  <button
+    type="button"
+    aria-pressed={active}
+    onClick={onClick}
+    className={`solara-filter-chip${active ? " is-active" : ""}`}
+  >
+    {label}
+  </button>
+);
+
+const HelperFilters: React.FC<Props> = ({
+  value,
+  onChange,
+  skillPool,
+  selectedSkill,
+  onSelectedSkillChange,
+  sortBy,
+  onSortByChange,
+  activeSummary,
+  savedOnly = false,
+  onClear,
+}) => {
   const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       try {
         onChange(JSON.parse(raw));
       } catch {
-        /* ignore */
+        // ignore invalid local state
       }
     }
     setMounted(true);
@@ -36,82 +72,127 @@ const HelperFilters: React.FC<Props> = ({ value, onChange }) => {
   }, [mounted, value]);
 
   return (
-    <div className="space-y-3 rounded-2xl border border-white/60 bg-white/85 p-4 text-slate-900 shadow-sm backdrop-blur-2xl dark:border-white/10 dark:bg-white/5 dark:text-white">
-      <div className="space-y-1">
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-solara-navy dark:text-indigo-200">Filters</p>
+    <div className="solara-filter-panel">
+      <div className="solara-filter-panel__intro">
+        <p className="solara-filter-panel__eyebrow">Filter stack</p>
+        <p className="solara-filter-panel__body">
+          Start with the job, then narrow by role, availability, support type, and response quality.
+        </p>
+      </div>
+
+      <div className="solara-filter-search">
+        <p className="solara-filter-section__label">Describe the job</p>
         <input
           value={value.search}
-          onChange={(e) => onChange({ ...value, search: e.target.value })}
-          placeholder="Search skills, tasks, roles"
-          className="w-full rounded-xl border border-white/60 bg-white/90 px-3 py-2 text-slate-900 placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
+          onChange={(event) => onChange({ ...value, search: event.target.value })}
+          placeholder="battery sizing, safety check, rooftop survey..."
+          className={searchFieldClassName}
         />
       </div>
-      <div className="grid gap-2 sm:grid-cols-2">
-        <label className="text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Role level</span>
-          <select
-            value={value.level}
-            onChange={(e) => onChange({ ...value, level: e.target.value as any })}
-            className="mt-1 w-full rounded-xl border border-white/60 bg-white/90 px-3 py-2 text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
-          >
-            <option value="all">All</option>
-            <option value="community">Community</option>
-            <option value="trained">Trained</option>
-            <option value="certified">Certified</option>
-          </select>
-        </label>
-        <label className="text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Availability</span>
-          <select
-            value={value.availability}
-            onChange={(e) => onChange({ ...value, availability: e.target.value as any })}
-            className="mt-1 w-full rounded-xl border border-white/60 bg-white/90 px-3 py-2 text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
-          >
-            <option value="all">All</option>
-            <option value="available">Available</option>
-            <option value="limited">Limited</option>
-            <option value="unavailable">Unavailable</option>
-          </select>
-        </label>
-        <label className="text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Support type</span>
-          <select
-            value={value.support}
-            onChange={(e) => onChange({ ...value, support: e.target.value as any })}
-            className="mt-1 w-full rounded-xl border border-white/60 bg-white/90 px-3 py-2 text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
-          >
-            <option value="all">All</option>
-            <option value="remote">Remote</option>
-            <option value="visit">Visit</option>
-          </select>
-        </label>
-        <label className="text-sm">
-          <span className="text-xs font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Minimum rating</span>
-          <select
-            value={value.minRating}
-            onChange={(e) => onChange({ ...value, minRating: Number(e.target.value) })}
-            className="mt-1 w-full rounded-xl border border-white/60 bg-white/90 px-3 py-2 text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
-          >
-            {[0, 3, 4, 4.5].map((r) => (
-              <option key={r} value={r}>
-                {r}+
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div className="flex justify-end">
-        <button
-          type="button"
-          onClick={() => onChange({ search: "", level: "all", availability: "all", support: "all", minRating: 0 })}
-          className="text-xs font-semibold text-solara-navy underline-offset-4 hover:underline dark:text-indigo-200"
-        >
+
+      {skillPool.length > 0 ? (
+        <section className="solara-filter-section">
+          <div className="flex items-center justify-between gap-3">
+            <p className="solara-filter-section__label">Skill focus</p>
+            {savedOnly ? <p className="solara-filter-section__note">Saved helpers only</p> : null}
+          </div>
+          <div className="solara-filter-cluster">
+            {renderChipButton("All skills", selectedSkill === "all", () => onSelectedSkillChange("all"))}
+            {skillPool.map((skill) => {
+              const active = selectedSkill.toLowerCase() === skill.toLowerCase();
+              return <React.Fragment key={skill}>{renderChipButton(skill, active, () => onSelectedSkillChange(skill))}</React.Fragment>;
+            })}
+          </div>
+        </section>
+      ) : null}
+
+      <section className="solara-filter-section">
+        <p className="solara-filter-section__label">Role level</p>
+        <div className="solara-filter-cluster">
+          {[
+            ["all", "All roles"],
+            ["community", "Community"],
+            ["trained", "Trained"],
+            ["certified", "Certified"],
+          ].map(([option, label]) => (
+            <React.Fragment key={option}>
+              {renderChipButton(label, value.level === option, () => onChange({ ...value, level: option as Helper["level"] | "all" }))}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      <section className="solara-filter-section">
+        <p className="solara-filter-section__label">Availability</p>
+        <div className="solara-filter-cluster">
+          {[
+            ["all", "All states"],
+            ["available", "Available"],
+            ["limited", "Limited"],
+            ["unavailable", "Unavailable"],
+          ].map(([option, label]) => (
+            <React.Fragment key={option}>
+              {renderChipButton(label, value.availability === option, () => onChange({ ...value, availability: option as FilterState["availability"] }))}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      <section className="solara-filter-section">
+        <p className="solara-filter-section__label">Support type</p>
+        <div className="solara-filter-cluster">
+          {[
+            ["all", "Any support"],
+            ["remote", "Remote"],
+            ["visit", "On-site"],
+          ].map(([option, label]) => (
+            <React.Fragment key={option}>
+              {renderChipButton(label, value.support === option, () => onChange({ ...value, support: option as FilterState["support"] }))}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      <section className="solara-filter-section">
+        <p className="solara-filter-section__label">Minimum rating</p>
+        <div className="solara-filter-cluster">
+          {[0, 3, 4, 4.5].map((rating) => (
+            <React.Fragment key={rating}>
+              {renderChipButton(`${rating}+`, value.minRating === rating, () => onChange({ ...value, minRating: rating }))}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      <section className="solara-filter-section">
+        <p className="solara-filter-section__label">Sort order</p>
+        <div className="solara-filter-cluster">
+          {[
+            ["relevance", "Relevance"],
+            ["rating", "Top rated"],
+            ["projects", "Most projects"],
+            ["response", "Fastest reply"],
+          ].map(([option, label]) => (
+            <React.Fragment key={option}>
+              {renderChipButton(label, sortBy === option, () => onSortByChange(option as SortOption))}
+            </React.Fragment>
+          ))}
+        </div>
+      </section>
+
+      <div className="solara-filter-footer">
+        <button type="button" onClick={onClear} className="solara-inline-action solara-inline-action--default">
           Clear filters
         </button>
+
+        <p className="solara-filter-footer__summary">
+          {activeSummary.length > 0 ? activeSummary.join(" / ") : "No active filters. Showing the full current screen."}
+        </p>
       </div>
     </div>
   );
 };
 
 export type HelperFilterState = FilterState;
+export type ConnectSortOption = SortOption;
 export default HelperFilters;

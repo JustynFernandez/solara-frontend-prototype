@@ -3,7 +3,10 @@ import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/auth-context";
 import { useSavedHelpersStore } from "../store/useSavedHelpersStore";
 import { useLearnStore } from "../store/useLearnStore";
-import SectionContainer from "../components/ui/section-container";
+import PageFrame from "@/components/ui/page-frame";
+import PageHeroStage from "@/components/ui/page-hero-stage";
+import PageReveal from "@/components/ui/page-reveal";
+import SurfacePanel from "@/components/ui/surface-panel";
 import DashboardHero from "../components/dashboard/DashboardHero";
 import QuickActions from "../components/dashboard/QuickActions";
 import SavedHelpersPreview from "../components/dashboard/SavedHelpersPreview";
@@ -16,61 +19,61 @@ const Dashboard: React.FC = () => {
   const { savedHelpers } = useSavedHelpersStore();
   const { completedGuides, bookmarkedGuides, lastViewedGuide } = useLearnStore();
 
-  // Redirect to sign-in if not authenticated
   if (!user) {
     return <Navigate to="/sign-in" replace />;
   }
 
-  // Calculate profile completeness (mock logic)
   const profileCompleteness = calculateProfileCompleteness(user);
 
   return (
-    <div className="relative min-h-screen pb-24">
-      <SectionContainer className="relative space-y-8 py-8">
-        {/* Breadcrumbs */}
-        <Breadcrumbs
-          items={[{ label: "Dashboard" }]}
-          className="mb-2"
-        />
+    <PageFrame family="product" width="wide" density="compact">
+      <div className="space-y-6">
+        <Breadcrumbs items={[{ label: "Dashboard" }]} className="mb-1" />
+        <PageReveal mode="mount">
+          <PageHeroStage
+            family="product"
+            eyebrow="Dashboard"
+            title={`Welcome back${user.displayName ? `, ${user.displayName}` : ""}.`}
+            body="Keep track of saved helpers, learning progress, and the next actions that matter across Solara."
+            metrics={[
+              { label: "Saved helpers", value: savedHelpers.length, meta: "Contacts and matches you kept close." },
+              { label: "Completed guides", value: completedGuides.length, meta: "Learning progress already recorded." },
+              { label: "Bookmarked guides", value: bookmarkedGuides.length, meta: "Context you wanted to return to." },
+            ]}
+            preview={<DashboardHero user={user} profileCompleteness={profileCompleteness} />}
+          />
+        </PageReveal>
 
-        {/* Hero section with greeting and profile */}
-        <DashboardHero user={user} profileCompleteness={profileCompleteness} />
+        <PageReveal mode="in-view">
+          <QuickActions />
+        </PageReveal>
 
-        {/* Quick actions grid */}
-        <QuickActions />
-
-        {/* Main content grid */}
-        <div className="grid gap-6 lg:grid-cols-[1fr_0.4fr]">
+        <PageReveal mode="in-view">
+          <div className="grid gap-6 lg:grid-cols-[1fr_0.4fr]">
           <div className="space-y-6">
-            {/* Saved helpers preview */}
             <SavedHelpersPreview savedHelperIds={savedHelpers} maxDisplay={3} />
-
-            {/* Learning progress */}
             <LearningProgress
               completedCount={completedGuides.length}
               bookmarkedCount={bookmarkedGuides.length}
               lastViewedGuide={lastViewedGuide}
             />
           </div>
-
-          {/* Activity feed sidebar */}
           <div className="lg:sticky lg:top-24 lg:self-start">
             <ActivityFeed />
           </div>
-        </div>
-      </SectionContainer>
-    </div>
+          </div>
+        </PageReveal>
+      </div>
+    </PageFrame>
   );
 };
 
 function calculateProfileCompleteness(user: { email: string; displayName?: string; avatarUrl?: string; bio?: string }): number {
-  let completeness = 20; // Base for having an account
-
+  let completeness = 20;
   if (user.email) completeness += 20;
   if (user.displayName) completeness += 20;
   if (user.avatarUrl) completeness += 20;
   if (user.bio) completeness += 20;
-
   return Math.min(completeness, 100);
 }
 

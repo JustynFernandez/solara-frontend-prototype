@@ -1,13 +1,15 @@
-import React from "react";
-import { Helper } from "../../data/helpers";
-import AnimatedButton from "../ui/animated-button";
-import { ShieldCheck } from "lucide-react";
+import React, { useEffect } from "react";
+import { createPortal } from "react-dom";
+import { Clock3, MapPin, ShieldCheck, Star, X } from "lucide-react";
+import type { Helper } from "../../data/helpers";
 
 type Props = {
   helper: Helper | null;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onRequest: (helper: Helper) => void;
+  saved: boolean;
+  onSaveToggle: (helper: Helper) => void;
 };
 
 const levelCopy: Record<Helper["level"], string> = {
@@ -16,50 +18,129 @@ const levelCopy: Record<Helper["level"], string> = {
   certified: "Mains wiring, commissioning, and formal sign-off.",
 };
 
-const HelperProfileDrawer: React.FC<Props> = ({ helper, open, onOpenChange, onRequest }) => {
+const supportLabel = (helper: Helper) =>
+  helper.supportTypes.includes("remote") && helper.supportTypes.includes("visit")
+    ? "Remote + on-site"
+    : helper.supportTypes.includes("visit")
+      ? "On-site support"
+      : "Remote support";
+
+const helperInitials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+const HelperProfileDrawer: React.FC<Props> = ({ helper, open, onOpenChange, onRequest, saved, onSaveToggle }) => {
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onOpenChange(false);
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onOpenChange, open]);
+
   if (!helper || !open) return null;
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => onOpenChange(false)} aria-hidden />
-      <div className="relative z-10 w-[95vw] max-w-2xl rounded-2xl border border-white/10 bg-white/90 p-5 text-slate-900 shadow-2xl backdrop-blur-2xl dark:bg-[#0a0f1e] dark:text-white">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <div className="flex items-center gap-2">
-              <p className="text-xl font-semibold">{helper.name}</p>
-              {helper.verified && <ShieldCheck className="h-4 w-4 text-solara-gold" />}
+
+  return createPortal(
+    <div className="solara-helper-drawer" role="dialog" aria-modal="true" aria-labelledby={`helper-drawer-title-${helper.id}`}>
+      <button type="button" className="solara-helper-drawer__scrim" onClick={() => onOpenChange(false)} aria-label="Close helper profile" />
+
+      <div className="solara-helper-drawer__panel">
+        <div className="solara-helper-drawer__top">
+          <div className="solara-helper-drawer__identity">
+            <span className="solara-helper-drawer__avatar">
+              {helper.avatar ? <img src={helper.avatar} alt={`${helper.name} avatar`} className="h-full w-full object-cover" /> : helperInitials(helper.name)}
+            </span>
+            <div className="min-w-0 space-y-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <h2 id={`helper-drawer-title-${helper.id}`} className="solara-helper-drawer__name">
+                  {helper.name}
+                </h2>
+                {helper.verified ? <ShieldCheck className="h-4 w-4 text-[var(--solara-accent)]" aria-label="Verified helper" /> : null}
+              </div>
+              <p className="solara-helper-drawer__level">{levelCopy[helper.level]}</p>
+              <div className="flex flex-wrap gap-2">
+                <span className="solara-helper-drawer__pill">{supportLabel(helper)}</span>
+                <span className="solara-helper-drawer__pill">{helper.coarseLocationLabel}</span>
+                <span className="solara-helper-drawer__pill">{helper.responseTimeLabel}</span>
+              </div>
             </div>
-            <p className="text-sm text-slate-700 dark:text-slate-200">{levelCopy[helper.level]}</p>
           </div>
-          <button
-            type="button"
-            onClick={() => onOpenChange(false)}
-            className="rounded-full border border-white/50 bg-white/60 px-2 py-1 text-xs font-semibold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
-          >
+
+          <button type="button" onClick={() => onOpenChange(false)} className="solara-helper-drawer__close">
+            <X className="h-4 w-4" aria-hidden="true" />
             Close
           </button>
         </div>
-        <div className="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
-          <p>{helper.bio}</p>
-          <p className="text-xs text-slate-600 dark:text-slate-300">Support types: {helper.supportTypes.join(", ")} · Response: {helper.responseTimeLabel}</p>
-          <div className="flex flex-wrap gap-2">
-            {helper.skills.map((skill) => (
-              <span key={skill} className="rounded-full border border-white/50 bg-white/70 px-2 py-1 text-xs font-semibold text-slate-800 dark:border-white/10 dark:bg-white/10 dark:text-slate-100">
-                {skill}
-              </span>
-            ))}
-          </div>
-          <p className="text-xs text-slate-600 dark:text-slate-300">Any work involving mains wiring requires a certified professional.</p>
+
+        <div className="solara-helper-drawer__grid">
+          <section className="solara-helper-drawer__section">
+            <p className="solara-helper-drawer__label">Profile</p>
+            <p className="solara-helper-drawer__body">{helper.bio}</p>
+
+            <div className="solara-helper-drawer__facts">
+              <div className="solara-helper-drawer__fact">
+                <p className="solara-helper-drawer__fact-label">Location</p>
+                <p className="solara-helper-drawer__fact-value inline-flex items-center gap-1">
+                  <MapPin className="h-3.5 w-3.5" />
+                  {helper.coarseLocationLabel}
+                </p>
+              </div>
+              <div className="solara-helper-drawer__fact">
+                <p className="solara-helper-drawer__fact-label">Response</p>
+                <p className="solara-helper-drawer__fact-value inline-flex items-center gap-1">
+                  <Clock3 className="h-3.5 w-3.5" />
+                  {helper.responseTimeLabel}
+                </p>
+              </div>
+              <div className="solara-helper-drawer__fact">
+                <p className="solara-helper-drawer__fact-label">Rating</p>
+                <p className="solara-helper-drawer__fact-value inline-flex items-center gap-1">
+                  <Star className="h-3.5 w-3.5 text-[var(--solara-accent)]" />
+                  {helper.rating.toFixed(1)} from {helper.reviewsCount} reviews
+                </p>
+              </div>
+              <div className="solara-helper-drawer__fact">
+                <p className="solara-helper-drawer__fact-label">Completed</p>
+                <p className="solara-helper-drawer__fact-value">{helper.completedProjectsCount} projects</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="solara-helper-drawer__section">
+            <p className="solara-helper-drawer__label">Skills</p>
+            <div className="solara-helper-drawer__skills">
+              {helper.skills.map((skill) => (
+                <span key={skill} className="solara-helper-drawer__skill">
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+            <div className="solara-helper-drawer__notice">
+              <p className="solara-helper-drawer__fact-label">Safety rule</p>
+              <p className="solara-helper-drawer__body">Any work involving mains wiring requires a certified professional.</p>
+            </div>
+          </section>
         </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <AnimatedButton onClick={() => onRequest(helper)} className="px-4 py-2">
+
+        <div className="solara-helper-drawer__actions">
+          <button type="button" onClick={() => onRequest(helper)} className="solara-inline-action solara-inline-action--strong">
             Request support
-          </AnimatedButton>
-          <AnimatedButton variant="outline" className="px-4 py-2">
-            Save helper
-          </AnimatedButton>
+          </button>
+          <button type="button" onClick={() => onSaveToggle(helper)} className="solara-inline-action solara-inline-action--default">
+            {saved ? "Saved helper" : "Save helper"}
+          </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

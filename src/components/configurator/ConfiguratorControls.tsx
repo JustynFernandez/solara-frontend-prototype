@@ -26,9 +26,20 @@ import {
   ROOF_PRESETS,
   MONTHS,
   PANEL_PRESETS,
-  OBSTACLE_SPECS,
   BATTERY_SPECS,
 } from "../../data/configuratorDefaults";
+
+const sectionClassName =
+  "rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-1)] p-3 shadow-[var(--solara-shadow-soft)]";
+const titleClassName =
+  "mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]";
+const quietButtonClassName =
+  "rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] px-3 py-2 text-xs font-medium text-[var(--solara-text-muted)] transition hover:border-[var(--solara-accent-soft)] hover:text-[var(--solara-text-strong)] disabled:cursor-not-allowed disabled:opacity-50";
+const activeButtonClassName =
+  "rounded-md border border-[var(--solara-accent)] bg-[var(--solara-accent-soft)] px-3 py-2 text-xs font-semibold text-[var(--solara-accent-strong)] transition";
+const fieldClassName =
+  "w-full rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] px-3 py-2 text-xs text-[var(--solara-text-strong)] outline-none transition focus:border-[var(--solara-accent)] focus:ring-2 focus:ring-[var(--solara-accent-soft)]";
+const rangeClassName = "h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-[var(--solara-surface-2)] accent-[var(--solara-accent)]";
 
 const ConfiguratorControls: React.FC = () => {
   const {
@@ -76,72 +87,54 @@ const ConfiguratorControls: React.FC = () => {
 
   return (
     <div className="flex h-full flex-col gap-3 overflow-y-auto pb-4">
-      {/* Tool Mode */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Tool Mode
-        </h3>
+      <section className={sectionClassName}>
+        <h3 className={titleClassName}>Tool mode</h3>
         <div className="flex flex-wrap gap-1.5">
           {toolOptions.map(({ mode, icon: Icon, label }) => (
             <button
               key={mode}
               onClick={() => setToolMode(mode)}
-              className={`flex flex-1 min-w-[60px] flex-col items-center gap-1 rounded-lg px-2 py-2 text-[10px] font-medium transition-all ${
-                toolMode === mode
-                  ? "bg-blue-600 text-white shadow-md"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-slate-600"
-              }`}
+              className={toolMode === mode ? activeButtonClassName : quietButtonClassName}
             >
-              <Icon className="h-3.5 w-3.5" />
-              {label}
+              <span className="flex items-center justify-center gap-1.5">
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+              </span>
             </button>
           ))}
         </div>
 
-        {/* Obstacle type selector */}
-        {toolMode === "obstacle" && (
-          <div className="mt-2 flex gap-1">
+        {toolMode === "obstacle" ? (
+          <div className="mt-3 flex flex-wrap gap-1.5">
             {obstacleTypes.map(({ type, label }) => (
               <button
                 key={type}
                 onClick={() => setObstacleType(type)}
-                className={`flex-1 rounded px-2 py-1.5 text-[10px] font-medium transition-all ${
-                  obstacleType === type
-                    ? "bg-amber-500 text-white"
-                    : "bg-slate-200 text-slate-600 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300"
-                }`}
+                className={obstacleType === type ? activeButtonClassName : quietButtonClassName}
               >
                 {label}
               </button>
             ))}
           </div>
-        )}
+        ) : null}
       </section>
 
-      {/* Panel Presets */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
+      <section className={sectionClassName}>
+        <h3 className={`${titleClassName} flex items-center gap-2`}>
           <Grid3X3 className="h-3.5 w-3.5" />
-          Quick Layouts
+          Quick layouts
         </h3>
         <div className="flex flex-wrap gap-1.5">
           {presetOptions.map((preset) => (
-            <button
-              key={preset}
-              onClick={() => applyPreset(preset)}
-              className="rounded bg-slate-100 px-2.5 py-1.5 text-[10px] font-medium text-slate-700 transition-colors hover:bg-blue-100 hover:text-blue-700 dark:bg-slate-700 dark:text-slate-300 dark:hover:bg-blue-900/30 dark:hover:text-blue-300"
-            >
+            <button key={preset} onClick={() => applyPreset(preset)} className={quietButtonClassName}>
               {PANEL_PRESETS[preset].label}
             </button>
           ))}
         </div>
       </section>
 
-      {/* Roof Type */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Roof Type
-        </h3>
+      <section className={sectionClassName}>
+        <h3 className={titleClassName}>Roof type</h3>
         <div className="grid grid-cols-3 gap-1.5">
           {roofTypes.map(({ type, icon: Icon }) => {
             const preset = ROOF_PRESETS[type];
@@ -149,101 +142,58 @@ const ConfiguratorControls: React.FC = () => {
               <button
                 key={type}
                 onClick={() => setRoof({ type, pitchAngle: preset.pitchAngle })}
-                className={`flex flex-col items-center gap-1 rounded-lg p-2 text-center transition-all ${
-                  roof.type === type
-                    ? "bg-blue-600 text-white shadow-md ring-2 ring-blue-400 ring-offset-1 dark:ring-offset-slate-900"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-                }`}
+                className={roof.type === type ? activeButtonClassName : quietButtonClassName}
               >
-                <Icon className="h-5 w-5" />
-                <span className="text-[10px] font-medium">{preset.label}</span>
+                <span className="flex flex-col items-center gap-1">
+                  <Icon className="h-4 w-4" />
+                  <span>{preset.label}</span>
+                </span>
               </button>
             );
           })}
         </div>
       </section>
 
-      {/* Roof Dimensions */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Dimensions
-        </h3>
-        <div className="space-y-2">
+      <section className={sectionClassName}>
+        <h3 className={titleClassName}>Dimensions</h3>
+        <div className="space-y-3">
           <div>
-            <label className="mb-0.5 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+            <label className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">
               <span>Width</span>
-              <span className="font-mono">{roof.width}m</span>
+              <span>{roof.width}m</span>
             </label>
-            <input
-              type="range"
-              min="4"
-              max="16"
-              step="0.5"
-              value={roof.width}
-              onChange={(e) => setRoof({ width: parseFloat(e.target.value) })}
-              className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-blue-600 dark:bg-slate-600"
-            />
+            <input type="range" min="4" max="16" step="0.5" value={roof.width} onChange={(e) => setRoof({ width: parseFloat(e.target.value) })} className={rangeClassName} />
           </div>
           <div>
-            <label className="mb-0.5 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+            <label className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">
               <span>Depth</span>
-              <span className="font-mono">{roof.depth}m</span>
+              <span>{roof.depth}m</span>
             </label>
-            <input
-              type="range"
-              min="3"
-              max="12"
-              step="0.5"
-              value={roof.depth}
-              onChange={(e) => setRoof({ depth: parseFloat(e.target.value) })}
-              className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-blue-600 dark:bg-slate-600"
-            />
+            <input type="range" min="3" max="12" step="0.5" value={roof.depth} onChange={(e) => setRoof({ depth: parseFloat(e.target.value) })} className={rangeClassName} />
           </div>
-          {(roof.type === "gabled" || roof.type === "hip") && (
+          {roof.type === "gabled" || roof.type === "hip" ? (
             <div>
-              <label className="mb-0.5 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+              <label className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">
                 <span>Pitch</span>
-                <span className="font-mono">{roof.pitchAngle}°</span>
+                <span>{roof.pitchAngle} deg</span>
               </label>
-              <input
-                type="range"
-                min="15"
-                max="45"
-                step="5"
-                value={roof.pitchAngle}
-                onChange={(e) => setRoof({ pitchAngle: parseFloat(e.target.value) })}
-                className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-blue-600 dark:bg-slate-600"
-              />
+              <input type="range" min="15" max="45" step="5" value={roof.pitchAngle} onChange={(e) => setRoof({ pitchAngle: parseFloat(e.target.value) })} className={rangeClassName} />
             </div>
-          )}
+          ) : null}
         </div>
       </section>
 
-      {/* Sun Position with Playback */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Sun Position
-        </h3>
-        <div className="space-y-2">
+      <section className={sectionClassName}>
+        <h3 className={titleClassName}>Sun position</h3>
+        <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => setSunPlayback({ isPlaying: !sunPlayback.isPlaying })}
-              className={`flex h-8 w-8 items-center justify-center rounded-full transition-all ${
-                sunPlayback.isPlaying
-                  ? "bg-amber-500 text-white shadow-md"
-                  : "bg-slate-200 text-slate-600 hover:bg-amber-100 dark:bg-slate-600 dark:text-slate-300"
-              }`}
-            >
-              {sunPlayback.isPlaying ? (
-                <Pause className="h-4 w-4" />
-              ) : (
-                <Play className="h-4 w-4 ml-0.5" />
-              )}
+            <button onClick={() => setSunPlayback({ isPlaying: !sunPlayback.isPlaying })} className={sunPlayback.isPlaying ? activeButtonClassName : quietButtonClassName}>
+              {sunPlayback.isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
             </button>
             <div className="flex-1">
-              <label className="mb-0.5 flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400">
+              <label className="mb-1 flex items-center justify-between text-[10px] uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">
                 <span>Time</span>
-                <span className="font-mono">{sun.hour}:00</span>
+                <span>{sun.hour}:00</span>
               </label>
               <input
                 type="range"
@@ -253,33 +203,21 @@ const ConfiguratorControls: React.FC = () => {
                 value={sun.hour}
                 onChange={(e) => setSun({ hour: parseFloat(e.target.value) })}
                 disabled={sunPlayback.isPlaying}
-                className="h-1.5 w-full cursor-pointer appearance-none rounded-lg bg-slate-200 accent-amber-500 disabled:opacity-50 dark:bg-slate-600"
+                className={rangeClassName}
               />
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400">Speed:</span>
+            <span className="text-[10px] uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">Speed</span>
             {[1, 2, 4].map((speed) => (
-              <button
-                key={speed}
-                onClick={() => setSunPlayback({ speed })}
-                className={`rounded px-2 py-0.5 text-[10px] font-medium transition-all ${
-                  sunPlayback.speed === speed
-                    ? "bg-amber-500 text-white"
-                    : "bg-slate-200 text-slate-600 hover:bg-slate-300 dark:bg-slate-600 dark:text-slate-300"
-                }`}
-              >
+              <button key={speed} onClick={() => setSunPlayback({ speed })} className={sunPlayback.speed === speed ? activeButtonClassName : quietButtonClassName}>
                 {speed}x
               </button>
             ))}
           </div>
 
-          <select
-            value={sun.month}
-            onChange={(e) => setSun({ month: parseInt(e.target.value) })}
-            className="w-full rounded-lg border border-slate-200 bg-white px-2 py-1.5 text-xs text-slate-700 focus:border-blue-500 focus:outline-none dark:border-slate-600 dark:bg-slate-700 dark:text-slate-200"
-          >
+          <select value={sun.month} onChange={(e) => setSun({ month: parseInt(e.target.value, 10) })} className={fieldClassName}>
             {MONTHS.map((month) => (
               <option key={month.value} value={month.value}>
                 {month.label}
@@ -289,67 +227,49 @@ const ConfiguratorControls: React.FC = () => {
         </div>
       </section>
 
-      {/* Battery Storage */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
+      <section className={sectionClassName}>
+        <h3 className={`${titleClassName} flex items-center gap-2`}>
           <Battery className="h-3.5 w-3.5" />
-          Battery Storage
+          Battery storage
         </h3>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={() => setBattery({ count: Math.max(0, battery.count - 1) })}
-            disabled={battery.count === 0}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-200 text-slate-600 transition-colors hover:bg-slate-300 disabled:opacity-50 dark:bg-slate-600 dark:text-slate-300"
-          >
+        <div className="flex items-center gap-3">
+          <button onClick={() => setBattery({ count: Math.max(0, battery.count - 1) })} disabled={battery.count === 0} className={quietButtonClassName}>
             -
           </button>
           <div className="flex-1 text-center">
-            <p className="text-lg font-bold text-slate-800 dark:text-white">
-              {battery.count}
-            </p>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400">
+            <p className="text-lg font-bold text-[var(--solara-text-strong)]">{battery.count}</p>
+            <p className="text-[10px] uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">
               {battery.count * BATTERY_SPECS.capacityKwh} kWh total
             </p>
           </div>
-          <button
-            onClick={() => setBattery({ count: Math.min(3, battery.count + 1) })}
-            disabled={battery.count >= 3}
-            className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-200 text-slate-600 transition-colors hover:bg-slate-300 disabled:opacity-50 dark:bg-slate-600 dark:text-slate-300"
-          >
+          <button onClick={() => setBattery({ count: Math.min(3, battery.count + 1) })} disabled={battery.count >= 3} className={quietButtonClassName}>
             +
           </button>
         </div>
       </section>
 
-      {/* Actions */}
-      <section className="rounded-xl border border-white/60 bg-white/80 p-3 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Actions
-        </h3>
+      <section className={sectionClassName}>
+        <h3 className={titleClassName}>Actions</h3>
         <div className="flex flex-col gap-1.5">
-          <button
-            onClick={clearPanels}
-            disabled={panels.length === 0}
-            className="flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-          >
-            <Trash2 className="h-3.5 w-3.5" />
-            Clear Panels ({panels.length})
+          <button onClick={clearPanels} disabled={panels.length === 0} className={quietButtonClassName}>
+            <span className="flex items-center justify-center gap-1.5">
+              <Trash2 className="h-3.5 w-3.5" />
+              Clear panels ({panels.length})
+            </span>
           </button>
-          {obstacles.length > 0 && (
-            <button
-              onClick={clearObstacles}
-              className="flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-            >
-              <CircleDot className="h-3.5 w-3.5" />
-              Clear Obstacles ({obstacles.length})
+          {obstacles.length > 0 ? (
+            <button onClick={clearObstacles} className={quietButtonClassName}>
+              <span className="flex items-center justify-center gap-1.5">
+                <CircleDot className="h-3.5 w-3.5" />
+                Clear obstacles ({obstacles.length})
+              </span>
             </button>
-          )}
-          <button
-            onClick={reset}
-            className="flex items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-3 py-2 text-xs font-medium text-slate-700 transition-colors hover:bg-slate-200 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-          >
-            <RotateCcw className="h-3.5 w-3.5" />
-            Reset All
+          ) : null}
+          <button onClick={reset} className={quietButtonClassName}>
+            <span className="flex items-center justify-center gap-1.5">
+              <RotateCcw className="h-3.5 w-3.5" />
+              Reset all
+            </span>
           </button>
         </div>
       </section>

@@ -12,11 +12,20 @@ import CommandPalette from "@/components/ui/CommandPalette";
 import AppRoutes from "@/app/AppRoutes";
 import EcoModeBadge from "@/app/EcoModeBadge";
 import { navItems } from "@/app/navItems";
+import { useLocation } from "react-router-dom";
+import { getPageShellConfig } from "@/app/pageFamilyConfig";
+import { cn } from "@/lib/utils";
 
 const AppShell = () => {
   const { ecoModeEnabled } = useEcoMode();
   const [solarModeActive, setSolarModeActive] = useState(false);
   const { open: commandPaletteOpen, setOpen: setCommandPaletteOpen, openPalette } = useCommandPalette();
+  const location = useLocation();
+  const isHomeRoute = location.pathname === "/";
+  const pageShell = getPageShellConfig(location.pathname);
+  const hideFloatingControls = pageShell.hideFloatingControls || false;
+  const hideFooter = pageShell.hideFooter || false;
+  const hideMobileBottomNav = pageShell.hideMobileBottomNav || false;
 
   const handleKonamiCode = useCallback(() => {
     setSolarModeActive(true);
@@ -39,8 +48,12 @@ const AppShell = () => {
   }, [ecoModeEnabled]);
 
   return (
-    <div className={`relative isolate min-h-screen bg-transparent text-slate-900 transition-colors duration-500 dark:text-slate-100 ${solarModeActive ? "solar-mode-active" : ""}`}>
-      <PageBackground />
+    <div
+      className={`solara-app-shell solara-page solara-page--${pageShell.family} relative isolate flex min-h-screen flex-col bg-transparent text-slate-900 transition-colors duration-500 dark:text-slate-100 ${solarModeActive ? "solar-mode-active" : ""}`}
+      data-page-family={pageShell.family}
+      data-page-path={location.pathname}
+    >
+      <PageBackground variant={pageShell.background} />
 
       <Toaster
         position="top-center"
@@ -59,15 +72,17 @@ const AppShell = () => {
       <CommandPalette open={commandPaletteOpen} onClose={() => setCommandPaletteOpen(false)} />
 
       <Navbar navItems={navItems} onSearchClick={openPalette} />
-      <main className="pb-16 md:pb-0">
+      <main className={cn("solara-app-main flex-1 pb-16 md:pb-0")}>
         <AppRoutes />
       </main>
-      <div className="solara-floating-controls fixed bottom-4 right-4 flex flex-col items-end gap-2">
-        <EcoModeBadge />
-        <ThemeToggle />
-      </div>
-      <Footer navItems={navItems} />
-      <MobileBottomNav />
+      {!isHomeRoute && !hideFloatingControls ? (
+        <div className="solara-floating-controls fixed bottom-4 right-4 flex flex-col items-end gap-2">
+          <EcoModeBadge />
+          <ThemeToggle />
+        </div>
+      ) : null}
+      {!hideFooter ? <Footer navItems={navItems} /> : null}
+      {!hideMobileBottomNav ? <MobileBottomNav /> : null}
     </div>
   );
 };

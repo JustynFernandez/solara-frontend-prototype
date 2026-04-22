@@ -1,0 +1,34 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main

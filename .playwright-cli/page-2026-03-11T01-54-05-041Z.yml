@@ -1,0 +1,200 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: Plan
+          - generic [ref=e50]:
+            - heading "Choose the planning mode that matches how you think." [level=1] [ref=e51]
+            - generic [ref=e52]: Use Navigator when you want a guided route. Use the configurator when you want to test layouts directly. Both hand off cleanly into helpers, projects, and learning.
+          - generic [ref=e54]:
+            - link "Start navigator ->" [ref=e55] [cursor=pointer]:
+              - /url: /plan/navigator
+            - link "Open configurator ->" [ref=e56] [cursor=pointer]:
+              - /url: /configurator
+            - link "Browse guides ->" [ref=e57] [cursor=pointer]:
+              - /url: /learn
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - paragraph [ref=e60]: Navigator flow
+            - paragraph [ref=e61]: 5 steps
+            - paragraph [ref=e62]: From first question to plan
+          - generic [ref=e63]:
+            - paragraph [ref=e64]: Design mode
+            - paragraph [ref=e65]: 3D roof
+            - paragraph [ref=e66]: Hands-on placement and review
+          - generic [ref=e67]:
+            - paragraph [ref=e68]: Continuity
+            - paragraph [ref=e69]: One workflow
+            - paragraph [ref=e70]: Move into helpers and projects without reset
+      - generic [ref=e71]:
+        - article [ref=e72]:
+          - generic [ref=e73]:
+            - generic [ref=e74]:
+              - paragraph [ref=e75]: Guided path
+              - heading "Solar Navigator" [level=2] [ref=e76]
+              - paragraph [ref=e77]: Answer a few questions and get a practical route forward.
+            - img [ref=e79]
+          - generic [ref=e82]:
+            - generic [ref=e85]: Five-step guided questionnaire
+            - generic [ref=e88]: Readiness score and blocker check
+            - generic [ref=e91]: Save and resume anytime
+          - generic [ref=e92]:
+            - link "Continue ->" [ref=e93] [cursor=pointer]:
+              - /url: /plan/navigator
+            - generic [ref=e94]: Best for first pass
+        - article [ref=e95]:
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - paragraph [ref=e98]: Hands-on path
+              - heading "3D roof designer" [level=2] [ref=e99]
+              - paragraph [ref=e100]: Work hands-on and test placement before you commit.
+            - img [ref=e102]
+          - generic [ref=e105]:
+            - generic [ref=e108]: Drag and place panels directly
+            - generic [ref=e111]: Real-time energy estimates
+            - generic [ref=e114]: Exportable reports and scenarios
+          - generic [ref=e115]:
+            - link "Continue ->" [ref=e116] [cursor=pointer]:
+              - /url: /configurator
+            - generic [ref=e117]: Best for direct layout work
+      - generic [ref=e118]:
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - img [ref=e121]
+            - text: Learning support
+          - heading "Need context before you start?" [level=2] [ref=e123]
+          - paragraph [ref=e124]: The learning hub covers solar basics, safety, and project-readiness guidance so your planning work starts from solid assumptions.
+        - link "Browse guides ->" [ref=e125] [cursor=pointer]:
+          - /url: /learn
+          - text: Browse guides
+          - img [ref=e126]
+          - text: "->"
+  - generic [ref=e128]:
+    - button "Hyper visuals" [ref=e129] [cursor=pointer]: Hyper visuals
+    - button "Toggle theme" [ref=e132] [cursor=pointer]:
+      - img [ref=e133]
+  - contentinfo [ref=e136]:
+    - generic [ref=e137]:
+      - generic [ref=e138]:
+        - generic [ref=e139]:
+          - generic [ref=e140]: "19"
+          - generic [ref=e141]: Verified helpers
+        - generic [ref=e142]:
+          - generic [ref=e143]: "2"
+          - generic [ref=e144]: Active projects
+        - generic [ref=e145]:
+          - generic [ref=e146]: "8"
+          - generic [ref=e147]: Guides available
+      - generic [ref=e148]:
+        - generic [ref=e149]:
+          - generic [ref=e150]:
+            - img "Solara logo" [ref=e152]
+            - generic [ref=e153]:
+              - generic [ref=e154]: Solara
+              - paragraph [ref=e155]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e156]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - heading "Product" [level=4] [ref=e159]
+            - list [ref=e160]:
+              - listitem [ref=e161]:
+                - link "Find Helpers" [ref=e162] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e163]:
+                - link "Plan Your Solar" [ref=e164] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e165]:
+                - link "3D Configurator" [ref=e166] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e167]:
+                - link "Projects" [ref=e168] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e169]:
+            - heading "Learn" [level=4] [ref=e170]
+            - list [ref=e171]:
+              - listitem [ref=e172]:
+                - link "Getting Started" [ref=e173] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e174]:
+                - link "Solar Navigator" [ref=e175] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e176]:
+                - link "Safety Guide" [ref=e177] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e178]:
+                - link "Services" [ref=e179] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e180]:
+            - heading "Community" [level=4] [ref=e181]
+            - list [ref=e182]:
+              - listitem [ref=e183]:
+                - link "Request Help" [ref=e184] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e185]:
+                - link "Become a Helper" [ref=e186] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e187]:
+                - link "Guidelines" [ref=e188] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e189]:
+                - link "Projects Board" [ref=e190] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e191]:
+            - heading "Account" [level=4] [ref=e192]
+            - list [ref=e193]:
+              - listitem [ref=e194]:
+                - link "Sign In" [ref=e195] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e196]:
+                - link "Register" [ref=e197] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e198]:
+                - link "My Account" [ref=e199] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e200]:
+                - link "Dashboard" [ref=e201] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e204]:
+          - generic [ref=e205]:
+            - heading "Get product updates" [level=3] [ref=e206]
+            - paragraph [ref=e207]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e208]:
+            - textbox "you@example.com" [ref=e209]
+            - button "Join update list" [ref=e210] [cursor=pointer]
+          - paragraph [ref=e211]: Unsubscribe any time.
+      - generic [ref=e212]:
+        - generic [ref=e213]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e215]: © 2026 Solara Community

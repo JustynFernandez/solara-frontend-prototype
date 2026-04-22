@@ -33,7 +33,7 @@ export const helpers: Helper[] = [
     bio: "Peer reviewer for rooftop layouts and safety walk-throughs.",
     coarseLocationLabel: "London",
     responseTimeLabel: "Under 12h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h1.svg",
   },
   {
     id: "h2",
@@ -49,7 +49,7 @@ export const helpers: Helper[] = [
     bio: "Certified installer for mains, commissioning, and backup systems.",
     coarseLocationLabel: "South London",
     responseTimeLabel: "1 day",
-    avatar: "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h2.svg",
   },
   {
     id: "h3",
@@ -65,7 +65,7 @@ export const helpers: Helper[] = [
     bio: "Remote guidance, monitoring setup, and tool-share coordination.",
     coarseLocationLabel: "Remote",
     responseTimeLabel: "Same day",
-    avatar: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h3.svg",
   },
   {
     id: "h4",
@@ -81,7 +81,7 @@ export const helpers: Helper[] = [
     bio: "Co-op and permitting guidance with monitoring playbooks.",
     coarseLocationLabel: "Camden",
     responseTimeLabel: "Under 24h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-9ae864ce6cf7?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h4.svg",
   },
   {
     id: "h5",
@@ -97,7 +97,7 @@ export const helpers: Helper[] = [
     bio: "Certified team for inspections, commissioning, and sign-off.",
     coarseLocationLabel: "UK-wide",
     responseTimeLabel: "24-48h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-1b1c1722653e?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h5.svg",
   },
   {
     id: "h6",
@@ -113,7 +113,7 @@ export const helpers: Helper[] = [
     bio: "Helps with starter kits and balcony-friendly layouts.",
     coarseLocationLabel: "Remote",
     responseTimeLabel: "Same day",
-    avatar: "https://images.unsplash.com/photo-1524504388940-1ff040f5c1f3?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h6.svg",
   },
   {
     id: "h7",
@@ -129,7 +129,7 @@ export const helpers: Helper[] = [
     bio: "Battery and backup sizing with safety-first checklists.",
     coarseLocationLabel: "Brixton",
     responseTimeLabel: "Under 12h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-0f1ff5c1f3c9?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h7.svg",
   },
   {
     id: "h8",
@@ -145,7 +145,7 @@ export const helpers: Helper[] = [
     bio: "Co-op structuring, finance, and training guidance.",
     coarseLocationLabel: "Remote",
     responseTimeLabel: "2-3 days",
-    avatar: "https://images.unsplash.com/photo-1524504388940-2af2000c0e1b?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h8.svg",
   },
   {
     id: "h9",
@@ -161,7 +161,7 @@ export const helpers: Helper[] = [
     bio: "Helps crews compare kits, BOMs, and avoid mismatched components.",
     coarseLocationLabel: "Cardiff",
     responseTimeLabel: "Within 1 day",
-    avatar: "https://images.unsplash.com/photo-1524504388940-992c8e0434ad?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h9.svg",
   },
   {
     id: "h10",
@@ -177,7 +177,7 @@ export const helpers: Helper[] = [
     bio: "Resilience-first planning, load calcs, and battery safety walkthroughs.",
     coarseLocationLabel: "Birmingham",
     responseTimeLabel: "Under 8h",
-    avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h10.svg",
   },
   {
     id: "h11",
@@ -193,7 +193,7 @@ export const helpers: Helper[] = [
     bio: "Hands-on helper for ground arrays and tidy cable runs.",
     coarseLocationLabel: "Sheffield",
     responseTimeLabel: "Under 24h",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h11.svg",
   },
   {
     id: "h12",
@@ -209,7 +209,7 @@ export const helpers: Helper[] = [
     bio: "Certified electrician, focuses on inspection-ready installs.",
     coarseLocationLabel: "Glasgow",
     responseTimeLabel: "Under 12h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-3fada7a98124?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h12.svg",
   },
   {
     id: "h13",
@@ -225,7 +225,7 @@ export const helpers: Helper[] = [
     bio: "Makes technical steps easy to understand for new volunteers.",
     coarseLocationLabel: "Liverpool",
     responseTimeLabel: "Within 1 day",
-    avatar: "https://images.unsplash.com/photo-1524504388940-1c1cfbc9abf4?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h13.svg",
   },
   {
     id: "h14",
@@ -241,7 +241,7 @@ export const helpers: Helper[] = [
     bio: "Safety checks for grounding/bonding and lightning planning.",
     coarseLocationLabel: "Newcastle",
     responseTimeLabel: "Under 18h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-9f2c040f5c1f?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h14.svg",
   },
   {
     id: "h15",
@@ -257,7 +257,7 @@ export const helpers: Helper[] = [
     bio: "Commissioning specialist for battery + inverter combos.",
     coarseLocationLabel: "Nottingham",
     responseTimeLabel: "Under 8h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-1c1cfbc9abf5?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h15.svg",
   },
   {
     id: "h16",
@@ -273,7 +273,7 @@ export const helpers: Helper[] = [
     bio: "Roof access confidence builder with rigging and ladder mentoring.",
     coarseLocationLabel: "Leicester",
     responseTimeLabel: "Under 12h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-1c1cfbc9abf6?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h16.svg",
   },
   {
     id: "h17",
@@ -289,7 +289,7 @@ export const helpers: Helper[] = [
     bio: "Helps renters and co-ops navigate permissions and documentation.",
     coarseLocationLabel: "Bristol",
     responseTimeLabel: "Under 24h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-1c1cfbc9abf4?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h17.svg",
   },
   {
     id: "h18",
@@ -305,7 +305,7 @@ export const helpers: Helper[] = [
     bio: "Guides newcomers through shade checks and layout drafts.",
     coarseLocationLabel: "Remote",
     responseTimeLabel: "Same day",
-    avatar: "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h18.svg",
   },
   {
     id: "h19",
@@ -321,7 +321,7 @@ export const helpers: Helper[] = [
     bio: "Certified pro for inspection-ready commissioning and AC wiring.",
     coarseLocationLabel: "London",
     responseTimeLabel: "Under 1 day",
-    avatar: "https://images.unsplash.com/photo-1524504388940-9f2c040f5c1f?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h19.svg",
   },
   {
     id: "h20",
@@ -337,7 +337,7 @@ export const helpers: Helper[] = [
     bio: "Ground-mount enthusiast who keeps cable runs clean and safe.",
     coarseLocationLabel: "Leeds",
     responseTimeLabel: "Within 24h",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h20.svg",
   },
   {
     id: "h21",
@@ -353,7 +353,7 @@ export const helpers: Helper[] = [
     bio: "Focuses on backup readiness and battery pairing for homes.",
     coarseLocationLabel: "Manchester",
     responseTimeLabel: "Under 12h",
-    avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h21.svg",
   },
   {
     id: "h22",
@@ -369,7 +369,7 @@ export const helpers: Helper[] = [
     bio: "Starter kits and balcony-friendly layouts for first installs.",
     coarseLocationLabel: "Remote",
     responseTimeLabel: "Same day",
-    avatar: "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h22.svg",
   },
   {
     id: "h23",
@@ -385,6 +385,6 @@ export const helpers: Helper[] = [
     bio: "Commissioning specialist ensuring hybrid inverters are safe and compliant.",
     coarseLocationLabel: "Birmingham",
     responseTimeLabel: "1 day",
-    avatar: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=320&q=80",
+    avatar: "/helper-avatars/h23.svg",
   },
 ];

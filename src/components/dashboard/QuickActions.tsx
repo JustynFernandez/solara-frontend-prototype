@@ -54,7 +54,7 @@ const actions: QuickAction[] = [
     to: "/projects",
     label: "Projects",
     description: "Browse community work",
-    color: "gold",
+    color: "sky",
     icon: (
       <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
@@ -106,7 +106,7 @@ const colorClasses: Record<QuickAction["color"], { bg: string; text: string; bor
   },
   gold: {
     bg: "bg-solara-gold/10 dark:bg-solara-gold/20",
-    text: "text-solara-gold dark:text-solara-gold",
+    text: "text-solara-blue-alt dark:text-solara-sky",
     border: "border-solara-gold/20 dark:border-solara-gold/30",
   },
   emerald: {
@@ -132,13 +132,13 @@ const QuickActions: React.FC = () => {
             >
               <Link
                 to={action.to}
-                className={`group flex flex-col items-center gap-2 rounded-2xl border ${colors.border} ${colors.bg} p-4 text-center transition hover:scale-[1.02] hover:shadow-lg`}
+                className={`group flex h-full flex-col items-start gap-2 rounded-[1.2rem] border ${colors.border} ${colors.bg} p-4 text-left transition hover:border-[var(--solara-accent-soft)] hover:shadow-[var(--solara-shadow-soft)]`}
               >
                 <span className={colors.text}>{action.icon}</span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white">
                   {action.label}
                 </span>
-                <span className="hidden text-xs text-slate-500 dark:text-slate-400 sm:block">
+                <span className="hidden text-xs leading-5 text-slate-500 dark:text-slate-400 sm:block">
                   {action.description}
                 </span>
               </Link>

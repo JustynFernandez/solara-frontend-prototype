@@ -4,7 +4,8 @@ import { BookOpen, Plus } from "lucide-react";
 import AnimatedButton from "@/components/ui/animated-button";
 import ResourceList from "@/components/ui/ResourceList";
 import TrustSafetyStrip from "@/components/connect/TrustSafetyStrip";
-import { guides } from "@/data/guides";
+import { guides } from "@/data/learnContent";
+import { resolveGuideTitle } from "@/lib/solaraApi";
 import type { ProjectWorkspaceResourcesModalProps, ProjectWorkspaceResourcesProps } from "./types";
 
 const ProjectWorkspaceResources: React.FC<ProjectWorkspaceResourcesProps> = ({
@@ -60,14 +61,12 @@ const ProjectWorkspaceResources: React.FC<ProjectWorkspaceResourcesProps> = ({
         <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Saved resources</h4>
         <ResourceList
           resources={projectResources.guideSlugs.map((slug) => {
-            const guide = guides.find((item) => item.slug === slug);
-            return guide
-              ? {
-                  type: "link",
-                  title: guide.title,
-                  url: `/learn/${guide.slug}?projectId=${project.id}`,
-                }
-              : { type: "link", title: slug, url: `/learn/${slug}` };
+            const title = resolveGuideTitle(slug, project);
+            return {
+              type: "link",
+              title,
+              url: `/learn/${slug}?projectId=${project.id}`,
+            };
           })}
         />
       </div>
@@ -77,8 +76,6 @@ const ProjectWorkspaceResources: React.FC<ProjectWorkspaceResourcesProps> = ({
         <h4 className="text-sm font-semibold text-slate-900 dark:text-white">Pinned</h4>
         <div className="flex flex-wrap gap-2">
           {projectResources.pinned.map((slug) => {
-            const guide = guides.find((item) => item.slug === slug);
-            if (!guide) return null;
             return (
               <button
                 key={slug}
@@ -86,7 +83,7 @@ const ProjectWorkspaceResources: React.FC<ProjectWorkspaceResourcesProps> = ({
                 onClick={() => onTogglePin(slug)}
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-2 text-xs font-semibold text-white shadow-sm backdrop-blur hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0f62c7]"
               >
-                {guide.title}
+                {resolveGuideTitle(slug, project)}
                 <span className="text-[10px] uppercase tracking-[0.14em] text-slate-200">Unpin</span>
               </button>
             );
@@ -192,8 +189,6 @@ export const ProjectWorkspaceResourcesModal: React.FC<ProjectWorkspaceResourcesM
                 <p className="text-xs uppercase tracking-[0.16em] text-slate-200">Pinned</p>
                 <div className="flex flex-wrap gap-2">
                   {projectResources.pinned.map((slug) => {
-                    const guide = guides.find((item) => item.slug === slug);
-                    if (!guide) return null;
                     return (
                       <button
                         key={slug}
@@ -201,7 +196,7 @@ export const ProjectWorkspaceResourcesModal: React.FC<ProjectWorkspaceResourcesM
                         onClick={() => onTogglePin(slug)}
                         className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs font-semibold text-white hover:-translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0f62c7]"
                       >
-                        {guide.title}
+                        {resolveGuideTitle(slug, project)}
                         <span className="text-[10px] uppercase tracking-[0.14em] text-slate-200">Unpin</span>
                       </button>
                     );
@@ -222,7 +217,7 @@ export const ProjectWorkspaceResourcesModal: React.FC<ProjectWorkspaceResourcesM
                 <div key={guide.slug} className="space-y-2 rounded-2xl border border-white/15 bg-white/5 p-3 text-sm shadow-[0_12px_36px_rgba(0,0,0,0.35)]">
                   <div className="space-y-1">
                     <p className="font-semibold">{guide.title}</p>
-                    <p className="line-clamp-2 text-xs text-slate-200">{guide.description || ""}</p>
+                    <p className="line-clamp-2 text-xs text-slate-200">{guide.summary || ""}</p>
                     <div className="flex flex-wrap gap-2 text-[11px] uppercase tracking-[0.12em] text-slate-300">
                       {guide.tags.slice(0, 4).map((tag) => (
                         <span key={tag} className="rounded-full border border-white/15 bg-white/10 px-2 py-1">
@@ -268,4 +263,3 @@ export const ProjectWorkspaceResourcesModal: React.FC<ProjectWorkspaceResourcesM
 );
 
 export default ProjectWorkspaceResources;
-

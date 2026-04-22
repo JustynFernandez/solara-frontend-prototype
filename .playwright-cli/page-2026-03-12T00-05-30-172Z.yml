@@ -1,0 +1,195 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Community guidelines
+            - generic [ref=e53]:
+              - heading "A respectful, inclusive solar community." [level=1] [ref=e54]
+              - generic [ref=e55]: Solara is for neighbors helping neighbors. Keep interactions honest, inclusive, and free from scams or misrepresentation.
+          - generic [ref=e57]:
+            - generic [ref=e63]: Community expectations
+            - generic [ref=e64]:
+              - paragraph [ref=e65]: Shared standards
+              - heading "The platform works when people are specific, respectful, and honest about scope." [level=3] [ref=e66]
+              - paragraph [ref=e67]: Good collaboration starts with clarity about skill, safety, and the role community members are actually playing.
+            - generic [ref=e69]:
+              - article [ref=e70]:
+                - generic [ref=e71]:
+                  - paragraph [ref=e72]: Respect
+                  - heading "Keep the space inclusive and non-discriminatory." [level=3] [ref=e73]
+                  - paragraph [ref=e74]: Treat neighbors, volunteers, and certified professionals with the same baseline respect.
+              - article [ref=e75]:
+                - generic [ref=e76]:
+                  - paragraph [ref=e77]: Transparency
+                  - heading "State your real qualifications." [level=3] [ref=e78]
+                  - paragraph [ref=e79]: Do not overstate experience, certification, or the risk of a task.
+              - article [ref=e80]:
+                - generic [ref=e81]:
+                  - paragraph [ref=e82]: Escalation
+                  - heading "Report bad behavior before it spreads." [level=3] [ref=e83]
+                  - paragraph [ref=e84]: Unsafe advice and harassment should be paused quickly, not debated into normalcy.
+        - generic [ref=e85]:
+          - article [ref=e86]:
+            - paragraph [ref=e87]: Baseline
+            - paragraph [ref=e88]: Respect first
+            - paragraph [ref=e89]: Participation starts with safety, honesty, and inclusion.
+          - article [ref=e90]:
+            - paragraph [ref=e91]: Moderation
+            - paragraph [ref=e92]: Report early
+            - paragraph [ref=e93]: Flag scams, harassment, or unsafe advice quickly.
+          - article [ref=e94]:
+            - paragraph [ref=e95]: Boundary
+            - paragraph [ref=e96]: No false claims
+            - paragraph [ref=e97]: Qualifications and risk should stay transparent.
+      - generic [ref=e99]:
+        - article [ref=e100]:
+          - generic [ref=e101]:
+            - heading "Principles" [level=2] [ref=e102]
+            - list [ref=e103]:
+              - listitem [ref=e104]: Respect, inclusion, and non-discrimination.
+              - listitem [ref=e105]: Transparent skills and qualifications; no false claims.
+              - listitem [ref=e106]: "Safety-first: pause if something feels risky."
+              - listitem [ref=e107]: Credit others' work and share knowledge openly.
+        - article [ref=e108]:
+          - generic [ref=e109]:
+            - heading "Reporting & moderation" [level=2] [ref=e110]
+            - list [ref=e111]:
+              - listitem [ref=e112]: Flag scams, harassment, or unsafe advice.
+              - listitem [ref=e113]: Organisers can remove posts or pause collaboration.
+              - listitem [ref=e114]: Repeat violations may be removed from Solara spaces.
+      - article [ref=e116]:
+        - generic [ref=e117]:
+          - heading "Professional boundaries" [level=2] [ref=e118]
+          - paragraph [ref=e119]: Helpers are community members, not employees of Solara. For high-risk electrical work, use certified professionals.
+  - generic [ref=e120]:
+    - button "Eco mode Low battery" [pressed] [ref=e121] [cursor=pointer]:
+      - text: Eco mode
+      - generic [ref=e124]: Low battery
+    - button "Toggle theme" [ref=e125] [cursor=pointer]:
+      - img [ref=e126]
+  - contentinfo [ref=e129]:
+    - generic [ref=e130]:
+      - generic [ref=e131]:
+        - generic [ref=e132]:
+          - generic [ref=e133]: "19"
+          - generic [ref=e134]: Verified helpers
+        - generic [ref=e135]:
+          - generic [ref=e136]: "2"
+          - generic [ref=e137]: Active projects
+        - generic [ref=e138]:
+          - generic [ref=e139]: "8"
+          - generic [ref=e140]: Guides available
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - img "Solara logo" [ref=e145]
+            - generic [ref=e146]:
+              - generic [ref=e147]: Solara
+              - paragraph [ref=e148]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e149]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e150]:
+          - generic [ref=e151]:
+            - heading "Product" [level=4] [ref=e152]
+            - list [ref=e153]:
+              - listitem [ref=e154]:
+                - link "Find Helpers" [ref=e155] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e156]:
+                - link "Plan Your Solar" [ref=e157] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e158]:
+                - link "3D Configurator" [ref=e159] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e160]:
+                - link "Projects" [ref=e161] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e162]:
+            - heading "Learn" [level=4] [ref=e163]
+            - list [ref=e164]:
+              - listitem [ref=e165]:
+                - link "Getting Started" [ref=e166] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e167]:
+                - link "Solar Navigator" [ref=e168] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e169]:
+                - link "Safety Guide" [ref=e170] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e171]:
+                - link "Services" [ref=e172] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e173]:
+            - heading "Community" [level=4] [ref=e174]
+            - list [ref=e175]:
+              - listitem [ref=e176]:
+                - link "Request Help" [ref=e177] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e178]:
+                - link "Become a Helper" [ref=e179] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e180]:
+                - link "Guidelines" [ref=e181] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e182]:
+                - link "Projects Board" [ref=e183] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e184]:
+            - heading "Account" [level=4] [ref=e185]
+            - list [ref=e186]:
+              - listitem [ref=e187]:
+                - link "Sign In" [ref=e188] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e189]:
+                - link "Register" [ref=e190] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e191]:
+                - link "My Account" [ref=e192] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e193]:
+                - link "Dashboard" [ref=e194] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - heading "Get product updates" [level=3] [ref=e199]
+            - paragraph [ref=e200]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e201]:
+            - textbox "you@example.com" [ref=e202]
+            - button "Join update list" [ref=e203] [cursor=pointer]
+          - paragraph [ref=e204]: Unsubscribe any time.
+      - generic [ref=e205]:
+        - generic [ref=e206]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e208]: © 2026 Solara Community

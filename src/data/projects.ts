@@ -16,8 +16,21 @@ export type ProjectRole = {
   verified: boolean;
 };
 
+export type ProjectGuideResource = {
+  id?: number;
+  guideId?: number;
+  guideSlug: string;
+  guideTitle: string;
+  pinned: boolean;
+  addedByUserId?: string;
+  addedByName?: string;
+};
+
 export type Project = {
   id: string;
+  backendId?: number;
+  source?: "mock" | "backend";
+  slug?: string;
   name: string;
   shortDescription: string;
   fullDescription: string;
@@ -39,11 +52,18 @@ export type Project = {
   shadingConfidence?: "clear" | "mixed" | "heavy" | "unknown";
   batteryInterest?: "yes" | "maybe" | "no";
   supportPreference?: "community" | "trained" | "certified" | "mixed";
+  guideResources?: ProjectGuideResource[];
+  membershipCount?: number;
+  linkedGuideCount?: number;
+  openHelpRequestCount?: number;
+  createdByUserId?: string;
+  createdByName?: string;
 };
 
 export const projects: Project[] = [
   {
     id: "brixton-rooftops",
+    backendId: 1,
     name: "Brixton Solar Rooftops",
     shortDescription: "Row homes retrofits with rooftop kits plus tenant mentorship.",
     fullDescription: "Retrofit 3kW rooftop arrays on Brixton row homes, pair tenants with mentors for upkeep, and measure savings for the block.",
@@ -76,6 +96,7 @@ export const projects: Project[] = [
   },
   {
     id: "camden-coop",
+    backendId: 2,
     name: "Camden Solar Co-op",
     shortDescription: "Co-owned 150kW array with youth training at two centers.",
     fullDescription: "A co-owned 150kW rooftop array across two community centers in Camden, paired with youth training and monitoring dashboards.",

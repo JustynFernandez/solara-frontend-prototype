@@ -1,0 +1,97 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e51]:
+          - article [ref=e52]:
+            - paragraph [ref=e53]: Flow
+            - paragraph [ref=e54]: Mock account
+            - paragraph [ref=e55]: No backend dependency required.
+          - article [ref=e56]:
+            - paragraph [ref=e57]: Carry-over
+            - paragraph [ref=e58]: Saved state
+            - paragraph [ref=e59]: Helpers, guides, and planning stay linked.
+        - generic [ref=e60]:
+          - paragraph [ref=e61]: Sign in
+          - heading "Access your Solara account" [level=1] [ref=e62]
+          - generic [ref=e63]: Sign in to pick up saved helpers, projects, and planning progress. This remains a mock flow with no backend dependency.
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - text: Email
+            - textbox "Email" [ref=e67]:
+              - /placeholder: you@example.com
+          - generic [ref=e68]:
+            - text: Password
+            - generic [ref=e69]:
+              - textbox "Password" [ref=e70]:
+                - /placeholder: "********"
+              - button "Show password" [ref=e71] [cursor=pointer]:
+                - img [ref=e72]
+          - generic [ref=e75]:
+            - button "Sign in ->" [ref=e76] [cursor=pointer]
+            - link "Create an account instead ->" [ref=e77] [cursor=pointer]:
+              - /url: /register
+      - complementary [ref=e78]:
+        - generic [ref=e79]:
+          - generic [ref=e85]: Account continuity
+          - generic [ref=e86]:
+            - paragraph [ref=e87]: What carries through
+            - heading "Pick up saved work without starting over." [level=3] [ref=e88]
+            - paragraph [ref=e89]: Sign in to resume planning, keep helper shortlists, and move between projects without losing context.
+          - generic [ref=e90]:
+            - generic [ref=e91]:
+              - article [ref=e92]:
+                - paragraph [ref=e93]: Saved helpers
+                - paragraph [ref=e94]: One shortlist
+                - paragraph [ref=e95]: Keep trusted contacts and request handoffs together.
+              - article [ref=e96]:
+                - paragraph [ref=e97]: Project continuity
+                - paragraph [ref=e98]: No reset
+                - paragraph [ref=e99]: Move from guides and planning into active workspaces.
+              - article [ref=e100]:
+                - paragraph [ref=e101]: Planning progress
+                - paragraph [ref=e102]: Resume later
+                - paragraph [ref=e103]: Return to Navigator and account details where you left off.
+            - generic [ref=e104]:
+              - article [ref=e105]:
+                - generic [ref=e106]:
+                  - paragraph [ref=e107]: Saved helpers
+                  - heading "Keep trusted contacts in one place." [level=3] [ref=e108]
+                  - paragraph [ref=e109]: Response history, fit notes, and request handoffs stay visible.
+              - article [ref=e110]:
+                - generic [ref=e111]:
+                  - paragraph [ref=e112]: Project continuity
+                  - heading "Move into active work without duplicate setup." [level=3] [ref=e113]
+                  - paragraph [ref=e114]: Saved guides, helpers, and planning choices stay attached to the flow.

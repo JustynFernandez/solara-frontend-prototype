@@ -1,7 +1,12 @@
-import type { Guide } from "@/data/guides";
+import type { GuideContent } from "@/data/learnContent";
 import type { Project, ProjectTask } from "@/data/projects";
+import type {
+  BackendNotification,
+  BackendNotificationPreference,
+  BackendProjectDashboard,
+} from "@/lib/solaraApi";
 
-export type WorkspaceTab = "overview" | "tasks" | "people" | "resources" | "impact";
+export type WorkspaceTab = "overview" | "dashboard" | "tasks" | "people" | "resources" | "updates" | "impact";
 
 export type ProjectResourceState = {
   guideSlugs: string[];
@@ -17,7 +22,7 @@ export type ProjectWorkspaceProps = {
 export type ProjectWorkspaceResourcesProps = {
   project: Project;
   projectResources: ProjectResourceState;
-  recommendedGuides: Guide[];
+  recommendedGuides: GuideContent[];
   onOpenResourceCenter: () => void;
   onAddGuideToProject: (slug: string) => void;
   onAddGuideToTasks: (slug: string) => void;
@@ -29,8 +34,8 @@ export type ProjectWorkspaceResourcesModalProps = {
   onClose: () => void;
   resourceSearch: string;
   onResourceSearchChange: (value: string) => void;
-  searchableGuides: Guide[];
-  recommendedGuides: Guide[];
+  searchableGuides: GuideContent[];
+  recommendedGuides: GuideContent[];
   project: Project;
   projectResources: ProjectResourceState;
   onAddGuideToProject: (slug: string) => void;
@@ -43,3 +48,29 @@ export type ProjectWorkspaceTasksProps = {
   onToggleTaskStatus: (id: string) => void;
 };
 
+export type ProjectWorkspaceDashboardProps = {
+  project: Project;
+  dashboardData: BackendProjectDashboard | null;
+  dashboardLoading: boolean;
+  dashboardError?: string | null;
+  onRefreshDashboard: () => void;
+};
+
+export type ProjectWorkspaceUpdatesProps = {
+  project: Project;
+  notifications: BackendNotification[];
+  notificationsLoading: boolean;
+  notificationsError?: string | null;
+  notificationPreferences: BackendNotificationPreference | null;
+  preferencesLoading: boolean;
+  preferencesError?: string | null;
+  onRefreshNotifications: () => void;
+  onToggleNotificationRead: (id: number, read: boolean) => void;
+  onPreferenceChange: (
+    key: "inAppEnabled" | "helpRequestsEnabled" | "projectResourcesEnabled" | "teamActivityEnabled",
+    value: boolean
+  ) => void;
+  onSavePreferences: () => void;
+  isSavingPreferences: boolean;
+  preferenceDirty: boolean;
+};

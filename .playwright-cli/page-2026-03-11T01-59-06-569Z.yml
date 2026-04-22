@@ -1,0 +1,54 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e7]:
+      - link "Solara logo Solara Solar Support Network" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e11]
+        - generic [ref=e12]:
+          - generic [ref=e13]: Solara
+          - generic [ref=e14]: Solar Support Network
+      - generic [ref=e15]:
+        - button "Toggle theme" [ref=e16] [cursor=pointer]:
+          - img [ref=e17]
+        - button "Toggle menu" [ref=e20] [cursor=pointer]:
+          - img [ref=e21]
+  - main [ref=e23]:
+    - generic [ref=e28]:
+      - generic [ref=e29]:
+        - generic [ref=e30]:
+          - paragraph [ref=e31]: Sign in
+          - heading "Access your Solara account" [level=1] [ref=e32]
+          - generic [ref=e33]: Sign in to pick up saved helpers, projects, and planning progress. This remains a mock flow with no backend dependency.
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - text: Email
+            - textbox "Email" [ref=e37]:
+              - /placeholder: you@example.com
+          - generic [ref=e38]:
+            - text: Password
+            - generic [ref=e39]:
+              - textbox "Password" [ref=e40]:
+                - /placeholder: "********"
+              - button "Show password" [ref=e41] [cursor=pointer]:
+                - img [ref=e42]
+          - generic [ref=e45]:
+            - button "Sign in ->" [ref=e46] [cursor=pointer]
+            - link "Create an account instead ->" [ref=e47] [cursor=pointer]:
+              - /url: /register
+      - complementary [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: Account continuity
+            - heading "Pick up saved work without starting over." [level=2] [ref=e52]
+            - paragraph [ref=e53]: Sign in to resume planning, keep helper shortlists, and move between projects without losing context.
+          - generic [ref=e54]:
+            - generic [ref=e55]:
+              - paragraph [ref=e56]: Saved helpers
+              - paragraph [ref=e57]: Keep trusted contacts, response history, and request handoffs in one place.
+            - generic [ref=e58]:
+              - paragraph [ref=e59]: Project continuity
+              - paragraph [ref=e60]: Move from guides and planning into active workspaces without duplicating setup.
+            - generic [ref=e61]:
+              - paragraph [ref=e62]: Planning progress
+              - paragraph [ref=e63]: Return to Navigator and account details exactly where you left them.

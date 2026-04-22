@@ -1,0 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { cn } from "@/lib/utils";
+const ActionRail = ({ items, className, compact = false }) => (_jsx("div", { className: cn("solara-action-rail", compact && "solara-action-rail--compact", className), children: items.map((item) => (_jsxs("article", { className: "solara-action-rail__item", children: [_jsxs("div", { className: "solara-action-rail__copy", children: [item.eyebrow ? _jsx("p", { className: "solara-action-rail__eyebrow", children: item.eyebrow }) : null, _jsx("h3", { className: "solara-action-rail__title", children: item.title }), item.body ? _jsx("p", { className: "solara-action-rail__body", children: item.body }) : null] }), item.action ? _jsx("div", { className: "solara-action-rail__action", children: item.action }) : null] }, `${item.title}-${item.eyebrow || ""}`))) }));
+export default ActionRail;

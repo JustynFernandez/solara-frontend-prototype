@@ -1,39 +1,104 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import RoleSelector from "../components/auth/RoleSelector";
+import ActionRail from "@/components/ui/action-rail";
+import PageFrame from "@/components/ui/page-frame";
+import PageIntro from "@/components/ui/page-intro";
+import PageHeroStage from "@/components/ui/page-hero-stage";
+import MetricBand from "@/components/ui/metric-band";
+import PageReveal from "@/components/ui/page-reveal";
+import PreviewFrame from "@/components/ui/preview-frame";
+import SurfacePanel from "@/components/ui/surface-panel";
+import InlineAction from "@/components/ui/inline-action";
 import { useAuth } from "../context/auth-context";
 import { locations, skillOptions } from "../data/mockData";
-import SkillIcon from "../components/shared/SkillIcon";
+
+const fieldClassName =
+  "w-full rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] px-4 py-3 text-sm text-[var(--solara-text-strong)] outline-none transition placeholder:text-[var(--solara-text-muted)] focus:border-[var(--solara-accent)] focus:ring-2 focus:ring-[var(--solara-accent-soft)]";
+
+const roleOptions = ["Helper", "Seeker"];
 
 const MyAccount = () => {
   const { user, updateProfile } = useAuth();
   const [editing, setEditing] = useState(false);
   const [draft, setDraft] = useState(user || {});
 
+  const initials = useMemo(() => {
+    if (!user?.name) return "SO";
+    return user.name
+      .split(" ")
+      .map((part) => part[0])
+      .join("")
+      .slice(0, 2)
+      .toUpperCase();
+  }, [user?.name]);
+
   if (!user) {
     return (
-      <div className="min-h-screen px-6 py-12 text-slate-900 dark:text-white">
-        <div className="relative mx-auto max-w-4xl rounded-3xl border border-white/70 bg-white/85 p-8 text-center shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
-          <h1 className="text-3xl font-semibold text-slate-900 dark:text-white">You are signed out</h1>
-          <p className="mt-2 text-slate-600 dark:text-slate-300">Sign in to view your profile, listings, and saved helpers.</p>
-          <div className="mt-4 flex justify-center gap-3">
-            <Link to="/sign-in" className="rounded-full bg-button-primary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg">
-              Sign In
-            </Link>
-            <Link to="/register" className="rounded-full border border-white/70 bg-white/80 px-5 py-2.5 text-sm font-semibold text-solara-navy shadow-sm backdrop-blur transition hover:shadow-md dark:border-white/10 dark:bg-white/10 dark:text-white">
-              Create account
-            </Link>
+      <PageFrame family="account" width="wide" density="compact">
+        <PageReveal mode="mount">
+          <div className="grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+            <SurfacePanel variant="account" density="comfortable" className="space-y-5">
+              <PageIntro
+                variant="quiet"
+                eyebrow="My account"
+                title="You are signed out."
+                body="Sign in to view your profile, saved helpers, and planning progress."
+                align="left"
+              />
+              <MetricBand
+                compact
+                items={[
+                  { label: "Profile", value: "Private", meta: "Your saved identity and preferences stay behind sign-in." },
+                  { label: "Context", value: "Stored", meta: "Helpers, projects, and planning notes reappear after login." },
+                ]}
+              />
+              <div className="flex flex-wrap gap-3">
+                <InlineAction to="/sign-in" emphasis="strong">
+                  Sign in
+                </InlineAction>
+                <InlineAction to="/register">Create account</InlineAction>
+              </div>
+            </SurfacePanel>
+
+            <PreviewFrame
+              chromeLabel="Why it matters"
+              eyebrow="Account continuity"
+              title="Keep your profile, helpers, and planning history together."
+              body="The account area is the stable surface that carries your identity through the rest of Solara."
+              viewportClassName="pt-0"
+            >
+              <ActionRail
+                compact
+                items={[
+                  { eyebrow: "Saved work", title: "Return to the same setup.", body: "Projects and helper shortlists wait for you instead of starting fresh." },
+                  { eyebrow: "Profile state", title: "Keep your roles visible.", body: "Location, skills, and photo all stay attached to your account." },
+                ]}
+              />
+            </PreviewFrame>
           </div>
-        </div>
-      </div>
+        </PageReveal>
+      </PageFrame>
     );
   }
 
+  const toggleRole = (role) => {
+    setDraft((prev) => {
+      const roles = prev.roles || [];
+      return {
+        ...prev,
+        roles: roles.includes(role) ? roles.filter((item) => item !== role) : [...roles, role],
+      };
+    });
+  };
+
   const toggleSkill = (skill) => {
-    const exists = draft.skills?.includes(skill);
-    const next = exists ? draft.skills.filter((s) => s !== skill) : [...(draft.skills || []), skill];
-    setDraft((prev) => ({ ...prev, skills: next }));
+    setDraft((prev) => {
+      const skills = prev.skills || [];
+      return {
+        ...prev,
+        skills: skills.includes(skill) ? skills.filter((item) => item !== skill) : [...skills, skill],
+      };
+    });
   };
 
   const saveProfile = (event) => {
@@ -42,147 +107,223 @@ const MyAccount = () => {
     setEditing(false);
   };
 
-  return (
-    <div className="relative min-h-screen px-6 py-12 text-slate-900 dark:text-white">
-      <div className="relative mx-auto max-w-5xl space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">My account</p>
-            <h1 className="text-4xl font-semibold text-slate-900 dark:text-white">Welcome back, {user.name}</h1>
-            <p className="text-slate-600 dark:text-slate-300">Role: {user.roles?.join(", ")}</p>
-          </div>
-          <button
-            type="button"
-            onClick={() => setEditing((value) => !value)}
-            className="rounded-full bg-button-primary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
-          >
-            {editing ? "Cancel" : "Edit profile"}
-          </button>
-        </div>
+  const roleCount = user.roles?.length || 0;
+  const skillCount = user.skills?.length || 0;
+  const bioWords = user.bio ? user.bio.split(/\s+/).filter(Boolean).length : 0;
 
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="grid gap-4 md:grid-cols-[1.2fr,1fr]"
-        >
-          <div className="rounded-3xl border border-white/70 bg-white/85 p-6 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
-            <div className="flex items-center gap-4">
-              <img src={user.photo} alt={user.name} className="h-20 w-20 rounded-2xl object-cover shadow-sm" />
-              <div>
-                <p className="text-xl font-semibold text-slate-900 dark:text-white">{user.name}</p>
-                <p className="text-sm text-slate-600 dark:text-slate-300">{user.location}</p>
-                <div className="mt-2 flex flex-wrap gap-2">
-                  {user.roles?.map((role) => (
-                    <span key={role} className="rounded-full border border-white/70 bg-white/80 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-slate-200">
+  return (
+    <PageFrame family="account" width="wide" density="compact">
+      <PageReveal mode="mount">
+        <PageHeroStage
+          family="account"
+          eyebrow="My account"
+          title={user.name}
+          body={`${user.location} - ${(user.roles || []).join(", ")}`}
+          actions={
+            <button
+              type="button"
+              onClick={() => setEditing((value) => !value)}
+              className="solara-inline-action solara-inline-action--strong"
+            >
+              {editing ? "Cancel" : "Edit profile"}
+            </button>
+          }
+          metrics={[
+            { label: "Roles", value: roleCount, meta: "How you appear across Solara" },
+            { label: "Skills", value: skillCount, meta: "Used for matching and requests" },
+            { label: "Bio", value: bioWords, meta: "Words available for context" },
+          ]}
+          preview={
+            <PreviewFrame
+              chromeLabel="Profile summary"
+              eyebrow="Visible identity"
+              title="The profile people see before opening the full detail."
+              body="Keep your role, skills, and short context readable at a glance."
+            >
+              <div className="flex items-start gap-4">
+                <span className="inline-flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[1.25rem] border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] text-xl font-semibold text-[var(--solara-text-strong)]">
+                  {user.photo ? <img src={user.photo} alt={user.name} className="h-full w-full object-cover" /> : initials}
+                </span>
+                <div className="space-y-2">
+                  <p className="text-lg font-semibold text-[var(--solara-text-strong)]">{user.name}</p>
+                  <p className="text-sm text-[var(--solara-text-muted)]">{user.location}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {(user.roles || []).map((role) => (
+                      <span key={role} className="rounded-full border border-[var(--solara-rule)] px-3 py-1 text-xs font-semibold text-[var(--solara-text-strong)]">
+                        {role}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </PreviewFrame>
+          }
+        />
+      </PageReveal>
+
+      <PageReveal mode="in-view">
+        <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+          <SurfacePanel variant="account" layout="preview" density="comfortable" className="space-y-5">
+            <div className="flex items-start gap-4">
+              <span className="inline-flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-[1.25rem] border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] text-xl font-semibold text-[var(--solara-text-strong)]">
+                {user.photo ? <img src={user.photo} alt={user.name} className="h-full w-full object-cover" /> : initials}
+              </span>
+              <div className="space-y-2">
+                <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Profile</p>
+                <p className="text-xl font-semibold text-[var(--solara-text-strong)]">{user.name}</p>
+                <p className="text-sm text-[var(--solara-text-muted)]">{user.location}</p>
+                <div className="flex flex-wrap gap-2">
+                  {(user.roles || []).map((role) => (
+                    <span key={role} className="rounded-full border border-[var(--solara-rule)] px-3 py-1 text-xs font-semibold text-[var(--solara-text-strong)]">
                       {role}
                     </span>
                   ))}
                 </div>
               </div>
             </div>
-            <p className="mt-4 text-sm text-slate-700 dark:text-slate-200">{user.bio}</p>
-            <div className="mt-4 flex flex-wrap gap-3">
-              {user.skills?.map((skill) => (
-                <span key={skill} className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-slate-200">
-                  <SkillIcon name={skill} className="h-8 w-8" />
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
 
-          <div className="rounded-3xl border border-white/70 bg-white/85 p-6 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Account actions</h2>
-            <ul className="mt-3 space-y-2 text-sm text-slate-700 dark:text-slate-200">
-              <li className="flex items-center justify-between rounded-xl border border-white/50 bg-white/60 px-4 py-3 dark:border-white/10 dark:bg-white/5">
-                <span>View your listings</span>
-                <Link to="/connect" className="text-sm font-semibold text-solara-navy hover:text-solara-blue dark:text-indigo-200 dark:hover:text-white">
-                  Open
-                </Link>
-              </li>
-              <li className="flex items-center justify-between rounded-xl border border-white/50 bg-white/60 px-4 py-3 dark:border-white/10 dark:bg-white/5">
-                <span>Request new help</span>
-                <Link to="/request" className="text-sm font-semibold text-solara-navy hover:text-solara-blue dark:text-indigo-200 dark:hover:text-white">
-                  Request
-                </Link>
-              </li>
-            </ul>
-          </div>
-        </motion.div>
-
-        {editing && (
-          <motion.form
-            onSubmit={saveProfile}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="space-y-5 rounded-3xl border border-white/70 bg-white/85 p-6 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-white/5"
-          >
-            <div className="grid gap-4 md:grid-cols-2">
-              <label className="space-y-1 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                Name
-                <input
-                  type="text"
-                  value={draft.name || ""}
-                  onChange={(event) => setDraft((prev) => ({ ...prev, name: event.target.value }))}
-                  className="w-full rounded-xl border border-white/50 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm backdrop-blur focus:border-solara-blue focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white"
-                />
-              </label>
-              <label className="space-y-1 text-sm font-semibold text-slate-800 dark:text-slate-200">
-                Location
-                <select
-                  value={draft.location || "London"}
-                  onChange={(event) => setDraft((prev) => ({ ...prev, location: event.target.value }))}
-                  className="w-full rounded-xl border border-white/50 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm backdrop-blur focus:border-solara-blue focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white"
-                >
-                  {locations.filter((city) => city !== "Any").map((city) => (
-                    <option key={city} value={city}>
-                      {city}
-                    </option>
-                  ))}
-                </select>
-              </label>
+            <div className="space-y-2 border-t border-[var(--solara-rule-soft)] pt-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">About</p>
+              <p className="text-sm leading-6 text-[var(--solara-text-muted)]">{user.bio || "No bio added yet."}</p>
             </div>
 
-            <label className="space-y-1 text-sm font-semibold text-slate-800 dark:text-slate-200">
-              Bio
-              <textarea
-                rows="3"
-                value={draft.bio || ""}
-                onChange={(event) => setDraft((prev) => ({ ...prev, bio: event.target.value }))}
-                className="w-full rounded-xl border border-white/50 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm backdrop-blur focus:border-solara-blue focus:outline-none dark:border-white/10 dark:bg-white/10 dark:text-white"
-              />
-            </label>
-
-            <RoleSelector value={draft.roles || []} onChange={(roles) => setDraft((prev) => ({ ...prev, roles }))} />
-
-            <div className="space-y-2">
-              <p className="text-sm font-semibold text-slate-800 dark:text-slate-200">Skills</p>
+            <div className="space-y-3 border-t border-[var(--solara-rule-soft)] pt-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Skills and resources</p>
               <div className="flex flex-wrap gap-2">
-                {skillOptions.map((skill) => {
-                  const active = draft.skills?.includes(skill);
-                  return (
-                    <button
-                      type="button"
-                      key={skill}
-                      onClick={() => toggleSkill(skill)}
-                      className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
-                        active ? "bg-button-primary text-white shadow-md" : "border border-white/50 bg-white/80 text-slate-700 shadow-sm hover:border-solara-blue/30 dark:border-white/10 dark:bg-white/10 dark:text-slate-200 dark:hover:border-solara-gold/30"
-                      }`}
-                    >
+                {(user.skills || []).length > 0 ? (
+                  user.skills.map((skill) => (
+                    <span key={skill} className="rounded-full border border-[var(--solara-rule)] px-3 py-2 text-sm text-[var(--solara-text-muted)]">
                       {skill}
-                    </button>
-                  );
-                })}
+                    </span>
+                  ))
+                ) : (
+                  <span className="text-sm text-[var(--solara-text-muted)]">No skills added yet.</span>
+                )}
               </div>
             </div>
+          </SurfacePanel>
 
-            <button type="submit" className="inline-flex items-center justify-center gap-2 rounded-full bg-button-primary px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg">
-              Save changes
-            </button>
-          </motion.form>
-        )}
-      </div>
-    </div>
+          <SurfacePanel variant="account" layout="rail" density="compact" className="space-y-4">
+            <div className="space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Actions</p>
+              <p className="text-sm leading-6 text-[var(--solara-text-muted)]">
+                Move into the parts of Solara where your profile matters most.
+              </p>
+            </div>
+            <ActionRail
+              items={[
+                { title: "Browse helpers", body: "See who matches your role and location best.", action: <Link to="/connect/helpers" className="solara-inline-action solara-inline-action--default">Open</Link> },
+                { title: "Open projects", body: "Move from profile into active neighborhood workspaces.", action: <Link to="/projects" className="solara-inline-action solara-inline-action--default">Open</Link> },
+                { title: "Run Navigator", body: "Turn your next solar question into a practical route.", action: <Link to="/plan/navigator" className="solara-inline-action solara-inline-action--default">Open</Link> },
+              ]}
+            />
+          </SurfacePanel>
+        </div>
+      </PageReveal>
+
+      {editing ? (
+        <PageReveal mode="in-view">
+          <SurfacePanel variant="account" layout="split" density="comfortable">
+            <form onSubmit={saveProfile} className="space-y-6">
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-[var(--solara-text-strong)]">
+                    Name
+                    <input
+                      type="text"
+                      value={draft.name || ""}
+                      onChange={(event) => setDraft((prev) => ({ ...prev, name: event.target.value }))}
+                      className={fieldClassName}
+                    />
+                  </label>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-semibold text-[var(--solara-text-strong)]">
+                    Location
+                    <select
+                      value={draft.location || "London"}
+                      onChange={(event) => setDraft((prev) => ({ ...prev, location: event.target.value }))}
+                      className={fieldClassName}
+                    >
+                      {locations.filter((city) => city !== "Any").map((city) => (
+                        <option key={city} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              </div>
+
+              <label className="block space-y-2 text-sm font-semibold text-[var(--solara-text-strong)]">
+                Bio
+                <textarea
+                  rows="3"
+                  value={draft.bio || ""}
+                  onChange={(event) => setDraft((prev) => ({ ...prev, bio: event.target.value }))}
+                  className={fieldClassName}
+                />
+              </label>
+
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-[var(--solara-text-strong)]">Roles</p>
+                <div className="flex flex-wrap gap-2">
+                  {roleOptions.map((role) => {
+                    const active = (draft.roles || []).includes(role);
+                    return (
+                      <button
+                        key={role}
+                        type="button"
+                        onClick={() => toggleRole(role)}
+                        className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                          active
+                            ? "border-[var(--solara-accent)] bg-[var(--solara-accent-soft)] text-[var(--solara-accent-strong)]"
+                            : "border-[var(--solara-rule)] bg-[var(--solara-surface-2)] text-[var(--solara-text-strong)] hover:border-[var(--solara-accent-soft)]"
+                        }`}
+                      >
+                        {role}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <p className="text-sm font-semibold text-[var(--solara-text-strong)]">Skills</p>
+                <div className="flex flex-wrap gap-2">
+                  {skillOptions.map((skill) => {
+                    const active = (draft.skills || []).includes(skill);
+                    return (
+                      <button
+                        key={skill}
+                        type="button"
+                        onClick={() => toggleSkill(skill)}
+                        className={`rounded-full border px-4 py-2 text-sm transition ${
+                          active
+                            ? "border-[var(--solara-accent)] bg-[var(--solara-accent-soft)] text-[var(--solara-accent-strong)]"
+                            : "border-[var(--solara-rule)] bg-[var(--solara-surface-2)] text-[var(--solara-text-muted)] hover:border-[var(--solara-accent-soft)] hover:text-[var(--solara-text-strong)]"
+                        }`}
+                      >
+                        {skill}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-3">
+                <button type="submit" className="solara-inline-action solara-inline-action--strong">
+                  Save changes
+                </button>
+                <button type="button" onClick={() => setEditing(false)} className="solara-inline-action solara-inline-action--default">
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </SurfacePanel>
+        </PageReveal>
+      ) : null}
+    </PageFrame>
   );
 };
 

@@ -1,0 +1,279 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e7]:
+      - link "Solara logo Solara Solar Support Network" [ref=e8] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e11]
+        - generic [ref=e12]:
+          - generic [ref=e13]: Solara
+          - generic [ref=e14]: Solar Support Network
+      - generic [ref=e15]:
+        - button "Toggle theme" [ref=e16] [cursor=pointer]:
+          - img [ref=e17]
+        - button "Toggle menu" [ref=e20] [cursor=pointer]:
+          - img [ref=e21]
+  - main [ref=e23]:
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - main [ref=e27]:
+          - generic [ref=e31]:
+            - heading "Neighborhood Solar, made simple." [level=1] [ref=e32]:
+              - generic [ref=e33]:
+                - generic [ref=e34]: Neighborhood
+                - generic [ref=e35]: Solar,
+                - generic [ref=e36]:
+                  - generic [ref=e37]: made
+                  - generic [ref=e41]: simple.
+            - paragraph [ref=e42]: Start with local solar helpers. Then open the planning flow or join projects already in motion.
+            - generic [ref=e43]:
+              - link "Find helpers" [ref=e44] [cursor=pointer]:
+                - /url: /connect
+                - generic [ref=e45]: Find helpers
+                - img [ref=e46]
+              - link "Plan with navigator" [ref=e48] [cursor=pointer]:
+                - /url: /solar-navigator
+                - generic [ref=e49]: Plan with navigator
+        - generic [ref=e53]:
+          - generic [ref=e54]:
+            - paragraph [ref=e55]: Live board
+            - heading "Start with what is live right now." [level=2] [ref=e56]
+            - paragraph [ref=e57]: Helpers, planning, and active builds in one surface.
+          - generic [ref=e59]:
+            - tablist "Live board lanes" [ref=e60]:
+              - tab "Help now Start here Find verified local help Open verified helpers by response speed, location, and skill. Browse helpers" [selected] [ref=e61] [cursor=pointer]:
+                - generic [ref=e62]:
+                  - generic [ref=e63]: Help now
+                  - generic [ref=e64]: Start here
+                - generic [ref=e65]: Find verified local help
+                - generic [ref=e66]: Open verified helpers by response speed, location, and skill.
+                - generic [ref=e67]:
+                  - text: Browse helpers
+                  - img [ref=e68]
+              - tab "Plan first Build a plan before you spend See the first planning questions before you open Navigator. Run Navigator" [ref=e70] [cursor=pointer]:
+                - generic [ref=e72]: Plan first
+                - generic [ref=e73]: Build a plan before you spend
+                - generic [ref=e74]: See the first planning questions before you open Navigator.
+                - generic [ref=e75]:
+                  - text: Run Navigator
+                  - img [ref=e76]
+              - tab "Join a build Open work already underway Open recruiting and in-progress projects with current volunteer demand. Open projects" [ref=e78] [cursor=pointer]:
+                - generic [ref=e80]: Join a build
+                - generic [ref=e81]: Open work already underway
+                - generic [ref=e82]: Open recruiting and in-progress projects with current volunteer demand.
+                - generic [ref=e83]:
+                  - text: Open projects
+                  - img [ref=e84]
+            - generic [ref=e87]:
+              - generic [ref=e88]:
+                - generic [ref=e89]:
+                  - generic [ref=e90]: Helpers online
+                  - generic [ref=e91]: "13"
+                - generic [ref=e92]:
+                  - generic [ref=e93]: Projects active
+                  - generic [ref=e94]: "2"
+                - generic [ref=e95]:
+                  - generic [ref=e96]: Navigator flow
+                  - generic [ref=e97]: 5 steps
+              - tabpanel [ref=e98]:
+                - generic [ref=e100]:
+                  - generic [ref=e101]:
+                    - generic [ref=e102]:
+                      - paragraph [ref=e103]: Helpers lane
+                      - paragraph [ref=e104]: Verified helpers available now
+                    - link "Browse helpers" [ref=e105] [cursor=pointer]:
+                      - /url: /connect
+                      - text: Browse helpers
+                      - img [ref=e106]
+                  - generic [ref=e108]:
+                    - generic [ref=e109]:
+                      - generic [ref=e112]:
+                        - paragraph [ref=e113]: Priya S.
+                        - paragraph [ref=e114]: trained / Brixton
+                      - generic [ref=e115]:
+                        - paragraph [ref=e116]: Under 12h
+                        - paragraph [ref=e117]: Battery / Backup
+                    - generic [ref=e118]:
+                      - generic [ref=e121]:
+                        - paragraph [ref=e122]: Leah G.
+                        - paragraph [ref=e123]: trained / Birmingham
+                      - generic [ref=e124]:
+                        - paragraph [ref=e125]: Under 8h
+                        - paragraph [ref=e126]: Battery / Load calc
+                    - generic [ref=e127]:
+                      - generic [ref=e130]:
+                        - paragraph [ref=e131]: Mia V.
+                        - paragraph [ref=e132]: certified / Nottingham
+                      - generic [ref=e133]:
+                        - paragraph [ref=e134]: Under 8h
+                        - paragraph [ref=e135]: Battery / Hybrid inverter
+      - generic [ref=e136]:
+        - generic [ref=e139]:
+          - generic [ref=e141]:
+            - img "Brixton Solar Rooftops" [ref=e142]
+            - generic [ref=e143]:
+              - generic [ref=e144]: Recruiting
+              - generic [ref=e145]: Brixton, London
+              - generic [ref=e146]: Rooftop
+          - generic [ref=e147]:
+            - generic [ref=e148]:
+              - paragraph [ref=e149]: Current build
+              - heading "Brixton Solar Rooftops" [level=2] [ref=e150]
+              - paragraph [ref=e151]: Recruiting in Brixton, London / Rooftop
+              - paragraph [ref=e152]: Row homes retrofits with rooftop kits plus tenant mentorship.
+            - generic [ref=e153]:
+              - generic [ref=e154]:
+                - term [ref=e155]: Volunteers
+                - definition [ref=e156]: 18/25
+                - paragraph [ref=e157]: 72% committed
+              - generic [ref=e158]:
+                - term [ref=e159]: Projected output
+                - definition [ref=e160]: 28K kWh
+                - paragraph [ref=e161]: 7.5t CO2 avoided / year
+              - generic [ref=e162]:
+                - term [ref=e163]: Funding
+                - definition [ref=e164]: £6.2K / £12K
+                - paragraph [ref=e165]: Current backing against target
+            - generic [ref=e166]:
+              - paragraph [ref=e167]: Current need now
+              - paragraph [ref=e168]: Order mounting kits
+              - paragraph [ref=e169]: 7 more volunteers needed. 1 task already moving. This is the next clear opening.
+            - generic [ref=e170]:
+              - generic [ref=e171]:
+                - paragraph [ref=e172]: Ava Mensah
+                - generic [ref=e173]: Project organiser
+              - generic [ref=e174]:
+                - paragraph [ref=e175]: Elliot P.
+                - generic [ref=e176]: Installer (pro)
+            - generic [ref=e177]:
+              - link "Open Projects" [ref=e178] [cursor=pointer]:
+                - /url: /projects
+                - text: Open Projects
+                - img [ref=e179]
+              - link "Find matching helpers" [ref=e181] [cursor=pointer]:
+                - /url: /connect
+                - text: Find matching helpers
+                - img [ref=e182]
+        - generic [ref=e185]:
+          - generic [ref=e186]:
+            - generic [ref=e187]:
+              - paragraph [ref=e188]: Before you start
+              - heading "Common blockers." [level=2] [ref=e189]
+            - list [ref=e191]:
+              - listitem [ref=e192]:
+                - button "How do I know helpers are trustworthy?" [ref=e193] [cursor=pointer]:
+                  - generic [ref=e194]: How do I know helpers are trustworthy?
+                  - generic [ref=e195]: +
+              - listitem [ref=e196]:
+                - button "Do I need to know solar before asking for help?" [ref=e197] [cursor=pointer]:
+                  - generic [ref=e198]: Do I need to know solar before asking for help?
+                  - generic [ref=e199]: +
+              - listitem [ref=e200]:
+                - button "Can I start small before committing budget?" [ref=e201] [cursor=pointer]:
+                  - generic [ref=e202]: Can I start small before committing budget?
+                  - generic [ref=e203]: +
+              - listitem [ref=e204]:
+                - button "What should I do first if I am unsure?" [ref=e205] [cursor=pointer]:
+                  - generic [ref=e206]: What should I do first if I am unsure?
+                  - generic [ref=e207]: +
+          - generic [ref=e210]:
+            - generic [ref=e211]:
+              - paragraph [ref=e212]: Operational proof
+              - heading "Local help and real project work are already live." [level=2] [ref=e213]
+              - paragraph [ref=e214]: Helpers are available now, projects are moving, and the planning flow is ready when you need it.
+              - link "Open Connect" [ref=e216] [cursor=pointer]:
+                - /url: /connect
+                - text: Open Connect
+                - img [ref=e217]
+            - generic [ref=e219]:
+              - generic [ref=e220]:
+                - term [ref=e221]: Helpers available now
+                - definition [ref=e222]: 13 verified
+                - paragraph [ref=e223]: Ready to respond without opening a request form first.
+              - generic [ref=e224]:
+                - term [ref=e225]: Projects already recruiting or in progress
+                - definition [ref=e226]: 2 live
+                - paragraph [ref=e227]: 1 recruiting now.
+              - generic [ref=e228]:
+                - term [ref=e229]: Open spots on the featured build
+                - definition [ref=e230]: 7 volunteer spots open
+                - paragraph [ref=e231]: Order mounting kits
+  - contentinfo [ref=e232]:
+    - generic [ref=e233]:
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - generic [ref=e236]:
+            - img "Solara logo" [ref=e238]
+            - generic [ref=e239]:
+              - generic [ref=e240]: Solara
+              - paragraph [ref=e241]: Plan, find help, join projects, and keep learning in one platform.
+          - generic [ref=e242]: Start in Connect, then move into projects or planning when needed.
+        - generic [ref=e243]:
+          - generic [ref=e244]:
+            - heading "Product" [level=4] [ref=e245]
+            - list [ref=e246]:
+              - listitem [ref=e247]:
+                - link "Find Helpers" [ref=e248] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e249]:
+                - link "Plan Your Solar" [ref=e250] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e251]:
+                - link "3D Configurator" [ref=e252] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e253]:
+                - link "Projects" [ref=e254] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e255]:
+            - heading "Learn" [level=4] [ref=e256]
+            - list [ref=e257]:
+              - listitem [ref=e258]:
+                - link "Getting Started" [ref=e259] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e260]:
+                - link "Solar Navigator" [ref=e261] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e262]:
+                - link "Safety Guide" [ref=e263] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e264]:
+                - link "Services" [ref=e265] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e266]:
+            - heading "Community" [level=4] [ref=e267]
+            - list [ref=e268]:
+              - listitem [ref=e269]:
+                - link "Request Help" [ref=e270] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e271]:
+                - link "Become a Helper" [ref=e272] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e273]:
+                - link "Guidelines" [ref=e274] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e275]:
+                - link "Projects Board" [ref=e276] [cursor=pointer]:
+                  - /url: /projects
+      - generic [ref=e279]: © 2026 Solara Community
+  - navigation [ref=e280]:
+    - generic [ref=e281]:
+      - link "Home" [ref=e282] [cursor=pointer]:
+        - /url: /
+        - img [ref=e284]
+        - generic [ref=e287]: Home
+      - link "Helpers" [ref=e288] [cursor=pointer]:
+        - /url: /connect/helpers
+        - img [ref=e290]
+        - generic [ref=e295]: Helpers
+      - link "Projects" [ref=e296] [cursor=pointer]:
+        - /url: /projects
+        - img [ref=e298]
+        - generic [ref=e300]: Projects
+      - link "Learn" [ref=e301] [cursor=pointer]:
+        - /url: /learn
+        - img [ref=e303]
+        - generic [ref=e306]: Learn
+      - link "Sign In" [ref=e307] [cursor=pointer]:
+        - /url: /sign-in
+        - img [ref=e309]
+        - generic [ref=e312]: Sign In

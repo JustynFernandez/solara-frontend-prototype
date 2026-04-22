@@ -19,7 +19,12 @@ export const useProjectsHelperOverlay = () => {
   const savedHelpers = useSavedHelpersStore((state) => state.savedHelpers);
   const toggleSavedHelper = useSavedHelpersStore((state) => state.toggleSavedHelper);
 
-  const featuredHelpers = useMemo(() => helpers.filter((helper) => helper.availabilityStatus !== "unavailable").slice(0, 4), []);
+  const featuredHelpers = useMemo(() => {
+    const verifiedAvailable = helpers.filter((helper) => helper.verified && helper.availabilityStatus !== "unavailable");
+    const verifiedFallback = helpers.filter((helper) => helper.verified);
+    const source = verifiedAvailable.length > 0 ? verifiedAvailable : verifiedFallback;
+    return source.slice(0, 4);
+  }, []);
 
   const skillPool = useMemo(() => {
     const all = helpers.flatMap((helper) => helper.skills);
@@ -78,4 +83,3 @@ export const useProjectsHelperOverlay = () => {
     filteredHelpers,
   };
 };
-

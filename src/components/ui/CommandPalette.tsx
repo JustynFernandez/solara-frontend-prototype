@@ -82,48 +82,38 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
   const navigate = useNavigate();
   const { ecoModeEnabled } = useEcoMode();
 
-  // Group and filter actions
   const { filtered, sections } = useMemo(() => {
     const lower = query.toLowerCase().trim();
-    let results: CommandAction[];
+    const results =
+      lower.length === 0
+        ? commandPaletteActions
+        : commandPaletteActions.filter(
+            (action) =>
+              action.title.toLowerCase().includes(lower) ||
+              action.description?.toLowerCase().includes(lower) ||
+              action.keywords?.some((keyword) => keyword.toLowerCase().includes(lower))
+          );
 
-    if (!lower) {
-      results = commandPaletteActions;
-    } else {
-      results = commandPaletteActions.filter(
-        (action) =>
-          action.title.toLowerCase().includes(lower) ||
-          action.description?.toLowerCase().includes(lower) ||
-          action.keywords?.some((k) => k.toLowerCase().includes(lower))
-      );
-    }
+    const grouped = results.reduce((acc, action) => {
+      const section = action.section || "other";
+      if (!acc[section]) acc[section] = [];
+      acc[section].push(action);
+      return acc;
+    }, {} as Record<string, CommandAction[]>);
 
-    // Group by section
-    const grouped = results.reduce(
-      (acc, action) => {
-        const section = action.section || "other";
-        if (!acc[section]) acc[section] = [];
-        acc[section].push(action);
-        return acc;
-      },
-      {} as Record<string, CommandAction[]>
-    );
-
-    // Order sections
     const sectionOrder = ["navigation", "actions", "account", "learn"];
-    const orderedSections = sectionOrder.filter((s) => grouped[s]?.length > 0);
+    const orderedSections = sectionOrder.filter((section) => grouped[section]?.length > 0);
 
     return {
       filtered: results,
-      sections: orderedSections.map((s) => ({
-        key: s,
-        label: getSectionLabel(s as CommandAction["section"]),
-        items: grouped[s],
+      sections: orderedSections.map((section) => ({
+        key: section,
+        label: getSectionLabel(section as CommandAction["section"]),
+        items: grouped[section],
       })),
     };
   }, [query]);
 
-  // Reset on open
   useEffect(() => {
     if (open) {
       setQuery("");
@@ -132,12 +122,10 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
     }
   }, [open]);
 
-  // Reset selection when query changes
   useEffect(() => {
     setSelectedIndex(0);
   }, [query]);
 
-  // Scroll selected item into view
   useEffect(() => {
     const selectedEl = listRef.current?.querySelector(`[data-index="${selectedIndex}"]`);
     selectedEl?.scrollIntoView({ block: "nearest" });
@@ -156,11 +144,11 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setSelectedIndex((i) => Math.min(i + 1, filtered.length - 1));
+        setSelectedIndex((index) => Math.min(index + 1, filtered.length - 1));
         break;
       case "ArrowUp":
         e.preventDefault();
-        setSelectedIndex((i) => Math.max(i - 1, 0));
+        setSelectedIndex((index) => Math.max(index - 1, 0));
         break;
       case "Enter":
         e.preventDefault();
@@ -173,10 +161,9 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
     }
   };
 
-  // Calculate flat index for an action
   const getFlatIndex = (sectionIdx: number, itemIdx: number): number => {
     let idx = 0;
-    for (let i = 0; i < sectionIdx; i++) {
+    for (let i = 0; i < sectionIdx; i += 1) {
       idx += sections[i].items.length;
     }
     return idx + itemIdx;
@@ -210,12 +197,11 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
         >
           <motion.div
             {...panelAnimation}
-            className="w-full max-w-xl overflow-hidden rounded-2xl border border-slate-200/50 bg-white shadow-2xl dark:border-slate-700/50 dark:bg-slate-900"
+            className="solara-command-palette w-full max-w-xl overflow-hidden rounded-xl border shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Search input */}
-            <div className="flex items-center gap-3 border-b border-slate-200 px-4 py-3 dark:border-slate-700">
-              <span className="text-slate-400">{IconMap.search}</span>
+            <div className="solara-command-palette__search flex items-center gap-3 border-b px-4 py-3">
+              <span className="solara-command-palette__icon">{IconMap.search}</span>
               <input
                 ref={inputRef}
                 type="text"
@@ -223,25 +209,22 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Search pages, actions..."
-                className="flex-1 bg-transparent text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-white"
+                className="flex-1 bg-transparent text-sm outline-none"
               />
-              <kbd className="hidden rounded-md border border-slate-200 bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:border-slate-600 dark:bg-slate-800 sm:inline">
-                ESC
-              </kbd>
+              <kbd className="solara-command-palette__kbd hidden rounded-md border px-2 py-1 text-xs sm:inline">ESC</kbd>
             </div>
 
-            {/* Results */}
             <div ref={listRef} className="max-h-80 overflow-y-auto p-2">
               {filtered.length === 0 ? (
                 <div className="py-12 text-center">
-                  <div className="text-slate-400">{IconMap.search}</div>
-                  <p className="mt-2 text-sm text-slate-500">No results found for "{query}"</p>
-                  <p className="mt-1 text-xs text-slate-400">Try a different search term</p>
+                  <div className="solara-command-palette__icon">{IconMap.search}</div>
+                  <p className="mt-2 text-sm">No results found for "{query}"</p>
+                  <p className="mt-1 text-xs">Try a different search term</p>
                 </div>
               ) : (
                 sections.map((section, sectionIdx) => (
                   <div key={section.key} className="mb-2">
-                    <div className="px-3 py-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    <div className="solara-command-palette__section px-3 py-2 text-xs font-semibold uppercase tracking-wider">
                       {section.label}
                     </div>
                     {section.items.map((action, itemIdx) => {
@@ -253,32 +236,18 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
                           key={action.id}
                           data-index={flatIdx}
                           onClick={() => executeAction(action)}
-                          className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-colors ${
-                            isSelected
-                              ? "bg-solara-blue/10 text-solara-blue dark:bg-solara-blue/20"
-                              : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800"
-                          }`}
+                          className={`solara-command-palette__item flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${isSelected ? "is-selected" : ""}`}
                         >
-                          <span
-                            className={
-                              isSelected ? "text-solara-blue" : "text-slate-400 dark:text-slate-500"
-                            }
-                          >
-                            {IconMap[action.icon]}
-                          </span>
-                          <div className="flex-1 min-w-0">
+                          <span className="solara-command-palette__icon">{IconMap[action.icon]}</span>
+                          <div className="min-w-0 flex-1">
                             <div className="truncate text-sm font-medium">{action.title}</div>
-                            {action.description && (
-                              <div className="truncate text-xs text-slate-500 dark:text-slate-400">
-                                {action.description}
-                              </div>
-                            )}
+                            {action.description ? (
+                              <div className="solara-command-palette__description truncate text-xs">{action.description}</div>
+                            ) : null}
                           </div>
-                          {action.shortcut && (
-                            <kbd className="rounded-md border border-slate-200 bg-slate-100 px-2 py-1 text-xs text-slate-500 dark:border-slate-600 dark:bg-slate-800">
-                              {action.shortcut}
-                            </kbd>
-                          )}
+                          {action.shortcut ? (
+                            <kbd className="solara-command-palette__kbd rounded-md border px-2 py-1 text-xs">{action.shortcut}</kbd>
+                          ) : null}
                         </button>
                       );
                     })}
@@ -287,28 +256,19 @@ const CommandPalette: React.FC<CommandPaletteProps> = ({ open, onClose }) => {
               )}
             </div>
 
-            {/* Footer hints */}
-            <div className="flex items-center justify-between border-t border-slate-200 px-4 py-2 text-xs text-slate-500 dark:border-slate-700">
+            <div className="solara-command-palette__footer flex items-center justify-between border-t px-4 py-2 text-xs">
               <div className="flex items-center gap-4">
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 dark:border-slate-600 dark:bg-slate-800">
-                    ↑↓
-                  </kbd>
+                  <kbd className="solara-command-palette__kbd rounded border px-1.5 py-0.5">Up/Down</kbd>
                   Navigate
                 </span>
                 <span className="flex items-center gap-1">
-                  <kbd className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 dark:border-slate-600 dark:bg-slate-800">
-                    ↵
-                  </kbd>
+                  <kbd className="solara-command-palette__kbd rounded border px-1.5 py-0.5">Enter</kbd>
                   Select
                 </span>
               </div>
               <span className="hidden sm:inline">
-                Press{" "}
-                <kbd className="rounded border border-slate-200 bg-slate-100 px-1.5 py-0.5 dark:border-slate-600 dark:bg-slate-800">
-                  ⌘K
-                </kbd>{" "}
-                anywhere
+                Press <kbd className="solara-command-palette__kbd rounded border px-1.5 py-0.5">Cmd+K</kbd> anywhere
               </span>
             </div>
           </motion.div>

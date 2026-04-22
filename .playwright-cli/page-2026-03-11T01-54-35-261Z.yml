@@ -1,0 +1,162 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e49]:
+      - generic [ref=e50]:
+        - paragraph [ref=e51]: Request help
+        - heading "Tell the community what you need." [level=1] [ref=e52]
+        - generic [ref=e53]: A simple request form for matching support, tools, and guidance.
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - text: Name
+          - textbox "Name" [ref=e57]:
+            - /placeholder: Your name
+        - generic [ref=e58]:
+          - text: Help category
+          - combobox "Help category" [ref=e59]:
+            - option "Choose a category" [selected]
+            - option "Installation"
+            - option "Tools"
+            - option "Advice & Learning"
+            - option "Maintenance"
+            - option "Community Projects"
+        - generic [ref=e60]:
+          - text: Description
+          - textbox "Description" [ref=e61]:
+            - /placeholder: Describe what you need help with...
+        - generic [ref=e62]:
+          - text: Location
+          - textbox "Location" [ref=e63]:
+            - /placeholder: City or neighborhood
+        - generic [ref=e64]:
+          - generic [ref=e66]: Details help us match
+          - button "Submit request" [ref=e68] [cursor=pointer]:
+            - text: Submit request
+            - img [ref=e69]
+  - generic [ref=e71]:
+    - button "Hyper visuals" [ref=e72] [cursor=pointer]: Hyper visuals
+    - button "Toggle theme" [ref=e75] [cursor=pointer]:
+      - img [ref=e76]
+  - contentinfo [ref=e79]:
+    - generic [ref=e80]:
+      - generic [ref=e81]:
+        - generic [ref=e82]:
+          - generic [ref=e83]: "19"
+          - generic [ref=e84]: Verified helpers
+        - generic [ref=e85]:
+          - generic [ref=e86]: "2"
+          - generic [ref=e87]: Active projects
+        - generic [ref=e88]:
+          - generic [ref=e89]: "8"
+          - generic [ref=e90]: Guides available
+      - generic [ref=e91]:
+        - generic [ref=e92]:
+          - generic [ref=e93]:
+            - img "Solara logo" [ref=e95]
+            - generic [ref=e96]:
+              - generic [ref=e97]: Solara
+              - paragraph [ref=e98]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e99]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e100]:
+          - generic [ref=e101]:
+            - heading "Product" [level=4] [ref=e102]
+            - list [ref=e103]:
+              - listitem [ref=e104]:
+                - link "Find Helpers" [ref=e105] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e106]:
+                - link "Plan Your Solar" [ref=e107] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e108]:
+                - link "3D Configurator" [ref=e109] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e110]:
+                - link "Projects" [ref=e111] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e112]:
+            - heading "Learn" [level=4] [ref=e113]
+            - list [ref=e114]:
+              - listitem [ref=e115]:
+                - link "Getting Started" [ref=e116] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e117]:
+                - link "Solar Navigator" [ref=e118] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e119]:
+                - link "Safety Guide" [ref=e120] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e121]:
+                - link "Services" [ref=e122] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e123]:
+            - heading "Community" [level=4] [ref=e124]
+            - list [ref=e125]:
+              - listitem [ref=e126]:
+                - link "Request Help" [ref=e127] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e128]:
+                - link "Become a Helper" [ref=e129] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e130]:
+                - link "Guidelines" [ref=e131] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e132]:
+                - link "Projects Board" [ref=e133] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e134]:
+            - heading "Account" [level=4] [ref=e135]
+            - list [ref=e136]:
+              - listitem [ref=e137]:
+                - link "Sign In" [ref=e138] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e139]:
+                - link "Register" [ref=e140] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e141]:
+                - link "My Account" [ref=e142] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e143]:
+                - link "Dashboard" [ref=e144] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e147]:
+          - generic [ref=e148]:
+            - heading "Get product updates" [level=3] [ref=e149]
+            - paragraph [ref=e150]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e151]:
+            - textbox "you@example.com" [ref=e152]
+            - button "Join update list" [ref=e153] [cursor=pointer]
+          - paragraph [ref=e154]: Unsubscribe any time.
+      - generic [ref=e155]:
+        - generic [ref=e156]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e158]: © 2026 Solara Community

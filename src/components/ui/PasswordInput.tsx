@@ -33,7 +33,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         placeholder={placeholder}
         required={required}
         autoComplete={autoComplete}
-        className={`w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 pr-12 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50 ${
+        className={`w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 pr-12 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-blue dark:focus:ring-solara-blue/50 ${
           error ? "border-red-500 ring-red-500/30 focus:border-red-500 focus:ring-red-500/30" : ""
         } ${className}`}
       />

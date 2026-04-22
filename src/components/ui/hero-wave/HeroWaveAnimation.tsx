@@ -47,6 +47,16 @@ const getDevFlag = (flag: string): boolean => {
   return new URLSearchParams(window.location.search).has(flag);
 };
 
+const getDevNumberFlag = (flag: string): number | null => {
+  if (!import.meta.env.DEV || typeof window === "undefined") return null;
+  const rawValue = new URLSearchParams(window.location.search).get(flag);
+  if (!rawValue) return null;
+
+  const parsed = Number(rawValue);
+  if (!Number.isFinite(parsed)) return null;
+  return Math.min(1, Math.max(0, parsed));
+};
+
 const HeroWaveAnimation: React.FC<HeroWaveAnimationProps> = ({ className = "", theme = "auto", interactive = true }) => {
   const rootRef = React.useRef<HTMLDivElement | null>(null);
   const contentsRef = React.useRef<HTMLDivElement | null>(null);
@@ -58,6 +68,8 @@ const HeroWaveAnimation: React.FC<HeroWaveAnimationProps> = ({ className = "", t
   const resolvedTheme = useResolvedTheme(theme);
   const waveDebugEnabled = getDevFlag("__waveDebug");
   const waveCaptureEnabled = getDevFlag("__waveCapture");
+  const waveNoArtEnabled = getDevFlag("__waveNoArt");
+  const waveCanvasOpacity = getDevNumberFlag("__waveCanvasOpacity");
 
   const [hasMounted, setHasMounted] = React.useState(false);
   const [isIntersecting, setIsIntersecting] = React.useState(false);
@@ -248,13 +260,16 @@ const HeroWaveAnimation: React.FC<HeroWaveAnimationProps> = ({ className = "", t
   const rootClassName = ["hero-wave-animation", className].filter(Boolean).join(" ");
   const contentsClassName = ["hero-wave-animation__contents", hasDrawn ? "hero-wave-animation--drawn" : ""].filter(Boolean).join(" ");
   const artSrc = resolvedTheme === "dark" ? "/hero-wave-art-dark.png" : "/hero-wave-art-light.png";
+  const hideArt = allowLive && (hasDrawn || waveNoArtEnabled);
+  const artStyle = { opacity: hideArt ? 0 : 0.98, transition: "opacity 280ms ease" };
+  const canvasStyle = waveCanvasOpacity == null ? undefined : { opacity: waveCanvasOpacity };
 
   return (
     <div ref={rootRef} className={rootClassName} aria-hidden="true">
       <div className="hero-wave-animation__layout">
         <div ref={contentsRef} className={contentsClassName}>
-          <img src={artSrc} className="hero-wave-animation__art" alt="" aria-hidden="true" />
-          {allowLive ? <canvas ref={canvasRef} className="hero-wave-animation__canvas" aria-hidden="true" /> : null}
+          <img src={artSrc} className="hero-wave-animation__art" alt="" aria-hidden="true" style={artStyle} />
+          {allowLive ? <canvas ref={canvasRef} className="hero-wave-animation__canvas" aria-hidden="true" style={canvasStyle} /> : null}
         </div>
       </div>
     </div>

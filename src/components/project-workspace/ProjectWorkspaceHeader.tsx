@@ -3,6 +3,12 @@ import { BadgeCheck, MapPin, Sparkles, Users } from "lucide-react";
 import AnimatedButton from "@/components/ui/animated-button";
 import type { Project } from "@/data/projects";
 
+const gbpFormatter = new Intl.NumberFormat("en-GB", {
+  style: "currency",
+  currency: "GBP",
+  maximumFractionDigits: 0,
+});
+
 type ProjectWorkspaceHeaderProps = {
   project: Project;
   volunteerPercent: number;
@@ -100,7 +106,9 @@ const ProjectWorkspaceHeader: React.FC<ProjectWorkspaceHeaderProps> = ({
               />
             </div>
             <p className="text-xs text-slate-700 dark:text-emerald-100/80">
-              {project.goalFunding ? `Â£${project.currentFunding?.toLocaleString() || 0} / Â£${project.goalFunding.toLocaleString()}` : "Mutual aid / in-kind"}
+              {project.goalFunding
+                ? `${gbpFormatter.format(project.currentFunding || 0)} / ${gbpFormatter.format(project.goalFunding)}`
+                : "Mutual aid / in-kind"}
             </p>
           </div>
         </div>

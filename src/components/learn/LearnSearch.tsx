@@ -27,7 +27,7 @@ const highlight = (text: string, query: string) => {
   const lowerQuery = query.toLowerCase();
   return parts.map((part, idx) =>
     part.toLowerCase() === lowerQuery ? (
-      <mark key={idx} className="rounded bg-solara-gold/20 px-0.5 text-solara-navy">
+      <mark key={idx} className="rounded bg-solara-blue/12 px-0.5 text-solara-blue-alt dark:bg-solara-blue/24 dark:text-solara-sky">
         {part}
       </mark>
     ) : (

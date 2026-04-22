@@ -1,0 +1,185 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - button "TA Taylor Green" [ref=e86] [cursor=pointer]:
+          - generic [ref=e87]: TA
+          - generic [ref=e89]: Taylor Green
+          - img [ref=e90]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e94]:
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - paragraph [ref=e98]: My account
+            - generic [ref=e99]:
+              - heading "Taylor Green" [level=1] [ref=e100]
+              - generic [ref=e101]: London / Helper, Seeker
+          - button "Edit profile ->" [ref=e102] [cursor=pointer]
+        - generic [ref=e103]:
+          - generic [ref=e104]:
+            - paragraph [ref=e105]: Roles
+            - paragraph [ref=e106]: "2"
+            - paragraph [ref=e107]: How you appear across Solara
+          - generic [ref=e108]:
+            - paragraph [ref=e109]: Skills
+            - paragraph [ref=e110]: "3"
+            - paragraph [ref=e111]: Used for matching and requests
+          - generic [ref=e112]:
+            - paragraph [ref=e113]: Bio
+            - paragraph [ref=e114]: "11"
+            - paragraph [ref=e115]: Words available for context
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - generic [ref=e118]:
+            - img "Taylor Green" [ref=e120]
+            - generic [ref=e121]:
+              - paragraph [ref=e122]: Profile
+              - paragraph [ref=e123]: Taylor Green
+              - paragraph [ref=e124]: London
+              - generic [ref=e125]:
+                - generic [ref=e126]: Helper
+                - generic [ref=e127]: Seeker
+          - generic [ref=e128]:
+            - paragraph [ref=e129]: About
+            - paragraph [ref=e130]: Neighbor-to-neighbor solar helper. I like coaching first installs and lending tools.
+          - generic [ref=e131]:
+            - paragraph [ref=e132]: Skills and resources
+            - generic [ref=e133]:
+              - generic [ref=e134]: Installation
+              - generic [ref=e135]: Tools
+              - generic [ref=e136]: Safety
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - paragraph [ref=e139]: Actions
+            - paragraph [ref=e140]: Move into the parts of Solara where your profile matters most.
+          - generic [ref=e141]:
+            - generic [ref=e142]:
+              - generic [ref=e143]: Browse helpers
+              - link "Open ->" [ref=e144] [cursor=pointer]:
+                - /url: /connect/helpers
+            - generic [ref=e145]:
+              - generic [ref=e146]: Open projects
+              - link "Open ->" [ref=e147] [cursor=pointer]:
+                - /url: /projects
+            - generic [ref=e148]:
+              - generic [ref=e149]: Run Navigator
+              - link "Open ->" [ref=e150] [cursor=pointer]:
+                - /url: /plan/navigator
+  - contentinfo [ref=e151]:
+    - generic [ref=e152]:
+      - generic [ref=e153]:
+        - generic [ref=e154]:
+          - generic [ref=e155]: "19"
+          - generic [ref=e156]: Verified helpers
+        - generic [ref=e157]:
+          - generic [ref=e158]: "2"
+          - generic [ref=e159]: Active projects
+        - generic [ref=e160]:
+          - generic [ref=e161]: "8"
+          - generic [ref=e162]: Guides available
+      - generic [ref=e163]:
+        - generic [ref=e164]:
+          - generic [ref=e165]:
+            - img "Solara logo" [ref=e167]
+            - generic [ref=e168]:
+              - generic [ref=e169]: Solara
+              - paragraph [ref=e170]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e171]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e172]:
+          - generic [ref=e173]:
+            - heading "Product" [level=4] [ref=e174]
+            - list [ref=e175]:
+              - listitem [ref=e176]:
+                - link "Find Helpers" [ref=e177] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e178]:
+                - link "Plan Your Solar" [ref=e179] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e180]:
+                - link "3D Configurator" [ref=e181] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e182]:
+                - link "Projects" [ref=e183] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e184]:
+            - heading "Learn" [level=4] [ref=e185]
+            - list [ref=e186]:
+              - listitem [ref=e187]:
+                - link "Getting Started" [ref=e188] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e189]:
+                - link "Solar Navigator" [ref=e190] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e191]:
+                - link "Safety Guide" [ref=e192] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e193]:
+                - link "Services" [ref=e194] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e195]:
+            - heading "Community" [level=4] [ref=e196]
+            - list [ref=e197]:
+              - listitem [ref=e198]:
+                - link "Request Help" [ref=e199] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e200]:
+                - link "Become a Helper" [ref=e201] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e202]:
+                - link "Guidelines" [ref=e203] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e204]:
+                - link "Projects Board" [ref=e205] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e206]:
+            - heading "Account" [level=4] [ref=e207]
+            - list [ref=e208]:
+              - listitem [ref=e209]:
+                - link "Sign In" [ref=e210] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e211]:
+                - link "Register" [ref=e212] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e213]:
+                - link "My Account" [ref=e214] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e215]:
+                - link "Dashboard" [ref=e216] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e219]:
+          - generic [ref=e220]:
+            - heading "Get product updates" [level=3] [ref=e221]
+            - paragraph [ref=e222]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e223]:
+            - textbox "you@example.com" [ref=e224]
+            - button "Join update list" [ref=e225] [cursor=pointer]
+          - paragraph [ref=e226]: Unsubscribe any time.
+      - generic [ref=e227]:
+        - generic [ref=e228]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e230]: © 2026 Solara Community

@@ -10,13 +10,13 @@ const EcoModeBadge = () => {
       type="button"
       onClick={toggleEcoMode}
       aria-pressed={ecoModeEnabled}
-      className="group relative inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-solara-navy shadow-lg backdrop-blur transition hover:scale-[1.02] focus-visible:outline-none focus-glow dark:border-white/10 dark:bg-white/10 dark:text-solara-gold"
+      className="group relative inline-flex items-center gap-2 rounded-full border border-slate-200/80 bg-white/90 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-slate-700 shadow-lg backdrop-blur transition hover:scale-[1.02] focus-visible:outline-none focus-glow dark:border-white/10 dark:bg-white/10 dark:text-slate-200"
     >
-      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-solara-navy/16 via-solara-blue/15 to-solara-gold/13 opacity-0 transition duration-500 group-hover:opacity-100" aria-hidden />
-      <span className="relative inline-flex h-2 w-2 animate-pulse rounded-full bg-solara-gold shadow-[0_0_0_8px_rgba(212,175,55,0.2)]" aria-hidden />
+      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-slate-500/10 via-slate-400/8 to-slate-300/10 opacity-0 transition duration-500 group-hover:opacity-100" aria-hidden />
+      <span className="relative inline-flex h-2 w-2 animate-pulse rounded-full bg-slate-500 shadow-[0_0_0_8px_rgba(100,116,139,0.18)] dark:bg-slate-300 dark:shadow-[0_0_0_8px_rgba(203,213,225,0.12)]" aria-hidden />
       {ecoModeEnabled ? "Eco mode" : "Hyper visuals"}
       {reasons.length > 0 && (
-        <span className="relative rounded-full bg-amber-50 px-2 py-1 text-[10px] text-amber-700 shadow-sm dark:bg-solara-gold/20 dark:text-amber-100">
+        <span className="relative rounded-full bg-slate-100 px-2 py-1 text-[10px] text-slate-600 shadow-sm dark:bg-white/10 dark:text-slate-200">
           {reasons.join(" / ")}
         </span>
       )}
@@ -25,4 +25,3 @@ const EcoModeBadge = () => {
 };
 
 export default EcoModeBadge;
-

@@ -1,0 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import { motion } from "framer-motion";
+const HoverBorderGradient = ({ children, className = "" }) => (_jsxs(motion.div, { whileHover: { scale: 1.01 }, className: `relative overflow-hidden rounded-2xl border border-white/60 bg-white/80 shadow-md backdrop-blur transition dark:border-white/10 dark:bg-white/5 ${className}`, children: [_jsx("div", { className: "pointer-events-none absolute inset-0 rounded-2xl border border-transparent bg-[radial-gradient(circle_at_10%_20%,rgba(0,123,255,0.22),transparent_25%),radial-gradient(circle_at_90%_10%,rgba(212,175,55,0.22),transparent_20%),radial-gradient(circle_at_80%_80%,rgba(0,191,255,0.18),transparent_20%)]" }), _jsx("div", { className: "relative", children: children })] }));
+export default HoverBorderGradient;

@@ -12,7 +12,7 @@ const SolarConfigurator: React.FC = () => {
           <ConfiguratorControls />
         </aside>
 
-        <main className="flex min-h-[400px] flex-1 overflow-hidden rounded-2xl border border-white/60 bg-white/50 shadow-xl backdrop-blur dark:border-white/10 dark:bg-white/5 lg:min-h-0">
+        <main className="flex min-h-[420px] flex-1 overflow-hidden rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-1)] shadow-[var(--solara-shadow-strong)] lg:min-h-0">
           <ConfiguratorCanvas />
         </main>
 
@@ -21,9 +21,9 @@ const SolarConfigurator: React.FC = () => {
         </aside>
       </div>
 
-      <footer className="mt-4 text-center text-xs text-slate-500 dark:text-slate-400">
+      <footer className="mt-2 text-center text-xs text-[var(--solara-text-muted)]">
         <p>
-          Drag to rotate view • Scroll to zoom • Use controls to configure your solar setup
+          Drag to rotate view / Scroll to zoom / Use controls to configure your solar setup
         </p>
       </footer>
     </ConfiguratorShell>
@@ -31,3 +31,4 @@ const SolarConfigurator: React.FC = () => {
 };
 
 export default SolarConfigurator;
+

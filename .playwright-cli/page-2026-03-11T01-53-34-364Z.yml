@@ -1,0 +1,290 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e50]:
+            - paragraph [ref=e51]: Connect
+            - heading "Find verified local help before the work stalls." [level=1] [ref=e52]
+            - paragraph [ref=e53]: Screen real helpers by location, response speed, and certification. Open a request only when someone fits the job.
+          - generic [ref=e54]:
+            - link "Find helpers ->" [ref=e55] [cursor=pointer]:
+              - /url: /connect/helpers
+            - generic [ref=e56]:
+              - link "Request support ->" [ref=e57] [cursor=pointer]:
+                - /url: /request-help
+              - link "Join a project ->" [ref=e58] [cursor=pointer]:
+                - /url: /projects
+          - generic [ref=e59]:
+            - article [ref=e60]:
+              - paragraph [ref=e61]: Verified helpers
+              - paragraph [ref=e62]: "19"
+            - article [ref=e63]:
+              - paragraph [ref=e64]: Available now
+              - paragraph [ref=e65]: "13"
+            - article [ref=e66]:
+              - paragraph [ref=e67]: Certified roles
+              - paragraph [ref=e68]: "7"
+            - article [ref=e69]:
+              - paragraph [ref=e70]: Areas covered
+              - paragraph [ref=e71]: "16"
+        - region "Verified helpers available now" [ref=e73]:
+          - generic [ref=e74]:
+            - paragraph [ref=e75]: Current screening pass
+            - paragraph [ref=e76]: 13 available across 16 areas
+          - article [ref=e77]:
+            - paragraph [ref=e78]: Best fit now
+            - generic [ref=e79]:
+              - generic "Mia V." [ref=e80]:
+                - img "Mia V. avatar" [ref=e81]
+              - generic [ref=e82]:
+                - generic [ref=e83]:
+                  - heading "Mia V." [level=3] [ref=e84]
+                  - img "Verified helper" [ref=e85]
+                - paragraph [ref=e88]: Certified installer
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - paragraph [ref=e91]: Location
+                - paragraph [ref=e92]: Nottingham
+              - generic [ref=e93]:
+                - paragraph [ref=e94]: Response
+                - paragraph [ref=e95]: Under 8h
+          - generic [ref=e96]:
+            - article [ref=e97]:
+              - paragraph [ref=e98]: "02"
+              - generic "Priya S." [ref=e99]:
+                - img "Priya S. avatar" [ref=e100]
+              - generic [ref=e101]:
+                - generic [ref=e102]:
+                  - paragraph [ref=e103]: Priya S.
+                  - img "Verified helper" [ref=e104]
+                - paragraph [ref=e107]: Trained volunteer
+              - generic [ref=e108]:
+                - paragraph [ref=e109]: Brixton
+                - paragraph [ref=e110]: Under 12h
+            - article [ref=e111]:
+              - paragraph [ref=e112]: "03"
+              - generic "Leah G." [ref=e113]:
+                - img "Leah G. avatar" [ref=e114]
+              - generic [ref=e115]:
+                - generic [ref=e116]:
+                  - paragraph [ref=e117]: Leah G.
+                  - img "Verified helper" [ref=e118]
+                - paragraph [ref=e121]: Trained volunteer
+              - generic [ref=e122]:
+                - paragraph [ref=e123]: Birmingham
+                - paragraph [ref=e124]: Under 8h
+            - article [ref=e125]:
+              - paragraph [ref=e126]: "04"
+              - generic "Ariana M." [ref=e127]:
+                - img "Ariana M. avatar" [ref=e128]
+              - generic [ref=e129]:
+                - generic [ref=e130]:
+                  - paragraph [ref=e131]: Ariana M.
+                  - img "Verified helper" [ref=e132]
+                - paragraph [ref=e135]: Trained volunteer
+              - generic [ref=e136]:
+                - paragraph [ref=e137]: Bristol
+                - paragraph [ref=e138]: Under 24h
+            - article [ref=e139]:
+              - paragraph [ref=e140]: "05"
+              - generic "Jamal H." [ref=e141]:
+                - img "Jamal H. avatar" [ref=e142]
+              - generic [ref=e143]:
+                - generic [ref=e144]:
+                  - paragraph [ref=e145]: Jamal H.
+                  - img "Verified helper" [ref=e146]
+                - paragraph [ref=e149]: Trained volunteer
+              - generic [ref=e150]:
+                - paragraph [ref=e151]: Leicester
+                - paragraph [ref=e152]: Under 12h
+      - generic [ref=e153]:
+        - generic [ref=e154]:
+          - paragraph [ref=e155]: Top available now
+          - heading "Start with these verified helpers." [level=2] [ref=e156]
+        - generic [ref=e157]:
+          - article [ref=e158]:
+            - paragraph [ref=e159]: Lead availability
+            - generic [ref=e160]:
+              - generic "Mia V." [ref=e161]:
+                - img "Mia V. avatar" [ref=e162]
+              - generic [ref=e163]:
+                - generic [ref=e164]:
+                  - heading "Mia V." [level=3] [ref=e165]
+                  - img "Verified helper" [ref=e166]
+                - paragraph [ref=e169]: Certified installer
+            - generic [ref=e170]:
+              - paragraph [ref=e171]: Nottingham
+              - paragraph [ref=e172]: Under 8h
+              - paragraph [ref=e173]: Battery / Hybrid inverter
+            - generic [ref=e174]:
+              - paragraph [ref=e175]: Battery / Hybrid inverter
+              - link "View helper ->" [ref=e176] [cursor=pointer]:
+                - /url: /connect/helpers?helperId=h15
+          - generic [ref=e177]:
+            - article [ref=e178]:
+              - generic [ref=e179]:
+                - generic "Priya S." [ref=e180]:
+                  - img "Priya S. avatar" [ref=e181]
+                - generic [ref=e182]:
+                  - generic [ref=e183]:
+                    - paragraph [ref=e184]: Priya S.
+                    - img "Verified helper" [ref=e185]
+                  - paragraph [ref=e188]: Trained volunteer
+              - generic [ref=e189]:
+                - paragraph [ref=e190]: Brixton
+                - paragraph [ref=e191]: Under 12h
+                - paragraph [ref=e192]: Battery
+              - link "View helper ->" [ref=e193] [cursor=pointer]:
+                - /url: /connect/helpers?helperId=h7
+            - article [ref=e194]:
+              - generic [ref=e195]:
+                - generic "Leah G." [ref=e196]:
+                  - img "Leah G. avatar" [ref=e197]
+                - generic [ref=e198]:
+                  - generic [ref=e199]:
+                    - paragraph [ref=e200]: Leah G.
+                    - img "Verified helper" [ref=e201]
+                  - paragraph [ref=e204]: Trained volunteer
+              - generic [ref=e205]:
+                - paragraph [ref=e206]: Birmingham
+                - paragraph [ref=e207]: Under 8h
+                - paragraph [ref=e208]: Battery
+              - link "View helper ->" [ref=e209] [cursor=pointer]:
+                - /url: /connect/helpers?helperId=h10
+      - generic [ref=e211]:
+        - generic "Helper role tiers" [ref=e212]:
+          - generic [ref=e213]: Community volunteer
+          - generic [ref=e214]: Trained volunteer
+          - generic [ref=e215]: Certified installer
+        - generic [ref=e216]:
+          - paragraph [ref=e217]: Any mains work requires a certified professional. Match the right level before you open a request.
+          - generic [ref=e218]:
+            - link "Safety ->" [ref=e219] [cursor=pointer]:
+              - /url: /safety
+            - link "Guidelines ->" [ref=e220] [cursor=pointer]:
+              - /url: /community-guidelines
+  - contentinfo [ref=e221]:
+    - generic [ref=e222]:
+      - generic [ref=e223]:
+        - generic [ref=e224]:
+          - generic [ref=e225]: "19"
+          - generic [ref=e226]: Verified helpers
+        - generic [ref=e227]:
+          - generic [ref=e228]: "2"
+          - generic [ref=e229]: Active projects
+        - generic [ref=e230]:
+          - generic [ref=e231]: "8"
+          - generic [ref=e232]: Guides available
+      - generic [ref=e233]:
+        - generic [ref=e234]:
+          - generic [ref=e235]:
+            - img "Solara logo" [ref=e237]
+            - generic [ref=e238]:
+              - generic [ref=e239]: Solara
+              - paragraph [ref=e240]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e241]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e242]:
+          - generic [ref=e243]:
+            - heading "Product" [level=4] [ref=e244]
+            - list [ref=e245]:
+              - listitem [ref=e246]:
+                - link "Find Helpers" [ref=e247] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e248]:
+                - link "Plan Your Solar" [ref=e249] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e250]:
+                - link "3D Configurator" [ref=e251] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e252]:
+                - link "Projects" [ref=e253] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e254]:
+            - heading "Learn" [level=4] [ref=e255]
+            - list [ref=e256]:
+              - listitem [ref=e257]:
+                - link "Getting Started" [ref=e258] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e259]:
+                - link "Solar Navigator" [ref=e260] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e261]:
+                - link "Safety Guide" [ref=e262] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e263]:
+                - link "Services" [ref=e264] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e265]:
+            - heading "Community" [level=4] [ref=e266]
+            - list [ref=e267]:
+              - listitem [ref=e268]:
+                - link "Request Help" [ref=e269] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e270]:
+                - link "Become a Helper" [ref=e271] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e272]:
+                - link "Guidelines" [ref=e273] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e274]:
+                - link "Projects Board" [ref=e275] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e276]:
+            - heading "Account" [level=4] [ref=e277]
+            - list [ref=e278]:
+              - listitem [ref=e279]:
+                - link "Sign In" [ref=e280] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e281]:
+                - link "Register" [ref=e282] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e283]:
+                - link "My Account" [ref=e284] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e285]:
+                - link "Dashboard" [ref=e286] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e289]:
+          - generic [ref=e290]:
+            - heading "Get product updates" [level=3] [ref=e291]
+            - paragraph [ref=e292]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e293]:
+            - textbox "you@example.com" [ref=e294]
+            - button "Join update list" [ref=e295] [cursor=pointer]
+          - paragraph [ref=e296]: Unsubscribe any time.
+      - generic [ref=e297]:
+        - generic [ref=e298]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e300]: © 2026 Solara Community

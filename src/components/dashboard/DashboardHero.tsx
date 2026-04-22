@@ -18,17 +18,11 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ user, profileCompleteness
   const greeting = getGreeting();
 
   return (
-    <div className="relative overflow-hidden rounded-3xl border border-white/60 bg-gradient-to-br from-white/90 via-white/80 to-solara-foam/50 p-6 shadow-lg dark:border-white/10 dark:from-slate-800/90 dark:via-slate-800/80 dark:to-slate-900/50 sm:p-8">
-      {/* Decorative gradient */}
-      <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-gradient-to-br from-solara-blue/20 to-solara-gold/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-16 -left-16 h-48 w-48 rounded-full bg-gradient-to-br from-solara-sky/15 to-transparent blur-2xl" />
-
+    <div className="relative overflow-hidden rounded-[1.4rem] border border-[var(--solara-rule-soft)] bg-[color-mix(in_srgb,var(--solara-surface-1)_88%,transparent)] p-5 shadow-[var(--solara-shadow-soft)] sm:p-6">
       <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          {/* Avatar with progress ring */}
           <div className="relative">
             <svg className="h-20 w-20 -rotate-90" viewBox="0 0 100 100">
-              {/* Background circle */}
               <circle
                 cx="50"
                 cy="50"
@@ -38,7 +32,6 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ user, profileCompleteness
                 strokeWidth="6"
                 className="text-slate-200 dark:text-slate-700"
               />
-              {/* Progress arc */}
               <motion.circle
                 cx="50"
                 cy="50"
@@ -67,7 +60,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ user, profileCompleteness
                   className="h-14 w-14 rounded-full object-cover"
                 />
               ) : (
-                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-solara-blue to-solara-navy text-xl font-bold text-white">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-solara-blue to-solara-blue-alt text-xl font-bold text-white">
                   {displayName.charAt(0).toUpperCase()}
                 </div>
               )}
@@ -76,7 +69,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ user, profileCompleteness
 
           <div>
             <p className="text-sm font-medium text-slate-500 dark:text-slate-400">{greeting}</p>
-            <h1 className="text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">
+            <h1 className="text-2xl font-semibold text-slate-900 dark:text-white sm:text-3xl">
               {displayName}
             </h1>
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
@@ -88,7 +81,7 @@ const DashboardHero: React.FC<DashboardHeroProps> = ({ user, profileCompleteness
         {profileCompleteness < 100 && (
           <Link
             to="/account/create"
-            className="inline-flex items-center gap-2 rounded-full border border-solara-blue/30 bg-solara-blue/10 px-5 py-2.5 text-sm font-semibold text-solara-blue transition hover:bg-solara-blue/20 dark:border-solara-blue/40 dark:bg-solara-blue/20 dark:text-solara-sky"
+            className="inline-flex items-center gap-2 rounded-full border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] px-5 py-2.5 text-sm font-semibold text-[var(--solara-accent-strong)] transition hover:border-[var(--solara-accent-soft)]"
           >
             Complete Profile
             <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

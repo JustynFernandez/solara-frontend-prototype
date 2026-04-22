@@ -1,111 +1,156 @@
 import React from "react";
-import { motion } from "framer-motion";
-import { GuideContent } from "../../data/learnContent";
-import ResourceList from "./ResourceList";
-import TableOfContents from "./TableOfContents";
-import AnimatedButton from "./animated-button";
+import { ArrowRight, BookOpen, FolderKanban } from "lucide-react";
+import type { GuideContent } from "../../data/learnContent";
+import type { Project } from "../../data/projects";
+import SurfacePanel from "@/components/ui/surface-panel";
+import InlineAction from "@/components/ui/inline-action";
 
 type GuideDetailLayoutProps = {
   guide: GuideContent;
+  currentProject?: Project | null;
 };
 
-const GuideDetailLayout: React.FC<GuideDetailLayoutProps> = ({ guide }) => {
-  const nextActions: Record<string, { label: string; href: string; variant?: "primary" | "outline" }[]> = {
-    "navigator-warmup": [
-      { label: "Start Solar Navigator", href: "/solar-navigator" },
-      { label: "Share with a helper", href: "/connect" },
-    ],
-    "workspace-playbook": [
-      { label: "Open Project Workspaces", href: "/projects" },
-      { label: "Invite collaborators", href: "/connect" },
-    ],
-    "maintenance-basics": [
-      { label: "Set a quarterly reminder", href: "/projects" },
-      { label: "Request a check", href: "/connect", variant: "outline" },
-    ],
-  };
+const nextActions: Record<string, { label: string; href: string }[]> = {
+  "navigator-warmup": [
+    { label: "Open Solar Navigator", href: "/solar-navigator" },
+    { label: "Browse helpers", href: "/connect" },
+  ],
+  "workspace-playbook": [
+    { label: "Open projects", href: "/projects" },
+    { label: "Find collaborators", href: "/connect" },
+  ],
+  "maintenance-basics": [
+    { label: "Browse maintenance help", href: "/connect" },
+    { label: "View active projects", href: "/projects" },
+  ],
+};
 
+const GuideDetailLayout: React.FC<GuideDetailLayoutProps> = ({ guide, currentProject }) => {
   const actions = nextActions[guide.slug] || [
-    { label: "Plan your solar journey", href: "/solar-navigator" },
+    { label: "Run Navigator", href: "/solar-navigator" },
     { label: "Browse helpers", href: "/connect" },
   ];
 
-  const tocItems = guide.toc.map((item) => ({ id: item.toLowerCase().replace(/\s+/g, "-"), label: item }));
+  const tocItems = guide.toc.map((item) => ({
+    id: item.toLowerCase().replace(/\s+/g, "-"),
+    label: item,
+  }));
 
-  // Persist the last guide viewed to surface a subtle "continue" breadcrumb.
   React.useEffect(() => {
     localStorage.setItem("solara:learn:last-guide", guide.slug);
   }, [guide.slug]);
 
   return (
-    <div className="space-y-6">
-      <motion.div
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.25 }}
-        className="halo-ring overflow-hidden rounded-[28px] card-surface"
-      >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_16%_18%,rgba(0,123,255,0.16),transparent_36%),radial-gradient(circle_at_86%_12%,rgba(212,175,55,0.12),transparent_32%)]" />
-        <div className="space-y-3 p-6">
-          <div className="flex flex-wrap items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#d8e3ff]">
-            <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1">{guide.format}</span>
-            <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1">{guide.difficulty}</span>
-            <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1">{guide.pillar}</span>
-            <span className="rounded-full border border-white/12 bg-white/10 px-3 py-1">{guide.durationMins} min</span>
+    <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]">
+      <div className="space-y-6">
+        <SurfacePanel variant="guide" layout="preview" density="compact" className="space-y-4">
+          <div className="flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">
+            <span className="rounded-full border border-[var(--solara-rule)] px-3 py-1">{guide.format}</span>
+            <span className="rounded-full border border-[var(--solara-rule)] px-3 py-1">{guide.difficulty}</span>
+            <span className="rounded-full border border-[var(--solara-rule)] px-3 py-1">{guide.pillar}</span>
+            <span className="rounded-full border border-[var(--solara-rule)] px-3 py-1">{guide.durationMins} min</span>
           </div>
-          <h1 className="text-3xl font-semibold text-white">{guide.title}</h1>
-          <p className="text-white/80">{guide.summary}</p>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 text-xs text-[var(--solara-text-muted)]">
             {guide.tags.map((tag) => (
-              <span key={tag} className="rounded-full border border-white/12 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+              <span key={tag} className="rounded-full border border-[var(--solara-rule-soft)] px-3 py-1">
                 {tag}
               </span>
             ))}
           </div>
-          <div className="flex flex-wrap gap-3 pt-2">
-            <AnimatedButton variant="outline" href="/learn" className="px-4 py-2">
-              Back to Learn
-            </AnimatedButton>
-            <AnimatedButton href="#resources" className="px-4 py-2">
-              Jump to resources
-            </AnimatedButton>
-          </div>
-        </div>
-      </motion.div>
+        </SurfacePanel>
 
-      <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-        <article className="glass-ring space-y-4 rounded-[24px] card-surface p-6 prose prose-slate prose-sm max-w-none dark:prose-invert">
-          <div dangerouslySetInnerHTML={{ __html: guide.content }} />
-          <div className="space-y-2 rounded-2xl bg-white/70 p-3 text-slate-800 shadow-sm backdrop-blur dark:bg-white/5 dark:text-slate-100">
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Key takeaways</p>
-            <ul className="space-y-1">
+        <SurfacePanel as="article" variant="guide" layout="split" density="comfortable" className="space-y-6">
+          <div
+            className="prose prose-slate max-w-none prose-headings:font-semibold prose-headings:text-[var(--solara-text-strong)] prose-p:text-[var(--solara-text-muted)] prose-li:text-[var(--solara-text-muted)] prose-strong:text-[var(--solara-text-strong)] dark:prose-invert"
+            dangerouslySetInnerHTML={{ __html: guide.content }}
+          />
+
+          <div className="space-y-3 border-t border-[var(--solara-rule-soft)] pt-5">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Key takeaways</p>
+            <ul className="space-y-2 text-sm leading-6 text-[var(--solara-text-muted)]">
               {guide.takeaways.map((item) => (
                 <li key={item} className="flex items-start gap-2">
-                  <span className="mt-1 h-2 w-2 rounded-full bg-[#0f62c7]" />
+                  <span className="mt-2 h-1.5 w-1.5 rounded-full bg-[var(--solara-accent)]" aria-hidden />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
-          <div id="resources" className="pt-2">
-            <ResourceList resources={guide.resources} />
+        </SurfacePanel>
+
+        <SurfacePanel variant="guide" layout="preview" density="compact" className="space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Resources</p>
+          <div className="divide-y divide-[var(--solara-rule-soft)] border-y border-[var(--solara-rule-soft)]">
+            {guide.resources.map((resource) => (
+              <a
+                key={`${resource.type}-${resource.title}`}
+                href={resource.url}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-between gap-4 py-3 text-sm text-[var(--solara-text-muted)] transition hover:text-[var(--solara-text-strong)]"
+              >
+                <span className="flex items-center gap-2">
+                  <BookOpen className="h-4 w-4 text-[var(--solara-accent-strong)]" />
+                  <span className="font-medium text-[var(--solara-text-strong)]">{resource.title}</span>
+                </span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.14em]">{resource.type}</span>
+              </a>
+            ))}
           </div>
-        </article>
-        <aside className="space-y-4">
-          <TableOfContents items={tocItems} />
-          <div className="glass-ring space-y-3 rounded-2xl card-surface p-4 text-slate-900 dark:text-white">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Do this next on Solara</h3>
-            <p className="text-sm text-slate-700 dark:text-slate-200">Turn learning into action with a next step inside the product.</p>
-            <div className="flex flex-col gap-2">
-              {actions.map((action) => (
-                <AnimatedButton key={action.label} href={action.href} variant={action.variant} className="w-full justify-center px-4 py-2">
-                  {action.label}
-                </AnimatedButton>
-              ))}
-            </div>
-          </div>
-        </aside>
+        </SurfacePanel>
       </div>
+
+      <aside className="space-y-4 xl:sticky xl:top-24 xl:self-start">
+        <SurfacePanel variant="guide" layout="rail" density="compact" className="space-y-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Contents</p>
+          <nav aria-label="Guide contents">
+            <ul className="space-y-2 text-sm">
+              {tocItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className="inline-flex text-[var(--solara-text-muted)] transition hover:text-[var(--solara-text-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--solara-accent)]"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </SurfacePanel>
+
+        <SurfacePanel variant="guide" layout="rail" density="compact" className="space-y-4">
+          <div className="space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Do this next</p>
+            <p className="text-sm leading-6 text-[var(--solara-text-muted)]">
+              Move from reading into a concrete Solara route without duplicating the full workspace chrome here.
+            </p>
+          </div>
+          <div className="space-y-2">
+            {actions.map((action, index) => (
+              <InlineAction key={action.href} to={action.href} emphasis={index === 0 ? "strong" : "default"}>
+                {action.label}
+              </InlineAction>
+            ))}
+          </div>
+          {currentProject ? (
+            <div className="space-y-2 border-t border-[var(--solara-rule-soft)] pt-4">
+              <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">
+                <FolderKanban className="h-3.5 w-3.5" />
+                Linked workspace
+              </div>
+              <p className="text-sm font-semibold text-[var(--solara-text-strong)]">{currentProject.name}</p>
+              <p className="text-sm text-[var(--solara-text-muted)]">
+                Keep this guide attached to the active project so tasks, resources, and requests stay connected.
+              </p>
+              <InlineAction to={`/projects/${currentProject.id}`}>
+                Open workspace
+                <ArrowRight className="h-4 w-4" />
+              </InlineAction>
+            </div>
+          ) : null}
+        </SurfacePanel>
+      </aside>
     </div>
   );
 };

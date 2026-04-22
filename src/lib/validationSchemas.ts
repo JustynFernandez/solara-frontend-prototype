@@ -55,7 +55,7 @@ export function validateField<T extends z.ZodRawShape>(
 
   const result = fieldSchema.safeParse(value);
   if (!result.success) {
-    return result.error.errors[0]?.message || "Invalid value";
+    return result.error.issues?.[0]?.message || "Invalid value";
   }
   return null;
 }

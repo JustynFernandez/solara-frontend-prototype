@@ -1,0 +1,72 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e50]:
+          - paragraph [ref=e51]: Sign in
+          - heading "Access your Solara account" [level=1] [ref=e52]
+          - generic [ref=e53]: Sign in to pick up saved helpers, projects, and planning progress. This remains a mock flow with no backend dependency.
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - text: Email
+            - textbox "Email" [ref=e57]:
+              - /placeholder: you@example.com
+          - generic [ref=e58]:
+            - text: Password
+            - generic [ref=e59]:
+              - textbox "Password" [ref=e60]:
+                - /placeholder: "********"
+              - button "Show password" [ref=e61] [cursor=pointer]:
+                - img [ref=e62]
+          - generic [ref=e65]:
+            - button "Sign in ->" [ref=e66] [cursor=pointer]
+            - link "Create an account instead ->" [ref=e67] [cursor=pointer]:
+              - /url: /register
+      - complementary [ref=e68]:
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - paragraph [ref=e71]: Account continuity
+            - heading "Pick up saved work without starting over." [level=2] [ref=e72]
+            - paragraph [ref=e73]: Sign in to resume planning, keep helper shortlists, and move between projects without losing context.
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Saved helpers
+              - paragraph [ref=e77]: Keep trusted contacts, response history, and request handoffs in one place.
+            - generic [ref=e78]:
+              - paragraph [ref=e79]: Project continuity
+              - paragraph [ref=e80]: Move from guides and planning into active workspaces without duplicating setup.
+            - generic [ref=e81]:
+              - paragraph [ref=e82]: Planning progress
+              - paragraph [ref=e83]: Return to Navigator and account details exactly where you left them.

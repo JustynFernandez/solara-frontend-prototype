@@ -6,4 +6,3 @@ export const navItems = [
   { label: "Plan", to: "/plan" },
   { label: "Learn", to: "/learn" },
 ];
-

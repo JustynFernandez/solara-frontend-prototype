@@ -1,21 +1,71 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import SectionContainer from "../components/ui/section-container";
+import { Bookmark, Clock3, Search, ShieldCheck, SlidersHorizontal } from "lucide-react";
+import PageFrame from "@/components/ui/page-frame";
+import SurfacePanel from "@/components/ui/surface-panel";
+import InlineAction from "@/components/ui/inline-action";
+import PageReveal from "@/components/ui/page-reveal";
 import { useEcoMode } from "../hooks/useEcoMode";
-import { helpers as helperData, Helper } from "../data/helpers";
-import ConnectHero from "../components/connect/ConnectHero";
-import TrustSafetyStrip from "../components/connect/TrustSafetyStrip";
-import HelperFilters, { HelperFilterState } from "../components/connect/HelperFilters";
-import HelperCard from "../components/connect/HelperCard";
-import SkeletonHelperCard from "../components/connect/SkeletonHelperCard";
+import { helpers as helperData } from "../data/helpers";
+import HelperFilters from "../components/connect/HelperFilters";
+import HelperDirectoryRow from "../components/connect/HelperDirectoryRow";
+import SkeletonHelperRow from "../components/connect/SkeletonHelperRow";
 import HelperProfileDrawer from "../components/connect/HelperProfileDrawer";
-import MatchingHowItWorks from "../components/connect/MatchingHowItWorks";
-import ConnectFAQ from "../components/connect/ConnectFAQ";
 import RequestHelpDialog from "../components/shared/RequestHelpDialog";
+import HelperRosterRibbon from "../components/connect/HelperRosterRibbon";
 import { useSavedHelpersStore } from "../store/useSavedHelpersStore";
+import HelperAvatar from "../components/connect/HelperAvatar";
 
-const Connect: React.FC = () => {
+const responseRank = {
+  "Under 8h": 0,
+  "Under 12h": 1,
+  "Same day": 2,
+  "Under 18h": 3,
+  "Under 24h": 4,
+  "Within 1 day": 5,
+  "1 day": 6,
+  "24-48h": 7,
+  "2-3 days": 8,
+};
+
+const deskPresets = [
+  {
+    id: "fast",
+    icon: Search,
+    label: "Fast response",
+    body: "Available helpers sorted by reply speed first.",
+  },
+  {
+    id: "certified",
+    icon: ShieldCheck,
+    label: "Certified lane",
+    body: "Use when the work needs sign-off or regulated decisions.",
+  },
+  {
+    id: "remote",
+    icon: SlidersHorizontal,
+    label: "Remote first",
+    body: "Good when the job still needs a narrow second opinion.",
+  },
+];
+
+const sortLabels = {
+  relevance: "Relevance",
+  rating: "Top rated",
+  projects: "Most projects",
+  response: "Fastest reply",
+};
+
+const screeningRules = [
+  "Use priority cards as the first outreach list.",
+  "Save helpers only after the ask is specific enough to send.",
+  "If the work is regulated, move certified helpers to the front immediately.",
+];
+
+const rankResponse = (label = "") => responseRank[label] ?? 99;
+
+const Connect = () => {
   const [searchParams] = useSearchParams();
   const searchFromQuery = searchParams.get("search") || "";
   const helperIdFromQuery = searchParams.get("helperId");
@@ -23,31 +73,30 @@ const Connect: React.FC = () => {
   const savedOnly = searchParams.get("filter") === "saved";
   const { ecoModeEnabled } = useEcoMode();
   const [isLoading, setIsLoading] = useState(true);
-  const [filters, setFilters] = useState<HelperFilterState>(() => ({
+  const [filters, setFilters] = useState(() => ({
     search: searchFromQuery,
     level: "all",
     availability: "all",
     support: "all",
     minRating: 0,
   }));
-  const [selectedSkill, setSelectedSkill] = useState<string>("all");
-  const [sortBy, setSortBy] = useState<"relevance" | "rating" | "projects" | "response">("relevance");
-  const [profile, setProfile] = useState<Helper | null>(null);
+  const [selectedSkill, setSelectedSkill] = useState("all");
+  const [sortBy, setSortBy] = useState("relevance");
+  const [profile, setProfile] = useState(null);
   const savedHelpers = useSavedHelpersStore((state) => state.savedHelpers);
   const toggleSavedHelper = useSavedHelpersStore((state) => state.toggleSavedHelper);
   const [requestOpen, setRequestOpen] = useState(false);
-  const [requestContext, setRequestContext] = useState<{ helper?: Helper }>({});
+  const [requestContext, setRequestContext] = useState({});
   const isExpanded = searchParams.get("view") === "full";
-  const directoryBadge = savedOnly ? "Saved helpers" : "Expanded directory";
+  const directoryBadge = savedOnly ? "Saved shortlist" : "Helper desk";
 
   const sourceHelpers = useMemo(
     () => (savedOnly ? helperData.filter((helper) => savedHelpers.includes(helper.id)) : helperData),
-    [savedOnly, savedHelpers]
+    [savedOnly, savedHelpers],
   );
 
-  // Simulate initial data loading for better perceived performance
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 400);
+    const timer = setTimeout(() => setIsLoading(false), 280);
     return () => clearTimeout(timer);
   }, []);
 
@@ -73,154 +122,341 @@ const Connect: React.FC = () => {
   }, [helperIdFromQuery, isLoading, requestFromQuery]);
 
   const skillPool = useMemo(() => {
-    const all = sourceHelpers.flatMap((h) => h.skills);
+    const all = sourceHelpers.flatMap((helper) => helper.skills);
     return Array.from(new Set(all)).slice(0, 12);
   }, [sourceHelpers]);
 
   const filteredHelpers = useMemo(() => {
     const list = sourceHelpers.filter((helper) => {
+      const searchText = filters.search.toLowerCase();
       const matchSearch =
         filters.search.trim().length === 0 ||
-        helper.name.toLowerCase().includes(filters.search.toLowerCase()) ||
-        helper.skills.some((s) => s.toLowerCase().includes(filters.search.toLowerCase()));
+        helper.name.toLowerCase().includes(searchText) ||
+        helper.bio.toLowerCase().includes(searchText) ||
+        helper.skills.some((skill) => skill.toLowerCase().includes(searchText));
       const matchLevel = filters.level === "all" || helper.level === filters.level;
       const matchAvail = filters.availability === "all" || helper.availabilityStatus === filters.availability;
-      const matchSupport = filters.support === "all" || helper.supportTypes.includes(filters.support as any);
+      const matchSupport = filters.support === "all" || helper.supportTypes.includes(filters.support);
       const matchRating = helper.rating >= filters.minRating;
-      const matchSkill = selectedSkill === "all" || helper.skills.map((s) => s.toLowerCase()).includes(selectedSkill.toLowerCase());
+      const matchSkill =
+        selectedSkill === "all" || helper.skills.map((skill) => skill.toLowerCase()).includes(selectedSkill.toLowerCase());
+
       return matchSearch && matchLevel && matchAvail && matchSupport && matchRating && matchSkill;
     });
 
     if (sortBy === "rating") return [...list].sort((a, b) => b.rating - a.rating);
     if (sortBy === "projects") return [...list].sort((a, b) => b.completedProjectsCount - a.completedProjectsCount);
-    if (sortBy === "response") return [...list].sort((a, b) => a.responseTimeLabel.localeCompare(b.responseTimeLabel));
-    return list;
+    if (sortBy === "response") return [...list].sort((a, b) => rankResponse(a.responseTimeLabel) - rankResponse(b.responseTimeLabel));
+    return [...list].sort((a, b) => {
+      const availabilityDelta = (a.availabilityStatus === "available" ? 0 : 1) - (b.availabilityStatus === "available" ? 0 : 1);
+      if (availabilityDelta !== 0) return availabilityDelta;
+      if (a.verified !== b.verified) return a.verified ? -1 : 1;
+      return b.rating - a.rating;
+    });
   }, [filters, selectedSkill, sortBy, sourceHelpers]);
 
-  return (
-    <div className="relative min-h-screen overflow-hidden py-14 text-slate-900 dark:text-slate-50">
-      <SectionContainer className={`relative space-y-10 ${isExpanded ? "max-w-none" : ""}`}>
-        <div className="space-y-8">
-          <ConnectHero
-            search={filters.search}
-            onSearchChange={(v) => setFilters({ ...filters, search: v })}
-            onRequestSupport={() => {
-              setRequestContext({});
-              setRequestOpen(true);
-            }}
-          />
-          <TrustSafetyStrip />
-          <div className="grid gap-6 lg:grid-cols-[0.32fr_1fr]">
-            <HelperFilters value={filters} onChange={setFilters} />
-            <div className="space-y-4">
-              <div className="flex flex-wrap items-center gap-2 rounded-2xl border border-white/70 bg-white/85 px-3 py-2 text-xs font-semibold text-slate-800 shadow-md backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85 dark:text-white">
-                <span className="uppercase tracking-[0.18em] text-solara-navy dark:text-indigo-200">Skills</span>
-                <button
-                  type="button"
-                  className={`rounded-full px-3 py-1 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue ${selectedSkill === "all" ? "bg-button-primary text-white shadow-md" : "border border-white/70 bg-white/80 text-slate-800 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-white"}`}
-                  onClick={() => setSelectedSkill("all")}
-                >
-                  All
-                </button>
-                {skillPool.map((skill) => (
-                  <button
-                    key={skill}
-                    type="button"
-                    onClick={() => setSelectedSkill(skill)}
-                    className={`rounded-full px-3 py-1 transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue ${
-                      selectedSkill === skill ? "bg-button-primary text-white shadow-md" : "border border-white/70 bg-white/80 text-slate-800 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-white"
-                    }`}
-                  >
-                    {skill}
-                  </button>
-                ))}
-              </div>
+  const screeningRoster = useMemo(() => {
+    const verified = filteredHelpers.filter((helper) => helper.verified).slice(0, 6);
+    return verified.length > 0 ? verified : filteredHelpers.slice(0, 6);
+  }, [filteredHelpers]);
 
-              <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-white/70 bg-white/85 px-4 py-3 text-sm text-slate-800 shadow-md backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85 dark:text-white">
-                <div className="flex items-center gap-2 text-xs uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">
-                  <span>{filteredHelpers.length} helpers</span>
-                  <span className="rounded-full border border-white/70 bg-white/80 px-2 py-1 text-[11px] font-semibold text-slate-800 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-white">
-                    {directoryBadge}
-                  </span>
+  const screeningSnapshot = useMemo(
+    () =>
+      [...filteredHelpers]
+        .sort((left, right) => {
+          const responseDelta = rankResponse(left.responseTimeLabel) - rankResponse(right.responseTimeLabel);
+          if (responseDelta !== 0) return responseDelta;
+          if (left.verified !== right.verified) return left.verified ? -1 : 1;
+          return right.rating - left.rating;
+        })
+        .slice(0, 4),
+    [filteredHelpers],
+  );
+
+  const priorityMatches = filteredHelpers.slice(0, 3);
+  const fullDirectory = filteredHelpers.slice(3);
+
+  const activeFilters = useMemo(() => {
+    const summary = [];
+    if (filters.search.trim()) summary.push(filters.search.trim());
+    if (filters.level !== "all") summary.push(`role ${filters.level}`);
+    if (filters.availability !== "all") summary.push(filters.availability);
+    if (filters.support !== "all") summary.push(filters.support === "visit" ? "on-site" : filters.support);
+    if (filters.minRating > 0) summary.push(`${filters.minRating}+ rating`);
+    if (selectedSkill !== "all") summary.push(selectedSkill);
+    if (sortBy !== "relevance") summary.push(sortLabels[sortBy]);
+    return summary;
+  }, [filters, selectedSkill, sortBy]);
+
+  const resetFilters = () => {
+    setFilters({ search: "", level: "all", availability: "all", support: "all", minRating: 0 });
+    setSelectedSkill("all");
+    setSortBy("relevance");
+  };
+
+  const applyPreset = (presetId) => {
+    if (presetId === "fast") {
+      setFilters((current) => ({ ...current, availability: "available" }));
+      setSortBy("response");
+      return;
+    }
+    if (presetId === "certified") {
+      setFilters((current) => ({ ...current, level: "certified" }));
+      return;
+    }
+    if (presetId === "remote") {
+      setFilters((current) => ({ ...current, support: "remote" }));
+    }
+  };
+
+  const isPresetActive = (presetId) => {
+    if (presetId === "fast") return filters.availability === "available" && sortBy === "response";
+    if (presetId === "certified") return filters.level === "certified";
+    if (presetId === "remote") return filters.support === "remote";
+    return false;
+  };
+
+  const verifiedMatches = filteredHelpers.filter((helper) => helper.verified).length;
+  const certifiedMatches = filteredHelpers.filter((helper) => helper.verified && helper.level === "certified").length;
+  const remoteReadyCount = filteredHelpers.filter((helper) => helper.supportTypes.includes("remote")).length;
+  const fastResponseCount = filteredHelpers.filter((helper) => rankResponse(helper.responseTimeLabel) <= 2).length;
+  const savedVisibleCount = savedHelpers.filter((id) => filteredHelpers.some((helper) => helper.id === id)).length;
+
+  return (
+    <PageFrame family="product" width={isExpanded ? "full" : "wide"} density="compact">
+      <PageReveal>
+        <section className="solara-connect-desk-hero">
+          <div className="solara-connect-desk-hero__intro">
+            <p className="solara-connect-desk-hero__eyebrow">{directoryBadge}</p>
+            <h1 className="solara-connect-desk-hero__title">
+              {savedOnly ? "Use the shortlist you already trust and move faster." : "Run the screening pass here, not in your head."}
+            </h1>
+            <p className="solara-connect-desk-hero__body">
+              {savedOnly
+                ? "Saved helpers stay in one tight list so the next request does not start from zero again."
+                : "This page is for triage. Narrow the field by role, support type, and response speed, then keep only the helpers you would actually contact."}
+            </p>
+
+            <div className="solara-connect-desk-hero__actions">
+              <InlineAction to="/connect">Back to Connect</InlineAction>
+              <button type="button" onClick={() => setRequestOpen(true)} className="solara-inline-action solara-inline-action--strong">
+                Request support
+              </button>
+            </div>
+
+            <div className="solara-connect-desk-hero__preset-grid">
+              {deskPresets.map((preset) => {
+                const Icon = preset.icon;
+                const active = isPresetActive(preset.id);
+                return (
+                  <button
+                    key={preset.id}
+                    type="button"
+                    onClick={() => applyPreset(preset.id)}
+                    className={`solara-connect-desk-hero__preset${active ? " is-active" : ""}`}
+                  >
+                    <span className="solara-connect-desk-hero__preset-icon">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <span className="solara-connect-desk-hero__preset-copy">
+                      <strong>{preset.label}</strong>
+                      <span>{preset.body}</span>
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <aside className="solara-connect-desk-hero__board">
+            <div className="solara-connect-desk-hero__board-head">
+              <div>
+                <p className="solara-connect-desk-hero__board-eyebrow">Current screening pass</p>
+                <h2 className="solara-connect-desk-hero__board-title">{filteredHelpers.length} helpers still fit this screen.</h2>
+              </div>
+              <HelperRosterRibbon helpers={screeningRoster} note={`${screeningRoster.length} helpers in the current shortlist`} />
+            </div>
+
+            <div className="solara-connect-desk-hero__metrics">
+              <article><span>Verified</span><strong>{verifiedMatches}</strong></article>
+              <article><span>Certified</span><strong>{certifiedMatches}</strong></article>
+              <article><span>Remote-ready</span><strong>{remoteReadyCount}</strong></article>
+              <article><span>Fast reply</span><strong>{fastResponseCount}</strong></article>
+            </div>
+
+            <div className="solara-connect-desk-hero__stack">
+              {activeFilters.length > 0 ? (
+                activeFilters.map((item) => (
+                  <span key={item} className="solara-connect-desk-hero__stack-chip">{item}</span>
+                ))
+              ) : (
+                <span className="solara-connect-desk-hero__stack-empty">No active stack. You are screening the full roster.</span>
+              )}
+            </div>
+
+            <div className="solara-connect-desk-hero__snapshot">
+              {screeningSnapshot.map((helper) => (
+                <article key={helper.id} className="solara-connect-desk-hero__snapshot-row">
+                  <HelperAvatar name={helper.name} src={helper.avatar} className="solara-connect-desk-hero__snapshot-avatar" />
+                  <div className="min-w-0 flex-1">
+                    <p className="solara-connect-desk-hero__snapshot-name">{helper.name}</p>
+                    <p className="solara-connect-desk-hero__snapshot-meta">{helper.skills[0]} / {helper.coarseLocationLabel}</p>
+                  </div>
+                  <div className="solara-connect-desk-hero__snapshot-proof">
+                    <p>{helper.responseTimeLabel}</p>
+                    <p>{helper.rating.toFixed(1)} rating</p>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </aside>
+        </section>
+      </PageReveal>
+
+      <div className="solara-connect-desk-layout">
+        <PageReveal delay={0.04}>
+          <SurfacePanel variant="product" layout="rail" density="compact" className="solara-connect-desk-filter-rail lg:sticky lg:top-24 lg:self-start">
+            <HelperFilters
+              value={filters}
+              onChange={setFilters}
+              skillPool={skillPool}
+              selectedSkill={selectedSkill}
+              onSelectedSkillChange={setSelectedSkill}
+              sortBy={sortBy}
+              onSortByChange={setSortBy}
+              activeSummary={activeFilters}
+              savedOnly={savedOnly}
+              onClear={resetFilters}
+            />
+          </SurfacePanel>
+        </PageReveal>
+
+        <PageReveal delay={0.08} className="solara-connect-desk-workspace">
+          {isLoading ? (
+            <div className="space-y-3">
+              {Array.from({ length: 6 }).map((_, index) => (
+                <SkeletonHelperRow key={`skeleton-${index}`} />
+              ))}
+            </div>
+          ) : filteredHelpers.length === 0 ? (
+            <SurfacePanel variant="product" layout="preview" density="compact" className="solara-route-card text-center text-sm text-[var(--solara-text-muted)]">
+              {savedOnly
+                ? "You do not have saved helpers in this view yet."
+                : "Nothing fits the current stack. Clear part of the screen and widen it again."}
+            </SurfacePanel>
+          ) : (
+            <>
+              <SurfacePanel variant="product" layout="preview" density="compact" className="solara-connect-desk-toolbar">
+                <div className="solara-route-card__header">
+                  <p className="solara-route-card__eyebrow">Screening note</p>
+                  <h2 className="solara-route-card__title">Keep the first list strict. The second list is only for near-matches.</h2>
+                  <p className="solara-route-card__body">
+                    This route works when the top section is small enough to act on. The rest of the roster is still useful, but it should not compete with the first outreach list.
+                  </p>
                 </div>
-                <div className="flex flex-wrap items-center gap-2 text-sm">
-                  <span className="text-xs uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Sort</span>
-                  {[
-                    ["relevance", "Relevance"],
-                    ["rating", "Rating"],
-                    ["projects", "Projects"],
-                    ["response", "Fast response"],
-                  ].map(([key, label]) => (
-                    <button
-                      key={key}
-                      type="button"
-                      onClick={() => setSortBy(key as any)}
-                      className={`rounded-full px-3 py-1 text-xs font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue ${
-                        sortBy === key ? "bg-button-primary text-white shadow-md" : "border border-white/70 bg-white/80 text-slate-800 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-white"
-                      }`}
+
+                <div className="solara-connect-desk-toolbar__meta">
+                  <article><span>Matches</span><strong>{filteredHelpers.length}</strong></article>
+                  <article><span>Saved</span><strong>{savedVisibleCount}</strong></article>
+                  <article><span>Sort</span><strong>{sortLabels[sortBy]}</strong></article>
+                </div>
+              </SurfacePanel>
+
+              <section className="solara-connect-desk-priority">
+                <div className="solara-connect-desk-section__head">
+                  <div>
+                    <p className="solara-connect-desk-section__kicker">Priority outreach</p>
+                    <h2 className="solara-connect-desk-section__title">Use these first if you are sending a request today.</h2>
+                  </div>
+                  <div className="solara-connect-desk-section__rules">
+                    {screeningRules.map((rule) => (
+                      <p key={rule}>{rule}</p>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="solara-connect-desk-priority__stack">
+                  {priorityMatches.map((helper, index) => (
+                    <motion.div
+                      key={helper.id}
+                      initial={ecoModeEnabled ? false : { opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.22, delay: ecoModeEnabled ? 0 : Math.min(index * 0.04, 0.1), ease: [0.4, 0, 0.2, 1] }}
                     >
-                      {label}
-                    </button>
+                      <HelperDirectoryRow
+                        helper={helper}
+                        variant="priority"
+                        rank={index + 1}
+                        saved={savedHelpers.includes(helper.id)}
+                        onSaveToggle={toggleSavedHelper}
+                        onOpenProfile={(value) => setProfile(value)}
+                        onRequest={(value) => {
+                          setRequestContext({ helper: value });
+                          setRequestOpen(true);
+                        }}
+                      />
+                    </motion.div>
                   ))}
                 </div>
-              </div>
+              </section>
 
-              <div className={`grid gap-4 ${isExpanded ? "md:grid-cols-2 xl:grid-cols-3" : "md:grid-cols-2"}`}>
-                {isLoading
-                  ? Array.from({ length: 6 }).map((_, i) => (
-                      <SkeletonHelperCard key={`skeleton-${i}`} />
-                    ))
-                  : filteredHelpers.map((helper, idx) => (
+              {fullDirectory.length > 0 ? (
+                <section className="solara-connect-desk-directory">
+                  <div className="solara-connect-desk-section__head">
+                    <div>
+                      <p className="solara-connect-desk-section__kicker">Full roster</p>
+                      <h2 className="solara-connect-desk-section__title">Everything else that still deserves a second look.</h2>
+                    </div>
+                  </div>
+
+                  <div className="solara-connect-desk-directory__grid">
+                    {fullDirectory.map((helper, index) => (
                       <motion.div
                         key={helper.id}
-                        initial={ecoModeEnabled ? false : { opacity: 0, y: 20 }}
+                        initial={ecoModeEnabled ? false : { opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.3, delay: ecoModeEnabled ? 0 : idx * 0.05, ease: [0.4, 0, 0.2, 1] }}
+                        transition={{ duration: 0.2, delay: ecoModeEnabled ? 0 : Math.min(index * 0.015, 0.12), ease: [0.4, 0, 0.2, 1] }}
                       >
-                        <HelperCard
+                        <HelperDirectoryRow
                           helper={helper}
+                          variant="standard"
                           saved={savedHelpers.includes(helper.id)}
                           onSaveToggle={toggleSavedHelper}
-                          onOpenProfile={(h) => setProfile(h)}
-                          onRequest={(h) => {
-                            setRequestContext({ helper: h });
+                          onOpenProfile={(value) => setProfile(value)}
+                          onRequest={(value) => {
+                            setRequestContext({ helper: value });
                             setRequestOpen(true);
                           }}
                         />
                       </motion.div>
                     ))}
-              </div>
-              {!isLoading && filteredHelpers.length === 0 && (
-                <div className="rounded-2xl border border-dashed border-slate-300/70 bg-white/80 p-8 text-center text-slate-600 shadow-md dark:border-slate-600/50 dark:bg-white/5 dark:text-slate-200">
-                  {savedOnly
-                    ? "You have no saved helpers yet. Save a profile to see it here."
-                    : "No helpers match that filter yet. Try clearing search or another category."}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-        <MatchingHowItWorks />
-        <ConnectFAQ />
-      </SectionContainer>
+                  </div>
+                </section>
+              ) : null}
+            </>
+          )}
+        </PageReveal>
+      </div>
+
       <HelperProfileDrawer
         helper={profile}
         open={Boolean(profile)}
         onOpenChange={(open) => {
           if (!open) setProfile(null);
         }}
-        onRequest={(h) => {
-          setRequestContext({ helper: h });
+        onRequest={(helper) => {
+          setRequestContext({ helper });
           setRequestOpen(true);
         }}
       />
+
       <RequestHelpDialog
         open={requestOpen}
         onOpenChange={setRequestOpen}
         helperId={requestContext.helper?.id}
         helperName={requestContext.helper?.name}
       />
-    </div>
+    </PageFrame>
   );
 };
 

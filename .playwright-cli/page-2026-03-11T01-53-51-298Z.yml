@@ -1,0 +1,848 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: Learning hub
+          - generic [ref=e50]:
+            - heading "Guides, tools, and pathways to launch solar work with confidence." [level=1] [ref=e51]
+            - generic [ref=e52]: "Built around Solara's three operating modes: plan with Navigator, coordinate through projects, and sustain with safety-first learning."
+          - generic [ref=e54]:
+            - link "Start planning ->" [ref=e55] [cursor=pointer]:
+              - /url: /plan
+            - link "Browse projects ->" [ref=e56] [cursor=pointer]:
+              - /url: /projects
+            - link "Safety guidance ->" [ref=e57] [cursor=pointer]:
+              - /url: /safety
+        - generic [ref=e58]:
+          - generic [ref=e59]:
+            - paragraph [ref=e60]: Learners
+            - paragraph [ref=e61]: 2,500+
+            - paragraph [ref=e62]: Using guides and workspaces
+          - generic [ref=e63]:
+            - paragraph [ref=e64]: Guides
+            - paragraph [ref=e65]: "8"
+            - paragraph [ref=e66]: Across planning, projects, and maintenance
+          - generic [ref=e67]:
+            - paragraph [ref=e68]: Pathways
+            - paragraph [ref=e69]: "3"
+            - paragraph [ref=e70]: Structured routes by goal
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - search "Search learn content" [ref=e74]:
+            - generic [ref=e75]:
+              - generic [ref=e76]:
+                - generic [ref=e77]:
+                  - paragraph [ref=e78]: Search
+                  - heading "Find a guide or template" [level=3] [ref=e79]
+                  - paragraph [ref=e80]: Type a topic, press Cmd/Ctrl+K for quick search, or filter by pillar.
+                - button "Cmd/Ctrl + K" [ref=e81] [cursor=pointer]:
+                  - img [ref=e82]
+                  - text: Cmd/Ctrl + K
+              - generic [ref=e84]:
+                - generic [ref=e85]:
+                  - img [ref=e86]
+                  - textbox "Search learn content" [ref=e89]:
+                    - /placeholder: Search titles, tags, or summaries
+                - generic [ref=e90]:
+                  - generic [ref=e91]:
+                    - generic [ref=e92]: Difficulty
+                    - generic [ref=e93]:
+                      - button "Beginner" [ref=e94] [cursor=pointer]
+                      - button "Intermediate" [ref=e95] [cursor=pointer]
+                      - button "Advanced" [ref=e96] [cursor=pointer]
+                  - generic [ref=e97]:
+                    - generic [ref=e98]: Format
+                    - generic [ref=e99]:
+                      - button "Guide" [ref=e100] [cursor=pointer]
+                      - button "Checklist" [ref=e101] [cursor=pointer]
+                      - button "Template" [ref=e102] [cursor=pointer]
+                      - button "Calculator" [ref=e103] [cursor=pointer]
+                  - generic [ref=e104]:
+                    - generic [ref=e105]: Pillar
+                    - generic [ref=e106]:
+                      - button "Plan" [ref=e107] [cursor=pointer]
+                      - button "Coordinate" [ref=e108] [cursor=pointer]
+                      - button "Sustain" [ref=e109] [cursor=pointer]
+            - list [ref=e110]:
+              - generic [ref=e111]:
+                - generic [ref=e112]:
+                  - generic [ref=e113]: Guide
+                  - generic [ref=e114]: Beginner
+                  - generic [ref=e115]: Plan
+                  - generic [ref=e116]: 10 min
+                - generic [ref=e117]:
+                  - generic [ref=e118]:
+                    - paragraph [ref=e119]: Navigator Warmup
+                    - paragraph [ref=e120]: "Get oriented before you launch Solar Navigator: what it asks, what you need, and how to save your run."
+                    - generic [ref=e121]:
+                      - generic [ref=e122]: Plan
+                      - generic [ref=e123]: Starter
+                      - generic [ref=e124]: Navigator
+                  - link "Read" [ref=e125] [cursor=pointer]:
+                    - /url: /learn/navigator-warmup
+              - generic [ref=e126]:
+                - generic [ref=e127]:
+                  - generic [ref=e128]: Guide
+                  - generic [ref=e129]: Beginner
+                  - generic [ref=e130]: Plan
+                  - generic [ref=e131]: 12 min
+                - generic [ref=e132]:
+                  - generic [ref=e133]:
+                    - paragraph [ref=e134]: Rooftop Safety Basics
+                    - paragraph [ref=e135]: Safe access, PPE, and power-down checks before any hands-on work.
+                    - generic [ref=e136]:
+                      - generic [ref=e137]: Safety
+                      - generic [ref=e138]: Basics
+                      - generic [ref=e139]: Checklist
+                  - link "Read" [ref=e140] [cursor=pointer]:
+                    - /url: /learn/rooftop-safety-basics
+              - generic [ref=e141]:
+                - generic [ref=e142]:
+                  - generic [ref=e143]: Template
+                  - generic [ref=e144]: Intermediate
+                  - generic [ref=e145]: Coordinate
+                  - generic [ref=e146]: 15 min
+                - generic [ref=e147]:
+                  - generic [ref=e148]:
+                    - paragraph [ref=e149]: Project Workspace Playbook
+                    - paragraph [ref=e150]: How to set up a Project Workspace to track installs, documents, and tasks with your crew.
+                    - generic [ref=e151]:
+                      - generic [ref=e152]: Projects
+                      - generic [ref=e153]: Templates
+                      - generic [ref=e154]: Coordination
+                  - link "Read" [ref=e155] [cursor=pointer]:
+                    - /url: /learn/workspace-playbook
+              - generic [ref=e156]:
+                - generic [ref=e157]:
+                  - generic [ref=e158]: Checklist
+                  - generic [ref=e159]: Beginner
+                  - generic [ref=e160]: Sustain
+                  - generic [ref=e161]: 8 min
+                - generic [ref=e162]:
+                  - generic [ref=e163]:
+                    - paragraph [ref=e164]: Maintenance Basics
+                    - paragraph [ref=e165]: Quarterly checks, cleaning guidance, and alerts to set so small issues don't grow.
+                    - generic [ref=e166]:
+                      - generic [ref=e167]: Sustain
+                      - generic [ref=e168]: Maintenance
+                      - generic [ref=e169]: Checklist
+                  - link "Read" [ref=e170] [cursor=pointer]:
+                    - /url: /learn/maintenance-basics
+              - generic [ref=e171]:
+                - generic [ref=e172]:
+                  - generic [ref=e173]: Guide
+                  - generic [ref=e174]: Intermediate
+                  - generic [ref=e175]: Plan
+                  - generic [ref=e176]: 14 min
+                - generic [ref=e177]:
+                  - generic [ref=e178]:
+                    - paragraph [ref=e179]: Backup Power Basics
+                    - paragraph [ref=e180]: "A primer on safe backup power: critical loads, transfer switches, and runtime expectations."
+                    - generic [ref=e181]:
+                      - generic [ref=e182]: Resilience
+                      - generic [ref=e183]: Design
+                      - generic [ref=e184]: Backup
+                  - link "Read" [ref=e185] [cursor=pointer]:
+                    - /url: /learn/backup-basics
+              - generic [ref=e186]:
+                - generic [ref=e187]:
+                  - generic [ref=e188]: Guide
+                  - generic [ref=e189]: Advanced
+                  - generic [ref=e190]: Sustain
+                  - generic [ref=e191]: 9 min
+                - generic [ref=e192]:
+                  - generic [ref=e193]:
+                    - paragraph [ref=e194]: Troubleshooting Quickwalk
+                    - paragraph [ref=e195]: A fast decision tree for low production, alerts, or odd inverter behavior.
+                    - generic [ref=e196]:
+                      - generic [ref=e197]: Diagnostics
+                      - generic [ref=e198]: Monitoring
+                  - link "Read" [ref=e199] [cursor=pointer]:
+                    - /url: /learn/troubleshooting-quickwalk
+              - generic [ref=e200]:
+                - generic [ref=e201]:
+                  - generic [ref=e202]: Guide
+                  - generic [ref=e203]: Beginner
+                  - generic [ref=e204]: Sustain
+                  - generic [ref=e205]: 10 min
+                - generic [ref=e206]:
+                  - generic [ref=e207]:
+                    - paragraph [ref=e208]: DC Electrical Safety Essentials
+                    - paragraph [ref=e209]: Essential knowledge about DC voltage hazards, proper disconnection procedures, and when to call a professional.
+                    - generic [ref=e210]:
+                      - generic [ref=e211]: Safety
+                      - generic [ref=e212]: Electrical
+                      - generic [ref=e213]: DC
+                      - generic [ref=e214]: Essentials
+                  - link "Read" [ref=e215] [cursor=pointer]:
+                    - /url: /learn/dc-electrical-safety
+              - generic [ref=e216]:
+                - generic [ref=e217]:
+                  - generic [ref=e218]: Guide
+                  - generic [ref=e219]: Intermediate
+                  - generic [ref=e220]: Plan
+                  - generic [ref=e221]: 12 min
+                - generic [ref=e222]:
+                  - generic [ref=e223]:
+                    - paragraph [ref=e224]: Battery Chemistry 101
+                    - paragraph [ref=e225]: "Compare LiFePO4 and lead-acid batteries: cycle life, depth of discharge, temperature factors, and sizing considerations."
+                    - generic [ref=e226]:
+                      - generic [ref=e227]: Batteries
+                      - generic [ref=e228]: Planning
+                      - generic [ref=e229]: LiFePO4
+                      - generic [ref=e230]: Lead-acid
+                  - link "Read" [ref=e231] [cursor=pointer]:
+                    - /url: /learn/battery-chemistry-101
+          - generic [ref=e232]:
+            - generic [ref=e233]:
+              - paragraph [ref=e234]: Featured learning flow
+              - heading "Recommended paths with a clear next step." [level=2] [ref=e235]
+              - paragraph [ref=e236]: Start with a sequence that matches your goal, then move directly into Navigator, project workspaces, or helper support without losing context.
+            - generic [ref=e237]:
+              - generic [ref=e238]:
+                - button "Plan Beginner 35 min Launch your first plan Use the Solar Navigator, save a scenario, and share it for review. Outcome / A saved Navigator run plus two next-step actions you can send to a helper. 0/5 0" [expanded] [ref=e239] [cursor=pointer]:
+                  - generic [ref=e240]:
+                    - generic [ref=e241]:
+                      - generic [ref=e242]: Plan
+                      - generic [ref=e243]: Beginner
+                      - generic [ref=e244]: 35 min
+                    - generic [ref=e245]:
+                      - heading "Launch your first plan" [level=4] [ref=e246]
+                      - paragraph [ref=e247]: Use the Solar Navigator, save a scenario, and share it for review.
+                      - paragraph [ref=e248]: Outcome / A saved Navigator run plus two next-step actions you can send to a helper.
+                  - generic [ref=e249]:
+                    - generic [ref=e250]: 0/5
+                    - progressbar [ref=e252]
+                    - img [ref=e253]
+                - generic [ref=e255]:
+                  - list [ref=e256]:
+                    - listitem [ref=e257]:
+                      - generic [ref=e258]:
+                        - button "Mark Collect basics as complete" [ref=e259] [cursor=pointer]
+                        - generic [ref=e260]:
+                          - generic [ref=e261]:
+                            - paragraph [ref=e262]: Collect basics
+                            - paragraph [ref=e263]: Grab photos of your roof or balcony and note your energy goal.
+                          - generic [ref=e264]:
+                            - generic [ref=e265]: Open Solar Navigator
+                            - link "Do this next ->" [ref=e266] [cursor=pointer]:
+                              - /url: /solar-navigator
+                              - text: Do this next
+                              - img [ref=e267]
+                              - text: "->"
+                    - listitem [ref=e269]:
+                      - generic [ref=e270]:
+                        - button "Mark Run Solar Navigator as complete" [ref=e271] [cursor=pointer]
+                        - generic [ref=e272]:
+                          - generic [ref=e273]:
+                            - paragraph [ref=e274]: Run Solar Navigator
+                            - paragraph [ref=e275]: Complete the guided quiz and save the scenario.
+                          - generic [ref=e276]:
+                            - generic [ref=e277]: Open Solar Navigator
+                            - link "Do this next ->" [ref=e278] [cursor=pointer]:
+                              - /url: /solar-navigator
+                              - text: Do this next
+                              - img [ref=e279]
+                              - text: "->"
+                    - listitem [ref=e281]:
+                      - generic [ref=e282]:
+                        - button "Mark Pick a scenario as complete" [ref=e283] [cursor=pointer]
+                        - generic [ref=e284]:
+                          - generic [ref=e285]:
+                            - paragraph [ref=e286]: Pick a scenario
+                            - paragraph [ref=e287]: Choose your preferred offset or backup option.
+                          - generic [ref=e288]:
+                            - generic [ref=e289]: Open Solar Navigator
+                            - link "Do this next ->" [ref=e290] [cursor=pointer]:
+                              - /url: /solar-navigator
+                              - text: Do this next
+                              - img [ref=e291]
+                              - text: "->"
+                    - listitem [ref=e293]:
+                      - generic [ref=e294]:
+                        - button "Mark Share for review as complete" [ref=e295] [cursor=pointer]
+                        - generic [ref=e296]:
+                          - generic [ref=e297]:
+                            - paragraph [ref=e298]: Share for review
+                            - paragraph [ref=e299]: Send your saved scenario link to a helper.
+                          - generic [ref=e300]:
+                            - generic [ref=e301]: Find a helper
+                            - link "Do this next ->" [ref=e302] [cursor=pointer]:
+                              - /url: /connect
+                              - text: Do this next
+                              - img [ref=e303]
+                              - text: "->"
+                    - listitem [ref=e305]:
+                      - generic [ref=e306]:
+                        - button "Mark Create a workspace as complete" [ref=e307] [cursor=pointer]
+                        - generic [ref=e308]:
+                          - generic [ref=e309]:
+                            - paragraph [ref=e310]: Create a workspace
+                            - paragraph [ref=e311]: Start a Project Workspace to track documents and tasks.
+                          - generic [ref=e312]:
+                            - generic [ref=e313]: Open Project Workspaces
+                            - link "Do this next ->" [ref=e314] [cursor=pointer]:
+                              - /url: /projects
+                              - text: Do this next
+                              - img [ref=e315]
+                              - text: "->"
+                  - link "Move into the next workspace ->" [ref=e318] [cursor=pointer]:
+                    - /url: /solar-navigator
+              - button "Coordinate Intermediate 50 min Coordinate a community install Set up a workspace, assign roles, and prepare communication for neighbors. Outcome / A shared workspace with roles, timeline, and safety checkpoints. 0/5 0" [ref=e320] [cursor=pointer]:
+                - generic [ref=e321]:
+                  - generic [ref=e322]:
+                    - generic [ref=e323]: Coordinate
+                    - generic [ref=e324]: Intermediate
+                    - generic [ref=e325]: 50 min
+                  - generic [ref=e326]:
+                    - heading "Coordinate a community install" [level=4] [ref=e327]
+                    - paragraph [ref=e328]: Set up a workspace, assign roles, and prepare communication for neighbors.
+                    - paragraph [ref=e329]: Outcome / A shared workspace with roles, timeline, and safety checkpoints.
+                - generic [ref=e330]:
+                  - generic [ref=e331]: 0/5
+                  - progressbar [ref=e333]
+                  - img [ref=e334]
+              - button "Sustain Beginner 25 min Keep your system healthy Establish a maintenance rhythm and alerts. Outcome / A quarterly maintenance loop with alerts and helper contacts. 0/5 0" [ref=e337] [cursor=pointer]:
+                - generic [ref=e338]:
+                  - generic [ref=e339]:
+                    - generic [ref=e340]: Sustain
+                    - generic [ref=e341]: Beginner
+                    - generic [ref=e342]: 25 min
+                  - generic [ref=e343]:
+                    - heading "Keep your system healthy" [level=4] [ref=e344]
+                    - paragraph [ref=e345]: Establish a maintenance rhythm and alerts.
+                    - paragraph [ref=e346]: Outcome / A quarterly maintenance loop with alerts and helper contacts.
+                - generic [ref=e347]:
+                  - generic [ref=e348]: 0/5
+                  - progressbar [ref=e350]
+                  - img [ref=e351]
+          - generic [ref=e354]:
+            - generic [ref=e355]:
+              - paragraph [ref=e356]: Guide library
+              - heading "Featured guides with expandable previews." [level=3] [ref=e357]
+              - paragraph [ref=e358]: Review key takeaways before you open the full article, then continue into the guide only when you need the full detail.
+            - generic [ref=e359]:
+              - generic [ref=e360]:
+                - paragraph [ref=e361]: Browse guides
+                - paragraph [ref=e363]: 8 visible / 0 completed
+              - generic [ref=e365]:
+                - button "Most relevant" [pressed] [ref=e366] [cursor=pointer]
+                - button "Newest" [ref=e367] [cursor=pointer]
+                - button "Shortest" [ref=e368] [cursor=pointer]
+                - button "Safety first" [ref=e369] [cursor=pointer]
+                - button "All (8)" [pressed] [ref=e370] [cursor=pointer]
+                - button "Saved (0)" [ref=e371] [cursor=pointer]
+                - button "Not completed" [ref=e372] [cursor=pointer]
+            - generic [ref=e373]:
+              - article [ref=e374]:
+                - generic [ref=e375]:
+                  - generic [ref=e376]:
+                    - generic [ref=e377]:
+                      - generic [ref=e378]: Guide
+                      - generic [ref=e379]: Beginner
+                      - generic [ref=e380]: Plan
+                      - generic [ref=e381]:
+                        - img [ref=e382]
+                        - text: 10 min
+                    - generic [ref=e385]:
+                      - heading "Navigator Warmup" [level=4] [ref=e386]
+                      - paragraph [ref=e387]: "Get oriented before you launch Solar Navigator: what it asks, what you need, and how to save your run."
+                    - generic [ref=e388]:
+                      - generic [ref=e389]: Plan
+                      - generic [ref=e390]: Starter
+                      - generic [ref=e391]: Navigator
+                  - generic [ref=e392]:
+                    - button "Bookmark guide" [ref=e393] [cursor=pointer]:
+                      - img [ref=e394]
+                    - link "Read guide ->" [ref=e396] [cursor=pointer]:
+                      - /url: /learn/navigator-warmup
+                    - button "Preview" [ref=e397] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e398]
+              - article [ref=e400]:
+                - generic [ref=e401]:
+                  - generic [ref=e402]:
+                    - generic [ref=e403]:
+                      - generic [ref=e404]: Guide
+                      - generic [ref=e405]: Beginner
+                      - generic [ref=e406]: Plan
+                      - generic [ref=e407]:
+                        - img [ref=e408]
+                        - text: 12 min
+                      - generic [ref=e411]:
+                        - img [ref=e412]
+                        - text: Safety critical
+                    - generic [ref=e414]:
+                      - heading "Rooftop Safety Basics" [level=4] [ref=e415]
+                      - paragraph [ref=e416]: Safe access, PPE, and power-down checks before any hands-on work.
+                    - generic [ref=e417]:
+                      - generic [ref=e418]: Safety
+                      - generic [ref=e419]: Basics
+                      - generic [ref=e420]: Checklist
+                  - generic [ref=e421]:
+                    - button "Bookmark guide" [ref=e422] [cursor=pointer]:
+                      - img [ref=e423]
+                    - link "Read guide ->" [ref=e425] [cursor=pointer]:
+                      - /url: /learn/rooftop-safety-basics
+                    - button "Preview" [ref=e426] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e427]
+              - article [ref=e429]:
+                - generic [ref=e430]:
+                  - generic [ref=e431]:
+                    - generic [ref=e432]:
+                      - generic [ref=e433]: Template
+                      - generic [ref=e434]: Intermediate
+                      - generic [ref=e435]: Coordinate
+                      - generic [ref=e436]:
+                        - img [ref=e437]
+                        - text: 15 min
+                    - generic [ref=e440]:
+                      - heading "Project Workspace Playbook" [level=4] [ref=e441]
+                      - paragraph [ref=e442]: How to set up a Project Workspace to track installs, documents, and tasks with your crew.
+                    - generic [ref=e443]:
+                      - generic [ref=e444]: Projects
+                      - generic [ref=e445]: Templates
+                      - generic [ref=e446]: Coordination
+                  - generic [ref=e447]:
+                    - button "Bookmark guide" [ref=e448] [cursor=pointer]:
+                      - img [ref=e449]
+                    - link "Read guide ->" [ref=e451] [cursor=pointer]:
+                      - /url: /learn/workspace-playbook
+                    - button "Preview" [ref=e452] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e453]
+              - article [ref=e455]:
+                - generic [ref=e456]:
+                  - generic [ref=e457]:
+                    - generic [ref=e458]:
+                      - generic [ref=e459]: Checklist
+                      - generic [ref=e460]: Beginner
+                      - generic [ref=e461]: Sustain
+                      - generic [ref=e462]:
+                        - img [ref=e463]
+                        - text: 8 min
+                    - generic [ref=e466]:
+                      - heading "Maintenance Basics" [level=4] [ref=e467]
+                      - paragraph [ref=e468]: Quarterly checks, cleaning guidance, and alerts to set so small issues don't grow.
+                    - generic [ref=e469]:
+                      - generic [ref=e470]: Sustain
+                      - generic [ref=e471]: Maintenance
+                      - generic [ref=e472]: Checklist
+                  - generic [ref=e473]:
+                    - button "Bookmark guide" [ref=e474] [cursor=pointer]:
+                      - img [ref=e475]
+                    - link "Read guide ->" [ref=e477] [cursor=pointer]:
+                      - /url: /learn/maintenance-basics
+                    - button "Preview" [ref=e478] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e479]
+              - article [ref=e481]:
+                - generic [ref=e482]:
+                  - generic [ref=e483]:
+                    - generic [ref=e484]:
+                      - generic [ref=e485]: Guide
+                      - generic [ref=e486]: Intermediate
+                      - generic [ref=e487]: Plan
+                      - generic [ref=e488]:
+                        - img [ref=e489]
+                        - text: 14 min
+                    - generic [ref=e492]:
+                      - heading "Backup Power Basics" [level=4] [ref=e493]
+                      - paragraph [ref=e494]: "A primer on safe backup power: critical loads, transfer switches, and runtime expectations."
+                    - generic [ref=e495]:
+                      - generic [ref=e496]: Resilience
+                      - generic [ref=e497]: Design
+                      - generic [ref=e498]: Backup
+                  - generic [ref=e499]:
+                    - button "Bookmark guide" [ref=e500] [cursor=pointer]:
+                      - img [ref=e501]
+                    - link "Read guide ->" [ref=e503] [cursor=pointer]:
+                      - /url: /learn/backup-basics
+                    - button "Preview" [ref=e504] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e505]
+              - article [ref=e507]:
+                - generic [ref=e508]:
+                  - generic [ref=e509]:
+                    - generic [ref=e510]:
+                      - generic [ref=e511]: Guide
+                      - generic [ref=e512]: Advanced
+                      - generic [ref=e513]: Sustain
+                      - generic [ref=e514]:
+                        - img [ref=e515]
+                        - text: 9 min
+                    - generic [ref=e518]:
+                      - heading "Troubleshooting Quickwalk" [level=4] [ref=e519]
+                      - paragraph [ref=e520]: A fast decision tree for low production, alerts, or odd inverter behavior.
+                    - generic [ref=e521]:
+                      - generic [ref=e522]: Diagnostics
+                      - generic [ref=e523]: Monitoring
+                  - generic [ref=e524]:
+                    - button "Bookmark guide" [ref=e525] [cursor=pointer]:
+                      - img [ref=e526]
+                    - link "Read guide ->" [ref=e528] [cursor=pointer]:
+                      - /url: /learn/troubleshooting-quickwalk
+                    - button "Preview" [ref=e529] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e530]
+              - article [ref=e532]:
+                - generic [ref=e533]:
+                  - generic [ref=e534]:
+                    - generic [ref=e535]:
+                      - generic [ref=e536]: Guide
+                      - generic [ref=e537]: Beginner
+                      - generic [ref=e538]: Sustain
+                      - generic [ref=e539]:
+                        - img [ref=e540]
+                        - text: 10 min
+                      - generic [ref=e543]:
+                        - img [ref=e544]
+                        - text: Safety critical
+                    - generic [ref=e546]:
+                      - heading "DC Electrical Safety Essentials" [level=4] [ref=e547]
+                      - paragraph [ref=e548]: Essential knowledge about DC voltage hazards, proper disconnection procedures, and when to call a professional.
+                    - generic [ref=e549]:
+                      - generic [ref=e550]: Safety
+                      - generic [ref=e551]: Electrical
+                      - generic [ref=e552]: DC
+                      - generic [ref=e553]: Essentials
+                  - generic [ref=e554]:
+                    - button "Bookmark guide" [ref=e555] [cursor=pointer]:
+                      - img [ref=e556]
+                    - link "Read guide ->" [ref=e558] [cursor=pointer]:
+                      - /url: /learn/dc-electrical-safety
+                    - button "Preview" [ref=e559] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e560]
+              - article [ref=e562]:
+                - generic [ref=e563]:
+                  - generic [ref=e564]:
+                    - generic [ref=e565]:
+                      - generic [ref=e566]: Guide
+                      - generic [ref=e567]: Intermediate
+                      - generic [ref=e568]: Plan
+                      - generic [ref=e569]:
+                        - img [ref=e570]
+                        - text: 12 min
+                    - generic [ref=e573]:
+                      - heading "Battery Chemistry 101" [level=4] [ref=e574]
+                      - paragraph [ref=e575]: "Compare LiFePO4 and lead-acid batteries: cycle life, depth of discharge, temperature factors, and sizing considerations."
+                    - generic [ref=e576]:
+                      - generic [ref=e577]: Batteries
+                      - generic [ref=e578]: Planning
+                      - generic [ref=e579]: LiFePO4
+                      - generic [ref=e580]: Lead-acid
+                  - generic [ref=e581]:
+                    - button "Bookmark guide" [ref=e582] [cursor=pointer]:
+                      - img [ref=e583]
+                    - link "Read guide ->" [ref=e585] [cursor=pointer]:
+                      - /url: /learn/battery-chemistry-101
+                    - button "Preview" [ref=e586] [cursor=pointer]:
+                      - text: Preview
+                      - img [ref=e587]
+          - generic [ref=e589]:
+            - generic [ref=e590]:
+              - generic [ref=e591]:
+                - generic [ref=e592]:
+                  - paragraph [ref=e593]: Quick answers
+                  - heading "Common questions from new builders." [level=3] [ref=e594]
+                  - paragraph [ref=e595]: Short, scannable answers with clear links back into the guide library.
+                - generic [ref=e596]:
+                  - img [ref=e597]
+                  - text: Safety first
+              - generic [ref=e600]:
+                - generic [ref=e601]:
+                  - button "Do I need a south-facing roof for solar?" [expanded] [ref=e602] [cursor=pointer]:
+                    - generic [ref=e603]: Do I need a south-facing roof for solar?
+                    - img [ref=e604]
+                  - generic [ref=e606]:
+                    - paragraph [ref=e607]: South is ideal, but east/west often works for small systems. Check shading and local regulations before installing.
+                    - generic [ref=e608]:
+                      - generic [ref=e609]: Related
+                      - link "Navigator Warmup" [ref=e610] [cursor=pointer]:
+                        - /url: /learn/navigator-warmup
+                        - img [ref=e611]
+                        - text: Navigator Warmup
+                    - paragraph [ref=e613]: Follow local regulations and pause if you are unsure about safety.
+                - button "How do I know if my roof can handle panels?" [ref=e615] [cursor=pointer]:
+                  - generic [ref=e616]: How do I know if my roof can handle panels?
+                  - img [ref=e617]
+                - button "Can I start with a balcony kit?" [ref=e620] [cursor=pointer]:
+                  - generic [ref=e621]: Can I start with a balcony kit?
+                  - img [ref=e622]
+                - button "What about permits and interconnection?" [ref=e625] [cursor=pointer]:
+                  - generic [ref=e626]: What about permits and interconnection?
+                  - img [ref=e627]
+                - button "How do I clean panels safely?" [ref=e630] [cursor=pointer]:
+                  - generic [ref=e631]: How do I clean panels safely?
+                  - img [ref=e632]
+                - button "What runtime should I expect from backup?" [ref=e635] [cursor=pointer]:
+                  - generic [ref=e636]: What runtime should I expect from backup?
+                  - img [ref=e637]
+                - button "Can I work on DC wiring myself?" [ref=e640] [cursor=pointer]:
+                  - generic [ref=e641]: Can I work on DC wiring myself?
+                  - img [ref=e642]
+                - button "How do I find a trusted helper?" [ref=e645] [cursor=pointer]:
+                  - generic [ref=e646]: How do I find a trusted helper?
+                  - img [ref=e647]
+                - button "How often should I check my system?" [ref=e650] [cursor=pointer]:
+                  - generic [ref=e651]: How often should I check my system?
+                  - img [ref=e652]
+                - button "What if I see burn marks or smell smoke?" [ref=e655] [cursor=pointer]:
+                  - generic [ref=e656]: What if I see burn marks or smell smoke?
+                  - img [ref=e657]
+            - generic [ref=e659]:
+              - generic [ref=e660]:
+                - generic [ref=e661]:
+                  - paragraph [ref=e662]: Hands-on tools
+                  - heading "Try two lightweight planning tools on the page." [level=3] [ref=e663]
+                  - paragraph [ref=e664]: These stay local to the browser and are directional only. Use them to frame a conversation, not to replace professional advice.
+                - generic [ref=e665]:
+                  - generic [ref=e666]:
+                    - generic [ref=e667]:
+                      - img [ref=e668]
+                      - text: Readiness checklist
+                    - paragraph [ref=e671]: Check the basics before you run Navigator or contact a helper.
+                    - list [ref=e672]:
+                      - listitem [ref=e673]:
+                        - checkbox "I have clear photos of my roof or balcony" [ref=e674]
+                        - generic [ref=e675]: I have clear photos of my roof or balcony
+                      - listitem [ref=e676]:
+                        - checkbox "I know my main shade sources" [ref=e677]
+                        - generic [ref=e678]: I know my main shade sources
+                      - listitem [ref=e679]:
+                        - checkbox "I have an offset or backup-runtime target" [ref=e680]
+                        - generic [ref=e681]: I have an offset or backup-runtime target
+                      - listitem [ref=e682]:
+                        - checkbox "I have a budget range noted" [ref=e683]
+                        - generic [ref=e684]: I have a budget range noted
+                      - listitem [ref=e685]:
+                        - checkbox "I know how to power down safely or will ask for help" [ref=e686]
+                        - generic [ref=e687]: I know how to power down safely or will ask for help
+                      - listitem [ref=e688]:
+                        - checkbox "I checked whether permits or approvals apply" [ref=e689]
+                        - generic [ref=e690]: I checked whether permits or approvals apply
+                    - generic [ref=e691]:
+                      - generic [ref=e692]:
+                        - generic [ref=e693]: Readiness score
+                        - generic [ref=e694]: 0%
+                      - paragraph [ref=e696]: Fill the biggest gaps before you commit hardware.
+                  - generic [ref=e697]:
+                    - generic [ref=e698]:
+                      - img [ref=e699]
+                      - text: Rough sizing estimator
+                    - paragraph [ref=e702]: Directional only. Confirm with a qualified installer and local rules.
+                    - generic [ref=e703]:
+                      - generic [ref=e704]:
+                        - generic [ref=e705]:
+                          - generic [ref=e706]: Daily energy target
+                          - generic [ref=e707]: 4.2 kWh
+                        - slider "Daily energy target 4.2 kWh" [ref=e708]: "4.2"
+                      - generic [ref=e709]:
+                        - generic [ref=e710]:
+                          - generic [ref=e711]: Average sun hours
+                          - generic [ref=e712]: 3.4 hrs
+                        - slider "Average sun hours 3.4 hrs" [ref=e713]: "3.4"
+                      - generic [ref=e714]:
+                        - generic [ref=e715]:
+                          - generic [ref=e716]: Losses
+                          - generic [ref=e717]: 18%
+                        - slider "Losses 18%" [ref=e718]: "18"
+                      - generic [ref=e719]:
+                        - text: Roof orientation
+                        - generic [ref=e720]:
+                          - button "South" [ref=e721] [cursor=pointer]:
+                            - generic [ref=e722]: South
+                          - button "South-East" [ref=e723] [cursor=pointer]:
+                            - generic [ref=e724]: South-East
+                          - button "South-West" [ref=e725] [cursor=pointer]:
+                            - generic [ref=e726]: South-West
+                          - button "East" [ref=e727] [cursor=pointer]:
+                            - generic [ref=e728]: East
+                          - button "West" [ref=e729] [cursor=pointer]:
+                            - generic [ref=e730]: West
+                      - generic [ref=e731]:
+                        - text: Battery chemistry
+                        - generic [ref=e732]:
+                          - button "LiFePO4 85% usable / 3000+ cycles" [ref=e733] [cursor=pointer]:
+                            - generic [ref=e734]: LiFePO4
+                            - generic [ref=e735]: 85% usable / 3000+ cycles
+                          - button "Lead-Acid 50% usable / 500-1000 cycles" [ref=e736] [cursor=pointer]:
+                            - generic [ref=e737]: Lead-Acid
+                            - generic [ref=e738]: 50% usable / 500-1000 cycles
+                    - generic [ref=e739]:
+                      - generic [ref=e740]:
+                        - generic [ref=e741]: Suggested array size
+                        - generic [ref=e742]: 1506 W
+                      - generic [ref=e743]:
+                        - generic [ref=e744]: Approx battery total
+                        - generic [ref=e745]: 3.0 kWh
+                      - generic [ref=e746]:
+                        - generic [ref=e747]:
+                          - generic [ref=e748]: Orientation factor
+                          - generic [ref=e749]: 100%
+                        - generic [ref=e750]:
+                          - generic [ref=e751]: Battery usable
+                          - generic [ref=e752]: 85%
+                      - paragraph [ref=e753]:
+                        - img [ref=e754]
+                        - text: Check roof space, structural limits, wiring rules, and local regulations before acting on these numbers.
+              - generic [ref=e756]:
+                - generic [ref=e757]:
+                  - paragraph [ref=e758]: Safety and trust
+                  - heading "Safety-first culture, transparent badges" [level=2] [ref=e759]
+                  - paragraph [ref=e760]: Review safety guidance before climbing, wiring, or organizing volunteers. The same standards carry into helpers and project workspaces.
+                - generic [ref=e761]:
+                  - generic [ref=e762]: Community volunteer
+                  - generic [ref=e763]: Trained volunteer
+                  - generic [ref=e764]: Certified installer
+                - generic [ref=e765]:
+                  - link "View safety guidance ->" [ref=e766] [cursor=pointer]:
+                    - /url: /safety
+                  - link "Community guidelines ->" [ref=e767] [cursor=pointer]:
+                    - /url: /community-guidelines
+        - navigation "On this page" [ref=e770]:
+          - paragraph [ref=e771]: On this page
+          - list [ref=e772]:
+            - listitem [ref=e773]:
+              - link "Your progress" [ref=e774] [cursor=pointer]:
+                - /url: "#progress"
+            - listitem [ref=e775]:
+              - link "Recommended paths" [ref=e776] [cursor=pointer]:
+                - /url: "#paths"
+            - listitem [ref=e777]:
+              - link "Guides" [ref=e778] [cursor=pointer]:
+                - /url: "#guides"
+            - listitem [ref=e779]:
+              - link "Quick answers and tools" [ref=e780] [cursor=pointer]:
+                - /url: "#support"
+  - generic [ref=e781]:
+    - button "Hyper visuals" [ref=e782] [cursor=pointer]: Hyper visuals
+    - button "Toggle theme" [ref=e785] [cursor=pointer]:
+      - img [ref=e786]
+  - contentinfo [ref=e789]:
+    - generic [ref=e790]:
+      - generic [ref=e791]:
+        - generic [ref=e792]:
+          - generic [ref=e793]: "19"
+          - generic [ref=e794]: Verified helpers
+        - generic [ref=e795]:
+          - generic [ref=e796]: "2"
+          - generic [ref=e797]: Active projects
+        - generic [ref=e798]:
+          - generic [ref=e799]: "8"
+          - generic [ref=e800]: Guides available
+      - generic [ref=e801]:
+        - generic [ref=e802]:
+          - generic [ref=e803]:
+            - img "Solara logo" [ref=e805]
+            - generic [ref=e806]:
+              - generic [ref=e807]: Solara
+              - paragraph [ref=e808]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e809]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e810]:
+          - generic [ref=e811]:
+            - heading "Product" [level=4] [ref=e812]
+            - list [ref=e813]:
+              - listitem [ref=e814]:
+                - link "Find Helpers" [ref=e815] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e816]:
+                - link "Plan Your Solar" [ref=e817] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e818]:
+                - link "3D Configurator" [ref=e819] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e820]:
+                - link "Projects" [ref=e821] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e822]:
+            - heading "Learn" [level=4] [ref=e823]
+            - list [ref=e824]:
+              - listitem [ref=e825]:
+                - link "Getting Started" [ref=e826] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e827]:
+                - link "Solar Navigator" [ref=e828] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e829]:
+                - link "Safety Guide" [ref=e830] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e831]:
+                - link "Services" [ref=e832] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e833]:
+            - heading "Community" [level=4] [ref=e834]
+            - list [ref=e835]:
+              - listitem [ref=e836]:
+                - link "Request Help" [ref=e837] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e838]:
+                - link "Become a Helper" [ref=e839] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e840]:
+                - link "Guidelines" [ref=e841] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e842]:
+                - link "Projects Board" [ref=e843] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e844]:
+            - heading "Account" [level=4] [ref=e845]
+            - list [ref=e846]:
+              - listitem [ref=e847]:
+                - link "Sign In" [ref=e848] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e849]:
+                - link "Register" [ref=e850] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e851]:
+                - link "My Account" [ref=e852] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e853]:
+                - link "Dashboard" [ref=e854] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e857]:
+          - generic [ref=e858]:
+            - heading "Get product updates" [level=3] [ref=e859]
+            - paragraph [ref=e860]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e861]:
+            - textbox "you@example.com" [ref=e862]
+            - button "Join update list" [ref=e863] [cursor=pointer]
+          - paragraph [ref=e864]: Unsubscribe any time.
+      - generic [ref=e865]:
+        - generic [ref=e866]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e868]: © 2026 Solara Community

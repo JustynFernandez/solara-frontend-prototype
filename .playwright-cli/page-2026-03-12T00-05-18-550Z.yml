@@ -1,0 +1,197 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Safety & scope
+            - generic [ref=e53]:
+              - heading "Work safely, stay within scope." [level=1] [ref=e54]
+              - generic [ref=e55]: Solara is a community platform. Helpers are community members, not employees of Solara. Always follow local regulations and use licensed professionals for high-risk work.
+          - generic [ref=e57]:
+            - generic [ref=e63]: Safety checks
+            - generic [ref=e64]:
+              - paragraph [ref=e65]: Default guardrails
+              - heading "Start with the non-negotiables." [level=3] [ref=e66]
+              - paragraph [ref=e67]: Every project should protect people, equipment, and the limits of community knowledge.
+            - generic [ref=e69]:
+              - article [ref=e70]:
+                - generic [ref=e71]:
+                  - paragraph [ref=e72]: PPE
+                  - heading "Use protective equipment and safe access." [level=3] [ref=e73]
+                  - paragraph [ref=e74]: Ladders, anchors, and electrical isolation are not optional.
+              - article [ref=e75]:
+                - generic [ref=e76]:
+                  - paragraph [ref=e77]: Scope
+                  - heading "Stay inside your real level of training." [level=3] [ref=e78]
+                  - paragraph [ref=e79]: Do not stretch community help into professional electrical work.
+              - article [ref=e80]:
+                - generic [ref=e81]:
+                  - paragraph [ref=e82]: Escalation
+                  - heading "Stop when the risk picture changes." [level=3] [ref=e83]
+                  - paragraph [ref=e84]: Pause work and escalate when a job becomes unclear or unsafe.
+        - generic [ref=e85]:
+          - article [ref=e86]:
+            - paragraph [ref=e87]: High-risk work
+            - paragraph [ref=e88]: Certified only
+            - paragraph [ref=e89]: Use licensed professionals where required.
+          - article [ref=e90]:
+            - paragraph [ref=e91]: Community role
+            - paragraph [ref=e92]: Neighbor help
+            - paragraph [ref=e93]: This is support, not employer-managed labor.
+          - article [ref=e94]:
+            - paragraph [ref=e95]: Default move
+            - paragraph [ref=e96]: Pause if unsure
+            - paragraph [ref=e97]: Escalate unclear or unsafe situations early.
+      - generic [ref=e99]:
+        - article [ref=e100]:
+          - generic [ref=e101]:
+            - heading "Do" [level=2] [ref=e102]
+            - list [ref=e103]:
+              - listitem [ref=e104]: Use licensed electricians for any grid-tied or high-voltage work.
+              - listitem [ref=e105]: Wear PPE, de-energize circuits, and follow lock-out/tag-out where relevant.
+              - listitem [ref=e106]: Document shade surveys, torque checks, and maintenance schedules.
+              - listitem [ref=e107]: Match equipment to manufacturer specs; check voltage/current limits.
+              - listitem [ref=e108]: Ensure safe ladders, harnesses, and rooftop practices.
+        - article [ref=e109]:
+          - generic [ref=e110]:
+            - heading "Do not" [level=2] [ref=e111]
+            - list [ref=e112]:
+              - listitem [ref=e113]: Perform electrical work you're not qualified for.
+              - listitem [ref=e114]: Bypass safety devices or ignore manufacturer warnings.
+              - listitem [ref=e115]: Work at height without proper anchors or supervision.
+              - listitem [ref=e116]: Share unvetted advice as professional guidance.
+      - article [ref=e118]:
+        - generic [ref=e119]:
+          - heading "Reporting & escalation" [level=2] [ref=e120]
+          - paragraph [ref=e121]: If you see unsafe behavior or misrepresentation, let the organiser know and pause work until risks are resolved.
+  - generic [ref=e122]:
+    - button "Eco mode Low battery" [pressed] [ref=e123] [cursor=pointer]:
+      - text: Eco mode
+      - generic [ref=e126]: Low battery
+    - button "Toggle theme" [ref=e127] [cursor=pointer]:
+      - img [ref=e128]
+  - contentinfo [ref=e131]:
+    - generic [ref=e132]:
+      - generic [ref=e133]:
+        - generic [ref=e134]:
+          - generic [ref=e135]: "19"
+          - generic [ref=e136]: Verified helpers
+        - generic [ref=e137]:
+          - generic [ref=e138]: "2"
+          - generic [ref=e139]: Active projects
+        - generic [ref=e140]:
+          - generic [ref=e141]: "8"
+          - generic [ref=e142]: Guides available
+      - generic [ref=e143]:
+        - generic [ref=e144]:
+          - generic [ref=e145]:
+            - img "Solara logo" [ref=e147]
+            - generic [ref=e148]:
+              - generic [ref=e149]: Solara
+              - paragraph [ref=e150]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e151]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e152]:
+          - generic [ref=e153]:
+            - heading "Product" [level=4] [ref=e154]
+            - list [ref=e155]:
+              - listitem [ref=e156]:
+                - link "Find Helpers" [ref=e157] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e158]:
+                - link "Plan Your Solar" [ref=e159] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e160]:
+                - link "3D Configurator" [ref=e161] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e162]:
+                - link "Projects" [ref=e163] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e164]:
+            - heading "Learn" [level=4] [ref=e165]
+            - list [ref=e166]:
+              - listitem [ref=e167]:
+                - link "Getting Started" [ref=e168] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e169]:
+                - link "Solar Navigator" [ref=e170] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e171]:
+                - link "Safety Guide" [ref=e172] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e173]:
+                - link "Services" [ref=e174] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e175]:
+            - heading "Community" [level=4] [ref=e176]
+            - list [ref=e177]:
+              - listitem [ref=e178]:
+                - link "Request Help" [ref=e179] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e180]:
+                - link "Become a Helper" [ref=e181] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e182]:
+                - link "Guidelines" [ref=e183] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e184]:
+                - link "Projects Board" [ref=e185] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e186]:
+            - heading "Account" [level=4] [ref=e187]
+            - list [ref=e188]:
+              - listitem [ref=e189]:
+                - link "Sign In" [ref=e190] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e191]:
+                - link "Register" [ref=e192] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e193]:
+                - link "My Account" [ref=e194] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e195]:
+                - link "Dashboard" [ref=e196] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e199]:
+          - generic [ref=e200]:
+            - heading "Get product updates" [level=3] [ref=e201]
+            - paragraph [ref=e202]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e203]:
+            - textbox "you@example.com" [ref=e204]
+            - button "Join update list" [ref=e205] [cursor=pointer]
+          - paragraph [ref=e206]: Unsubscribe any time.
+      - generic [ref=e207]:
+        - generic [ref=e208]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e210]: © 2026 Solara Community

@@ -1,27 +1,50 @@
 import React from "react";
-import SectionContainer from "../components/ui/section-container";
+import ActionRail from "@/components/ui/action-rail";
+import PageFrame from "@/components/ui/page-frame";
+import PageHeroStage from "@/components/ui/page-hero-stage";
+import PageReveal from "@/components/ui/page-reveal";
+import PreviewFrame from "@/components/ui/preview-frame";
+import SurfacePanel from "@/components/ui/surface-panel";
 
 const Safety: React.FC = () => (
-  <div className="relative min-h-screen overflow-hidden px-6 py-14 text-slate-900 dark:text-slate-50">
-    <SectionContainer className="relative space-y-6">
-      {/* Hero header card */}
-      <header className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-8 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#050a16]/85">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,123,255,0.1),transparent_40%)]" />
-        <div className="relative space-y-2">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-solara-navy dark:text-indigo-200">Safety & Scope</p>
-          <h1 className="text-3xl font-semibold text-slate-900 dark:text-white">Work safely, stay within scope.</h1>
-          <p className="max-w-3xl text-slate-700 dark:text-slate-200">
-            Solara is a community platform. Helpers are community members, not employees of Solara. Always follow local regulations and use licensed professionals for high-risk work.
-          </p>
-        </div>
-      </header>
+  <PageFrame family="editorial" width="wide" density="compact">
+    <PageReveal mode="mount">
+      <PageHeroStage
+        family="guide"
+        eyebrow="Safety & scope"
+        title="Work safely, stay within scope."
+        body="Solara is a community platform. Helpers are community members, not employees of Solara. Always follow local regulations and use licensed professionals for high-risk work."
+        metrics={[
+          { label: "High-risk work", value: "Certified only", meta: "Use licensed professionals where required." },
+          { label: "Community role", value: "Neighbor help", meta: "This is support, not employer-managed labor." },
+          { label: "Default move", value: "Pause if unsure", meta: "Escalate unclear or unsafe situations early." },
+        ]}
+        preview={
+          <PreviewFrame
+            chromeLabel="Safety checks"
+            eyebrow="Default guardrails"
+            title="Start with the non-negotiables."
+            body="Every project should protect people, equipment, and the limits of community knowledge."
+          >
+            <ActionRail
+              compact
+              items={[
+                { eyebrow: "PPE", title: "Use protective equipment and safe access.", body: "Ladders, anchors, and electrical isolation are not optional." },
+                { eyebrow: "Scope", title: "Stay inside your real level of training.", body: "Do not stretch community help into professional electrical work." },
+                { eyebrow: "Escalation", title: "Stop when the risk picture changes.", body: "Pause work and escalate when a job becomes unclear or unsafe." },
+              ]}
+            />
+          </PreviewFrame>
+        }
+      />
+    </PageReveal>
 
+    <PageReveal mode="in-view">
       <div className="grid gap-4 lg:grid-cols-2">
-        <article className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-6 shadow-md backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(0,123,255,0.08),transparent_34%)]" />
-          <div className="relative space-y-3">
+        <SurfacePanel as="article" variant="guide" layout="preview">
+          <div className="space-y-3">
             <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Do</h2>
-            <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200 list-disc list-inside">
+            <ul className="list-inside list-disc space-y-2 text-sm text-slate-700 dark:text-slate-200">
               <li>Use licensed electricians for any grid-tied or high-voltage work.</li>
               <li>Wear PPE, de-energize circuits, and follow lock-out/tag-out where relevant.</li>
               <li>Document shade surveys, torque checks, and maintenance schedules.</li>
@@ -29,30 +52,33 @@ const Safety: React.FC = () => (
               <li>Ensure safe ladders, harnesses, and rooftop practices.</li>
             </ul>
           </div>
-        </article>
-        <article className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-6 shadow-md backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_86%_18%,rgba(212,175,55,0.08),transparent_34%)]" />
-          <div className="relative space-y-3">
-            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Don't</h2>
-            <ul className="space-y-2 text-sm text-slate-700 dark:text-slate-200 list-disc list-inside">
+        </SurfacePanel>
+
+        <SurfacePanel as="article" variant="guide" layout="preview">
+          <div className="space-y-3">
+            <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Do not</h2>
+            <ul className="list-inside list-disc space-y-2 text-sm text-slate-700 dark:text-slate-200">
               <li>Perform electrical work you're not qualified for.</li>
               <li>Bypass safety devices or ignore manufacturer warnings.</li>
               <li>Work at height without proper anchors or supervision.</li>
               <li>Share unvetted advice as professional guidance.</li>
             </ul>
           </div>
-        </article>
+        </SurfacePanel>
       </div>
+    </PageReveal>
 
-      <article className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-6 shadow-md backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(0,123,255,0.06),transparent_40%)]" />
-        <div className="relative space-y-3">
+    <PageReveal mode="in-view">
+      <SurfacePanel as="article" variant="guide" layout="closeout">
+        <div className="space-y-3">
           <h2 className="text-lg font-semibold text-slate-900 dark:text-white">Reporting & escalation</h2>
-          <p className="text-sm text-slate-700 dark:text-slate-200">If you see unsafe behavior or misrepresentation, let the organiser know and pause work until risks are resolved.</p>
+          <p className="text-sm text-slate-700 dark:text-slate-200">
+            If you see unsafe behavior or misrepresentation, let the organiser know and pause work until risks are resolved.
+          </p>
         </div>
-      </article>
-    </SectionContainer>
-  </div>
+      </SurfacePanel>
+    </PageReveal>
+  </PageFrame>
 );
 
 export default Safety;

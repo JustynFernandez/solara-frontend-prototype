@@ -1,0 +1,34 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+import React from "react";
+import { ArrowRight, BookOpen, FolderKanban } from "lucide-react";
+import SurfacePanel from "@/components/ui/surface-panel";
+import InlineAction from "@/components/ui/inline-action";
+const nextActions = {
+    "navigator-warmup": [
+        { label: "Open Solar Navigator", href: "/solar-navigator" },
+        { label: "Browse helpers", href: "/connect" },
+    ],
+    "workspace-playbook": [
+        { label: "Open projects", href: "/projects" },
+        { label: "Find collaborators", href: "/connect" },
+    ],
+    "maintenance-basics": [
+        { label: "Browse maintenance help", href: "/connect" },
+        { label: "View active projects", href: "/projects" },
+    ],
+};
+const GuideDetailLayout = ({ guide, currentProject }) => {
+    const actions = nextActions[guide.slug] || [
+        { label: "Run Navigator", href: "/solar-navigator" },
+        { label: "Browse helpers", href: "/connect" },
+    ];
+    const tocItems = guide.toc.map((item) => ({
+        id: item.toLowerCase().replace(/\s+/g, "-"),
+        label: item,
+    }));
+    React.useEffect(() => {
+        localStorage.setItem("solara:learn:last-guide", guide.slug);
+    }, [guide.slug]);
+    return (_jsxs("div", { className: "grid gap-6 xl:grid-cols-[minmax(0,1fr)_20rem]", children: [_jsxs("div", { className: "space-y-6", children: [_jsxs(SurfacePanel, { variant: "guide", layout: "preview", density: "compact", className: "space-y-4", children: [_jsxs("div", { className: "flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--solara-text-muted)]", children: [_jsx("span", { className: "rounded-full border border-[var(--solara-rule)] px-3 py-1", children: guide.format }), _jsx("span", { className: "rounded-full border border-[var(--solara-rule)] px-3 py-1", children: guide.difficulty }), _jsx("span", { className: "rounded-full border border-[var(--solara-rule)] px-3 py-1", children: guide.pillar }), _jsxs("span", { className: "rounded-full border border-[var(--solara-rule)] px-3 py-1", children: [guide.durationMins, " min"] })] }), _jsx("div", { className: "flex flex-wrap gap-2 text-xs text-[var(--solara-text-muted)]", children: guide.tags.map((tag) => (_jsx("span", { className: "rounded-full border border-[var(--solara-rule-soft)] px-3 py-1", children: tag }, tag))) })] }), _jsxs(SurfacePanel, { as: "article", variant: "guide", layout: "split", density: "comfortable", className: "space-y-6", children: [_jsx("div", { className: "prose prose-slate max-w-none prose-headings:font-semibold prose-headings:text-[var(--solara-text-strong)] prose-p:text-[var(--solara-text-muted)] prose-li:text-[var(--solara-text-muted)] prose-strong:text-[var(--solara-text-strong)] dark:prose-invert", dangerouslySetInnerHTML: { __html: guide.content } }), _jsxs("div", { className: "space-y-3 border-t border-[var(--solara-rule-soft)] pt-5", children: [_jsx("p", { className: "text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]", children: "Key takeaways" }), _jsx("ul", { className: "space-y-2 text-sm leading-6 text-[var(--solara-text-muted)]", children: guide.takeaways.map((item) => (_jsxs("li", { className: "flex items-start gap-2", children: [_jsx("span", { className: "mt-2 h-1.5 w-1.5 rounded-full bg-[var(--solara-accent)]", "aria-hidden": true }), _jsx("span", { children: item })] }, item))) })] })] }), _jsxs(SurfacePanel, { variant: "guide", layout: "preview", density: "compact", className: "space-y-3", children: [_jsx("p", { className: "text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]", children: "Resources" }), _jsx("div", { className: "divide-y divide-[var(--solara-rule-soft)] border-y border-[var(--solara-rule-soft)]", children: guide.resources.map((resource) => (_jsxs("a", { href: resource.url, target: "_blank", rel: "noreferrer", className: "flex items-center justify-between gap-4 py-3 text-sm text-[var(--solara-text-muted)] transition hover:text-[var(--solara-text-strong)]", children: [_jsxs("span", { className: "flex items-center gap-2", children: [_jsx(BookOpen, { className: "h-4 w-4 text-[var(--solara-accent-strong)]" }), _jsx("span", { className: "font-medium text-[var(--solara-text-strong)]", children: resource.title })] }), _jsx("span", { className: "text-[11px] font-semibold uppercase tracking-[0.14em]", children: resource.type })] }, `${resource.type}-${resource.title}`))) })] })] }), _jsxs("aside", { className: "space-y-4 xl:sticky xl:top-24 xl:self-start", children: [_jsxs(SurfacePanel, { variant: "guide", layout: "rail", density: "compact", className: "space-y-3", children: [_jsx("p", { className: "text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]", children: "Contents" }), _jsx("nav", { "aria-label": "Guide contents", children: _jsx("ul", { className: "space-y-2 text-sm", children: tocItems.map((item) => (_jsx("li", { children: _jsx("a", { href: `#${item.id}`, className: "inline-flex text-[var(--solara-text-muted)] transition hover:text-[var(--solara-text-strong)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--solara-accent)]", children: item.label }) }, item.id))) }) })] }), _jsxs(SurfacePanel, { variant: "guide", layout: "rail", density: "compact", className: "space-y-4", children: [_jsxs("div", { className: "space-y-2", children: [_jsx("p", { className: "text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]", children: "Do this next" }), _jsx("p", { className: "text-sm leading-6 text-[var(--solara-text-muted)]", children: "Move from reading into a concrete Solara route without duplicating the full workspace chrome here." })] }), _jsx("div", { className: "space-y-2", children: actions.map((action, index) => (_jsx(InlineAction, { to: action.href, emphasis: index === 0 ? "strong" : "default", children: action.label }, action.href))) }), currentProject ? (_jsxs("div", { className: "space-y-2 border-t border-[var(--solara-rule-soft)] pt-4", children: [_jsxs("div", { className: "flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]", children: [_jsx(FolderKanban, { className: "h-3.5 w-3.5" }), "Linked workspace"] }), _jsx("p", { className: "text-sm font-semibold text-[var(--solara-text-strong)]", children: currentProject.name }), _jsx("p", { className: "text-sm text-[var(--solara-text-muted)]", children: "Keep this guide attached to the active project so tasks, resources, and requests stay connected." }), _jsxs(InlineAction, { to: `/projects/${currentProject.id}`, children: ["Open workspace", _jsx(ArrowRight, { className: "h-4 w-4" })] })] })) : null] })] })] }));
+};
+export default GuideDetailLayout;

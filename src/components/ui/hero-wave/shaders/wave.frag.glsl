@@ -1,5 +1,7 @@
 precision highp float;
 
+#include <common>
+
 uniform float uTime;
 uniform float uIntro;
 uniform vec2 uResolution;
@@ -107,6 +109,30 @@ void main() {
   color += glowColor * glow * 0.16;
   color += vec3(1.0, 0.97, 0.92) * fresnel * foldMask * structureMask * 0.08;
 
+  vec3 keyLightDirection = normalize(vec3(0.42, 0.54, 0.73));
+  float nDotL = max(dot(normal, keyLightDirection), 0.0);
+  vec3 halfVector = normalize(keyLightDirection + viewDirection);
+
+  vec3 tangentCandidate = tangent - normal * dot(tangent, normal);
+  if (dot(tangentCandidate, tangentCandidate) < 0.00001) {
+    tangentCandidate = abs(normal.y) < 0.999 ? cross(vec3(0.0, 1.0, 0.0), normal) : cross(vec3(1.0, 0.0, 0.0), normal);
+  }
+  vec3 tangentDir = normalize(tangentCandidate);
+  vec3 bitangentDir = normalize(cross(normal, tangentDir));
+
+  float nDotH = max(dot(normal, halfVector), 0.0);
+  float tDotH = dot(tangentDir, halfVector);
+  float bDotH = dot(bitangentDir, halfVector);
+
+  float broadAniso = pow(clamp(1.0 - abs(bDotH), 0.0, 1.0), 2.4) * pow(clamp(1.0 - abs(tDotH), 0.0, 1.0), 0.6);
+  float tightAniso = pow(clamp(1.0 - abs(bDotH), 0.0, 1.0), 12.0) * pow(clamp(1.0 - abs(tDotH), 0.0, 1.0), 1.8);
+  float broadSheen = broadAniso * pow(nDotH, 5.0) * 0.14;
+  float tightSheen = tightAniso * pow(nDotH, 34.0) * 0.22;
+  float sheenBias = mix(0.84, 1.2, clamp(fresnel * 0.72 + foldMask * 0.52 + rimMask * 0.34, 0.0, 1.0));
+  float silkSpec = clamp((broadSheen + tightSheen) * nDotL * sheenBias * structureMask, 0.0, 0.28);
+  vec3 specColor = mix(vec3(1.0, 0.91, 0.76), vec3(0.84, 0.93, 1.0), clamp(foldMask * 0.62 + rimMask * 0.9, 0.0, 1.0));
+  color += specColor * silkSpec;
+
   float grain = sampleBlueNoise(gl_FragCoord.xy / max(uResolution.xy, vec2(1.0)));
   color += grain * 0.014;
   color = applyHueShift(color, uColorHueShift);
@@ -119,5 +145,7 @@ void main() {
   alpha += grain * 0.004;
   alpha = clamp(alpha * intro * diagonalPresence, 0.0, 0.98);
 
-  gl_FragColor = vec4(clamp(color, 0.0, 1.0), alpha);
+  gl_FragColor = vec4(max(color, vec3(0.0)), alpha);
+  #include <tonemapping_fragment>
+  #include <colorspace_fragment>
 }

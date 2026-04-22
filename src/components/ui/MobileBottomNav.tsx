@@ -61,7 +61,7 @@ const MobileBottomNav: React.FC = () => {
   ];
 
   return (
-    <nav className="solara-mobile-nav fixed bottom-0 left-0 right-0 z-40 border-t border-slate-200/50 bg-white/95 pb-safe backdrop-blur-lg dark:border-slate-700/50 dark:bg-slate-900/95 md:hidden">
+    <nav className="solara-mobile-nav fixed bottom-0 left-0 right-0 z-40 pb-safe md:hidden">
       <div className="flex items-center justify-around py-2">
         {items.map(({ to, icon, label }) => {
           const isActive = location.pathname === to || (to !== "/" && location.pathname.startsWith(to));
@@ -69,13 +69,9 @@ const MobileBottomNav: React.FC = () => {
             <NavLink
               key={to}
               to={to}
-              className={`flex flex-col items-center gap-1 px-3 py-2 text-xs font-medium transition-colors ${
-                isActive
-                  ? "text-solara-blue dark:text-solara-sky"
-                  : "text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200"
-              }`}
+              className={`solara-mobile-nav__item flex flex-col items-center gap-1 px-3 py-2 text-xs font-medium transition-colors ${isActive ? "is-active" : ""}`}
             >
-              <span className={isActive ? "text-solara-blue dark:text-solara-sky" : ""}>{icon}</span>
+              <span>{icon}</span>
               <span>{label}</span>
             </NavLink>
           );

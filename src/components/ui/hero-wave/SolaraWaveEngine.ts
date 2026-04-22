@@ -1,4 +1,13 @@
 import * as THREE from "three";
+import {
+  BlendFunction,
+  BloomEffect,
+  EffectComposer,
+  EffectPass,
+  NoiseEffect,
+  RenderPass,
+  VignetteEffect,
+} from "postprocessing";
 import WaveGeometryWorker from "./SolaraWaveGeometry.worker?worker";
 import fragmentShader from "./shaders/wave.frag.glsl?raw";
 import vertexShader from "./shaders/wave.vert.glsl?raw";
@@ -101,6 +110,12 @@ export class SolaraWaveEngine {
   private material: THREE.ShaderMaterial | null = null;
   private mesh: THREE.Mesh<THREE.BufferGeometry, THREE.ShaderMaterial> | null = null;
   private uniforms: ShaderUniforms | null = null;
+  private composer: EffectComposer | null = null;
+  private renderPass: RenderPass | null = null;
+  private effectPass: EffectPass | null = null;
+  private bloomEffect: BloomEffect | null = null;
+  private noiseEffect: NoiseEffect | null = null;
+  private vignetteEffect: VignetteEffect | null = null;
 
   private resizeObserver: ResizeObserver | null = null;
   private startPromise: Promise<void> | null = null;
@@ -187,7 +202,7 @@ export class SolaraWaveEngine {
     uniforms.uIntro.value = this.intro;
     uniforms.uMouse.value.copy(this.pointerCurrent);
 
-    renderer.render(scene, camera);
+    this.renderFrame(delta);
 
     if (!this.firstFrameDrawn) {
       this.firstFrameDrawn = true;
@@ -269,6 +284,16 @@ export class SolaraWaveEngine {
     this.scene = null;
     this.camera = null;
 
+    if (this.composer) {
+      this.composer.dispose();
+      this.composer = null;
+    }
+    this.renderPass = null;
+    this.effectPass = null;
+    this.bloomEffect = null;
+    this.noiseEffect = null;
+    this.vignetteEffect = null;
+
     if (this.renderer) {
       this.renderer.dispose();
       this.renderer = null;
@@ -294,6 +319,7 @@ export class SolaraWaveEngine {
 
     await this.loadTextures();
     this.createSceneGraph();
+    this.createPostProcessing();
     this.syncRendererSize();
     await this.applySceneConfig(this.currentConfig, true);
     this.renderInitialFrame();
@@ -315,7 +341,10 @@ export class SolaraWaveEngine {
       failIfMajorPerformanceCaveat: !this.options.allowMajorPerformanceCaveat,
     });
 
+    // ACES + modest exposure avoids a flat look and gives highlights a softer, more physical rolloff.
     renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.05;
     renderer.setClearColor(0x000000, 0);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
 
@@ -429,6 +458,74 @@ export class SolaraWaveEngine {
     }
   }
 
+  private shouldUsePostProcessing(): boolean {
+    return this.options.quality === "medium" || this.options.quality === "high";
+  }
+
+  private createPostProcessing(): void {
+    const renderer = this.renderer;
+    const scene = this.scene;
+    const camera = this.camera;
+    if (!renderer || !scene || !camera) return;
+
+    if (!this.shouldUsePostProcessing()) {
+      this.composer = null;
+      this.renderPass = null;
+      this.effectPass = null;
+      this.bloomEffect = null;
+      this.noiseEffect = null;
+      this.vignetteEffect = null;
+      return;
+    }
+
+    const composer = new EffectComposer(renderer, {
+      depthBuffer: false,
+      stencilBuffer: false,
+      multisampling: 0,
+    });
+    const renderPass = new RenderPass(scene, camera);
+
+    // Minimal finishing stack: preserve the ribbon as primary while adding gentle polish.
+    const bloomEffect = new BloomEffect({
+      blendFunction: BlendFunction.SCREEN,
+      intensity: 0.16,
+      luminanceThreshold: 0.78,
+      luminanceSmoothing: 0.22,
+      mipmapBlur: true,
+    });
+    const noiseEffect = new NoiseEffect({
+      blendFunction: BlendFunction.SOFT_LIGHT,
+      premultiply: true,
+    });
+    noiseEffect.blendMode.opacity.value = 0.018;
+    const vignetteEffect = new VignetteEffect({
+      blendFunction: BlendFunction.NORMAL,
+      offset: 0.36,
+      darkness: 0.18,
+    });
+    vignetteEffect.blendMode.opacity.value = 0.12;
+
+    const effectPass = new EffectPass(camera, bloomEffect, noiseEffect, vignetteEffect);
+    composer.addPass(renderPass);
+    composer.addPass(effectPass);
+
+    this.composer = composer;
+    this.renderPass = renderPass;
+    this.effectPass = effectPass;
+    this.bloomEffect = bloomEffect;
+    this.noiseEffect = noiseEffect;
+    this.vignetteEffect = vignetteEffect;
+  }
+
+  private renderFrame(delta: number): void {
+    if (!this.renderer || !this.scene || !this.camera) return;
+    if (this.composer) {
+      this.composer.render(delta);
+      return;
+    }
+    this.renderer.render(this.scene, this.camera);
+  }
+
   private syncRendererSize(): void {
     const renderer = this.renderer;
     const uniforms = this.uniforms;
@@ -438,6 +535,7 @@ export class SolaraWaveEngine {
     const width = Math.max(1, Math.round(this.container.clientWidth || 1));
     const height = Math.max(1, Math.round(this.container.clientHeight || 1));
     renderer.setSize(width, height, false);
+    this.composer?.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
 
@@ -531,7 +629,7 @@ export class SolaraWaveEngine {
     this.uniforms.uTime.value = this.elapsed;
     this.uniforms.uIntro.value = Math.max(this.intro, 0.08);
     this.uniforms.uMouse.value.copy(this.pointerCurrent);
-    this.renderer.render(this.scene, this.camera);
+    this.renderFrame(0);
 
     if (!this.firstFrameDrawn) {
       this.firstFrameDrawn = true;

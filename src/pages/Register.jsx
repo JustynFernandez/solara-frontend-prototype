@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AuthForm from "../components/auth/AuthForm";
-import RoleSelector from "../components/auth/RoleSelector";
-import SketchNote from "../components/ui/SketchNote";
 import { useAuth } from "../context/auth-context";
 import { locations, skillOptions } from "../data/mockData";
+
+const fieldClassName =
+  "w-full rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] px-4 py-3 text-sm text-[var(--solara-text-strong)] outline-none transition placeholder:text-[var(--solara-text-muted)] focus:border-[var(--solara-accent)] focus:ring-2 focus:ring-[var(--solara-accent-soft)]";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,10 +20,18 @@ const Register = () => {
   });
   const [status, setStatus] = useState("");
 
+  const toggleRole = (role) => {
+    setForm((prev) => ({
+      ...prev,
+      roles: prev.roles.includes(role) ? prev.roles.filter((item) => item !== role) : [...prev.roles, role],
+    }));
+  };
+
   const toggleSkill = (skill) => {
-    const exists = form.skills.includes(skill);
-    const next = exists ? form.skills.filter((s) => s !== skill) : [...form.skills, skill];
-    setForm((prev) => ({ ...prev, skills: next }));
+    setForm((prev) => ({
+      ...prev,
+      skills: prev.skills.includes(skill) ? prev.skills.filter((item) => item !== skill) : [...prev.skills, skill],
+    }));
   };
 
   const handlePhoto = (event) => {
@@ -42,35 +51,39 @@ const Register = () => {
 
   return (
     <AuthForm
+      eyebrow="Create account"
       title="Create your Solara profile"
-      subtitle="Choose a role, add skills, and share a quick bio. This flow is mock-only - data stays in-memory."
+      subtitle="Choose your role, add skills, and share a short bio. This flow stays mock-only and in-memory, but it should still feel curated."
       cta="Register"
       onSubmit={handleSubmit}
     >
       <div className="grid gap-4 md:grid-cols-2">
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-slate-800 dark:text-slate-100" htmlFor="name">
+          <label className="text-sm font-semibold text-[var(--solara-text-strong)]" htmlFor="name">
             Name
           </label>
+          <p className="text-sm leading-6 text-[var(--solara-text-muted)]">This is the name that will appear on your profile card and requests.</p>
           <input
             id="name"
             type="text"
             required
             value={form.name}
             onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
-            className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+            className={fieldClassName}
             placeholder="Your name"
           />
         </div>
+
         <div className="space-y-2">
-          <label className="text-sm font-semibold text-slate-800 dark:text-slate-100" htmlFor="location">
+          <label className="text-sm font-semibold text-[var(--solara-text-strong)]" htmlFor="location">
             Location
           </label>
+          <p className="text-sm leading-6 text-[var(--solara-text-muted)]">Used to shape helper discovery and nearby project suggestions.</p>
           <select
             id="location"
             value={form.location}
             onChange={(event) => setForm((prev) => ({ ...prev, location: event.target.value }))}
-            className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+            className={fieldClassName}
           >
             {locations.filter((city) => city !== "Any").map((city) => (
               <option key={city} value={city}>
@@ -82,23 +95,47 @@ const Register = () => {
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-semibold text-slate-800 dark:text-slate-100" htmlFor="bio">
+        <label className="text-sm font-semibold text-[var(--solara-text-strong)]" htmlFor="bio">
           Short bio
         </label>
+        <p className="text-sm leading-6 text-[var(--solara-text-muted)]">Keep it short and practical. What do you help with, or what do you need?</p>
         <textarea
           id="bio"
           rows="3"
           value={form.bio}
           onChange={(event) => setForm((prev) => ({ ...prev, bio: event.target.value }))}
-          className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+          className={fieldClassName}
           placeholder="Share how you help or what you need."
         />
       </div>
 
-      <RoleSelector value={form.roles} onChange={(roles) => setForm((prev) => ({ ...prev, roles }))} />
+      <div className="space-y-3">
+        <p className="text-sm font-semibold text-[var(--solara-text-strong)]">Role</p>
+        <p className="text-sm leading-6 text-[var(--solara-text-muted)]">Pick one or both so Solara can frame how you participate.</p>
+        <div className="flex flex-wrap gap-2">
+          {["Helper", "Seeker"].map((role) => {
+            const active = form.roles.includes(role);
+            return (
+              <button
+                key={role}
+                type="button"
+                onClick={() => toggleRole(role)}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                  active
+                    ? "border-[var(--solara-accent)] bg-[var(--solara-accent-soft)] text-[var(--solara-accent-strong)]"
+                    : "border-[var(--solara-rule)] bg-[var(--solara-surface-2)] text-[var(--solara-text-strong)] hover:border-[var(--solara-accent-soft)]"
+                }`}
+              >
+                {role}
+              </button>
+            );
+          })}
+        </div>
+      </div>
 
-      <div className="space-y-2">
-        <p className="text-sm font-semibold text-slate-800 dark:text-slate-100">Skills and tools</p>
+      <div className="space-y-3">
+        <p className="text-sm font-semibold text-[var(--solara-text-strong)]">Skills and tools</p>
+        <p className="text-sm leading-6 text-[var(--solara-text-muted)]">These tags shape matching, not just decoration, so choose the ones that feel accurate.</p>
         <div className="flex flex-wrap gap-2">
           {skillOptions.map((skill) => {
             const active = form.skills.includes(skill);
@@ -107,10 +144,10 @@ const Register = () => {
                 key={skill}
                 type="button"
                 onClick={() => toggleSkill(skill)}
-                className={`rounded-full px-3 py-1 text-xs font-semibold transition ${
+                className={`rounded-full border px-4 py-2 text-sm transition ${
                   active
-                    ? "bg-button-primary text-white shadow-sm"
-                    : "border border-white/50 bg-white/80 text-slate-700 hover:border-solara-blue/30 dark:border-white/10 dark:bg-white/10 dark:text-slate-200 dark:hover:border-solara-gold/30"
+                    ? "border-[var(--solara-accent)] bg-[var(--solara-accent-soft)] text-[var(--solara-accent-strong)]"
+                    : "border-[var(--solara-rule)] bg-[var(--solara-surface-2)] text-[var(--solara-text-muted)] hover:border-[var(--solara-accent-soft)] hover:text-[var(--solara-text-strong)]"
                 }`}
               >
                 {skill}
@@ -121,29 +158,29 @@ const Register = () => {
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-semibold text-slate-800 dark:text-slate-100" htmlFor="photo">
+        <label className="text-sm font-semibold text-[var(--solara-text-strong)]" htmlFor="photo">
           Profile picture (preview only)
         </label>
-        <div className="flex items-center gap-3">
-          <input id="photo" type="file" accept="image/*" onChange={handlePhoto} className="text-sm text-slate-700 dark:text-slate-300" />
-          {form.photo && <img src={form.photo} alt="Preview" className="h-14 w-14 rounded-xl object-cover shadow-sm" />}
+        <p className="text-sm leading-6 text-[var(--solara-text-muted)]">A simple image is enough. It helps the profile feel complete in the mock flow.</p>
+        <div className="flex flex-wrap items-center gap-3">
+          <input id="photo" type="file" accept="image/*" onChange={handlePhoto} className="text-sm text-[var(--solara-text-muted)] file:mr-3 file:rounded-full file:border file:border-[var(--solara-rule)] file:bg-[var(--solara-surface-2)] file:px-3 file:py-2 file:text-sm file:font-medium file:text-[var(--solara-text-strong)]" />
+          {form.photo ? <img src={form.photo} alt="Preview" className="h-12 w-12 rounded-[1rem] object-cover border border-[var(--solara-rule)]" /> : null}
         </div>
       </div>
 
-      {status && (
-        <div className="rounded-xl border border-solara-blue/20 bg-solara-blue/10 px-4 py-3 text-sm font-semibold text-solara-navy dark:border-solara-gold/20 dark:bg-solara-gold/10 dark:text-solara-gold">
+      {status ? (
+        <div role="status" aria-live="polite" className="rounded-[1rem] border border-[var(--solara-accent-soft)] bg-[var(--solara-accent-soft)]/50 px-4 py-3 text-sm font-semibold text-[var(--solara-text-strong)]">
           {status}
         </div>
-      )}
+      ) : null}
 
-      <div className="flex flex-wrap items-center gap-3">
-        <SketchNote text="Make it yours" tone="blue" className="hidden sm:inline-flex" />
-        <button
-          type="submit"
-          className="inline-flex items-center justify-center gap-2 rounded-full bg-button-primary bg-[length:220%_220%] px-5 py-3 text-sm font-semibold text-white shadow-solara-soft transition hover:scale-[1.02] hover:shadow-glow hover:bg-[position:100%_50%] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue"
-        >
+      <div className="flex flex-wrap items-center gap-3 pt-1">
+        <button type="submit" className="solara-inline-action solara-inline-action--strong min-w-[10rem]">
           Create account
         </button>
+        <Link to="/sign-in" className="solara-inline-action solara-inline-action--default">
+          Sign in instead
+        </Link>
       </div>
     </AuthForm>
   );

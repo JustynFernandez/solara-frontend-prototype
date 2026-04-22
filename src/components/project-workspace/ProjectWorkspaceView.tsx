@@ -1,14 +1,17 @@
 import React from "react";
 import ImageGallery from "@/components/ui/ImageGallery";
-import RequestHelpDialog from "@/components/ui/request-help-dialog";
-import type { Guide } from "@/data/guides";
+import RequestHelpDialog from "@/components/shared/RequestHelpDialog";
+import type { GuideContent } from "@/data/learnContent";
 import type { Project, ProjectTask } from "@/data/projects";
 import ProjectWorkspaceHeader from "./ProjectWorkspaceHeader";
+import ProjectWorkspaceDashboard from "./ProjectWorkspaceDashboard";
 import ProjectWorkspaceTasks from "./ProjectWorkspaceTasks";
 import ProjectWorkspaceRoles from "./ProjectWorkspaceRoles";
 import ProjectWorkspaceResources, { ProjectWorkspaceResourcesModal } from "./ProjectWorkspaceResources";
 import ProjectWorkspaceSidebar, { ProjectWorkspaceImpactCard } from "./ProjectWorkspaceSidebar";
+import ProjectWorkspaceUpdates from "./ProjectWorkspaceUpdates";
 import type { ProjectResourceState, WorkspaceTab } from "./types";
+import type { BackendNotification, BackendNotificationPreference, BackendProjectDashboard } from "@/lib/solaraApi";
 
 type ProjectWorkspaceViewProps = {
   project: Project;
@@ -20,12 +23,32 @@ type ProjectWorkspaceViewProps = {
   fundingPercent: number | null;
   impactKwh: string;
   impactCO2: string;
+  resourceError?: string | null;
   dialogOpen: boolean;
   onDialogOpenChange: (open: boolean) => void;
   dialogContext?: string;
-  recommendedGuides: Guide[];
-  searchableGuides: Guide[];
+  dashboardData: BackendProjectDashboard | null;
+  dashboardLoading: boolean;
+  dashboardError?: string | null;
+  onRefreshDashboard: () => void;
+  recommendedGuides: GuideContent[];
+  searchableGuides: GuideContent[];
   projectResources: ProjectResourceState;
+  notifications: BackendNotification[];
+  notificationsLoading: boolean;
+  notificationsError?: string | null;
+  notificationPreferences: BackendNotificationPreference | null;
+  preferencesLoading: boolean;
+  preferencesError?: string | null;
+  onRefreshNotifications: () => void;
+  onToggleNotificationRead: (id: number, read: boolean) => void;
+  onPreferenceChange: (
+    key: "inAppEnabled" | "helpRequestsEnabled" | "projectResourcesEnabled" | "teamActivityEnabled",
+    value: boolean
+  ) => void;
+  onSavePreferences: () => void;
+  isSavingPreferences: boolean;
+  preferenceDirty: boolean;
   resourceCenterOpen: boolean;
   onOpenResourceCenter: () => void;
   onCloseResourceCenter: () => void;
@@ -37,13 +60,16 @@ type ProjectWorkspaceViewProps = {
   onPledgeHelp: () => void;
   onRequestHelpWithContext: () => void;
   onRequestHelp: () => void;
+  onHelpRequestSubmitted: () => void;
 };
 
 const tabs: Array<{ key: WorkspaceTab; label: string }> = [
   { key: "overview", label: "Overview" },
+  { key: "dashboard", label: "Dashboard" },
   { key: "tasks", label: "Tasks" },
   { key: "people", label: "People" },
   { key: "resources", label: "Resources" },
+  { key: "updates", label: "Updates" },
   { key: "impact", label: "Impact" },
 ];
 
@@ -57,12 +83,29 @@ const ProjectWorkspaceView: React.FC<ProjectWorkspaceViewProps> = ({
   fundingPercent,
   impactKwh,
   impactCO2,
+  resourceError,
   dialogOpen,
   onDialogOpenChange,
   dialogContext,
+  dashboardData,
+  dashboardLoading,
+  dashboardError,
+  onRefreshDashboard,
   recommendedGuides,
   searchableGuides,
   projectResources,
+  notifications,
+  notificationsLoading,
+  notificationsError,
+  notificationPreferences,
+  preferencesLoading,
+  preferencesError,
+  onRefreshNotifications,
+  onToggleNotificationRead,
+  onPreferenceChange,
+  onSavePreferences,
+  isSavingPreferences,
+  preferenceDirty,
   resourceCenterOpen,
   onOpenResourceCenter,
   onCloseResourceCenter,
@@ -74,6 +117,7 @@ const ProjectWorkspaceView: React.FC<ProjectWorkspaceViewProps> = ({
   onPledgeHelp,
   onRequestHelpWithContext,
   onRequestHelp,
+  onHelpRequestSubmitted,
 }) => (
   <div className="space-y-4">
     <div className="flex flex-wrap gap-2 rounded-2xl border border-white/20 bg-white/70 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-solara-navy shadow-sm backdrop-blur dark:border-white/10 dark:bg-white/5 dark:text-white">
@@ -103,7 +147,21 @@ const ProjectWorkspaceView: React.FC<ProjectWorkspaceViewProps> = ({
         />
 
         {tab === "tasks" && <ProjectWorkspaceTasks tasks={tasks} onToggleTaskStatus={onToggleTaskStatus} />}
+        {tab === "dashboard" && (
+          <ProjectWorkspaceDashboard
+            project={project}
+            dashboardData={dashboardData}
+            dashboardLoading={dashboardLoading}
+            dashboardError={dashboardError}
+            onRefreshDashboard={onRefreshDashboard}
+          />
+        )}
         {tab === "people" && <ProjectWorkspaceRoles roles={project.roles} />}
+        {resourceError ? (
+          <div className="rounded-[18px] border border-red-500/40 bg-red-500/10 px-4 py-3 text-sm text-red-100">
+            {resourceError}
+          </div>
+        ) : null}
 
         {tab === "resources" && (
           <ProjectWorkspaceResources
@@ -114,6 +172,24 @@ const ProjectWorkspaceView: React.FC<ProjectWorkspaceViewProps> = ({
             onAddGuideToProject={onAddGuideToProject}
             onAddGuideToTasks={onAddGuideToTasks}
             onTogglePin={onTogglePin}
+          />
+        )}
+
+        {tab === "updates" && (
+          <ProjectWorkspaceUpdates
+            project={project}
+            notifications={notifications}
+            notificationsLoading={notificationsLoading}
+            notificationsError={notificationsError}
+            notificationPreferences={notificationPreferences}
+            preferencesLoading={preferencesLoading}
+            preferencesError={preferencesError}
+            onRefreshNotifications={onRefreshNotifications}
+            onToggleNotificationRead={onToggleNotificationRead}
+            onPreferenceChange={onPreferenceChange}
+            onSavePreferences={onSavePreferences}
+            isSavingPreferences={isSavingPreferences}
+            preferenceDirty={preferenceDirty}
           />
         )}
 
@@ -130,7 +206,13 @@ const ProjectWorkspaceView: React.FC<ProjectWorkspaceViewProps> = ({
       <ProjectWorkspaceSidebar tab={tab} impactKwh={impactKwh} impactCO2={impactCO2} onRequestHelp={onRequestHelp} />
     </div>
 
-    <RequestHelpDialog open={dialogOpen} onOpenChange={onDialogOpenChange} prefill={{ context: dialogContext || project.name }} />
+    <RequestHelpDialog
+      open={dialogOpen}
+      onOpenChange={onDialogOpenChange}
+      projectId={project.backendId ? String(project.backendId) : undefined}
+      context={dialogContext || project.name}
+      onSubmitted={onHelpRequestSubmitted}
+    />
 
     <ProjectWorkspaceResourcesModal
       open={resourceCenterOpen}
@@ -149,4 +231,3 @@ const ProjectWorkspaceView: React.FC<ProjectWorkspaceViewProps> = ({
 );
 
 export default ProjectWorkspaceView;
-

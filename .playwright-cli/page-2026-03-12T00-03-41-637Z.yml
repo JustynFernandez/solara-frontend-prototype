@@ -1,0 +1,319 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e48]:
+        - generic [ref=e49]:
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: Services
+            - generic [ref=e53]:
+              - heading "Support designed to move people from first question to local action." [level=1] [ref=e54]
+              - generic [ref=e55]: Solara combines helpers, shared resources, guidance, and community coordination into one operating layer. The goal is practical progress, not another marketplace or course library.
+            - generic [ref=e57]:
+              - link "Open Connect ->" [ref=e58] [cursor=pointer]:
+                - /url: /connect
+              - link "Browse projects ->" [ref=e59] [cursor=pointer]:
+                - /url: /projects
+              - link "Open learning hub ->" [ref=e60] [cursor=pointer]:
+                - /url: /learn
+          - generic [ref=e62]:
+            - generic [ref=e68]: Support board
+            - generic [ref=e69]:
+              - paragraph [ref=e70]: Live support model
+              - heading "Four support lanes, one operating surface." [level=3] [ref=e71]
+              - paragraph [ref=e72]: Use the route that matches the job, then move into helpers, projects, or learning without losing context.
+            - generic [ref=e74]:
+              - article [ref=e75]:
+                - paragraph [ref=e76]: Live crews
+                - heading "Skill sharing" [level=3] [ref=e77]
+                - paragraph [ref=e78]: Hands-on helpers for installs, wiring, and safety spot-checks.
+              - article [ref=e79]:
+                - paragraph [ref=e80]: Tool pools
+                - heading "Resource sharing" [level=3] [ref=e81]
+                - paragraph [ref=e82]: Shared tools, checklists, and monitoring templates to speed up work.
+              - article [ref=e83]:
+                - paragraph [ref=e84]: Coaches
+                - heading "Advice and learning" [level=3] [ref=e85]
+                - paragraph [ref=e86]: Lightweight coaching, design reviews, and self-paced learning paths.
+              - article [ref=e87]:
+                - paragraph [ref=e88]: Build hubs
+                - heading "Community projects" [level=3] [ref=e89]
+                - paragraph [ref=e90]: Organized build days, fundraising, and shared ownership models.
+        - generic [ref=e91]:
+          - article [ref=e92]:
+            - paragraph [ref=e93]: Response speed
+            - paragraph [ref=e94]: Under 24h
+            - paragraph [ref=e95]: Typical reply from vetted helpers
+          - article [ref=e96]:
+            - paragraph [ref=e97]: Coverage
+            - paragraph [ref=e98]: UK-wide
+            - paragraph [ref=e99]: Connect by specialty, location, or availability
+          - article [ref=e100]:
+            - paragraph [ref=e101]: Continuity
+            - paragraph [ref=e102]: One system
+            - paragraph [ref=e103]: Helpers, guides, and projects stay linked
+        - generic [ref=e105]:
+          - article [ref=e106]:
+            - generic [ref=e107]:
+              - heading "Find the right people" [level=3] [ref=e108]
+              - paragraph [ref=e109]: Helpers, organizers, and trained volunteers are surfaced by skill, availability, and response speed instead of forcing users through generic contact forms.
+          - article [ref=e110]:
+            - generic [ref=e111]:
+              - heading "Reuse tools and shared playbooks" [level=3] [ref=e112]
+              - paragraph [ref=e113]: Templates, checklists, and shared resources are structured to repeat work safely rather than reinventing every install from scratch.
+          - article [ref=e114]:
+            - generic [ref=e115]:
+              - heading "Move from learning into action" [level=3] [ref=e116]
+              - paragraph [ref=e117]: Guides, project workspaces, and support requests are linked so planning, doing, and maintaining stay in one operational system.
+      - generic [ref=e119]:
+        - article [ref=e120]:
+          - generic [ref=e122]:
+            - paragraph [ref=e123]: Live crews
+            - heading "Skill sharing" [level=2] [ref=e124]
+            - paragraph [ref=e125]: Hands-on helpers for installs, wiring, and safety spot-checks.
+          - generic [ref=e126]:
+            - generic [ref=e129]: Site surveys and shade checks
+            - generic [ref=e132]: Racking, mounting, and cable routing
+            - generic [ref=e135]: Safety walk-throughs and tool setup
+        - article [ref=e136]:
+          - generic [ref=e138]:
+            - paragraph [ref=e139]: Tool pools
+            - heading "Resource sharing" [level=2] [ref=e140]
+            - paragraph [ref=e141]: Shared tools, checklists, and monitoring templates to speed up work.
+          - generic [ref=e142]:
+            - generic [ref=e145]: Tool library and ladders
+            - generic [ref=e148]: Torque and crimp tool kits
+            - generic [ref=e151]: Monitoring dashboards and alerts
+        - article [ref=e152]:
+          - generic [ref=e154]:
+            - paragraph [ref=e155]: Coaches
+            - heading "Advice and learning" [level=2] [ref=e156]
+            - paragraph [ref=e157]: Lightweight coaching, design reviews, and self-paced learning paths.
+          - generic [ref=e158]:
+            - generic [ref=e161]: Beginner-friendly lessons
+            - generic [ref=e164]: Remote design reviews
+            - generic [ref=e167]: Office hours for quick questions
+        - article [ref=e168]:
+          - generic [ref=e170]:
+            - paragraph [ref=e171]: Build hubs
+            - heading "Community projects" [level=2] [ref=e172]
+            - paragraph [ref=e173]: Organized build days, fundraising, and shared ownership models.
+          - generic [ref=e174]:
+            - generic [ref=e177]: Weekend build coordination
+            - generic [ref=e180]: Fundraising playbooks
+            - generic [ref=e183]: Volunteer onboarding
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - generic [ref=e187]:
+            - paragraph [ref=e188]: How Solara operates
+            - generic [ref=e189]:
+              - heading "One operating system for help, tools, learning, and shared neighborhood work." [level=1] [ref=e190]
+              - generic [ref=e191]: The platform is designed so people can start with a question, find the right route, and keep moving without switching between disconnected systems.
+            - generic [ref=e193]:
+              - link "Find helpers ->" [ref=e194] [cursor=pointer]:
+                - /url: /connect
+              - link "Plan your route ->" [ref=e195] [cursor=pointer]:
+                - /url: /plan
+          - generic [ref=e196]:
+            - generic [ref=e202]: Route handoff
+            - generic [ref=e203]:
+              - paragraph [ref=e204]: System flow
+              - heading "Every route points to a practical next move." [level=3] [ref=e205]
+              - paragraph [ref=e206]: A user can start with services, then move directly into helper discovery, planning, or shared project work.
+            - generic [ref=e208]:
+              - generic [ref=e209]:
+                - paragraph [ref=e210]: "01"
+                - paragraph [ref=e211]: Question
+                - paragraph [ref=e212]: Start with the real blocker.
+              - generic [ref=e213]:
+                - paragraph [ref=e214]: "02"
+                - paragraph [ref=e215]: Route
+                - paragraph [ref=e216]: See the right support lane immediately.
+              - generic [ref=e217]:
+                - paragraph [ref=e218]: "03"
+                - paragraph [ref=e219]: Action
+                - paragraph [ref=e220]: Continue into the route that moves the work forward.
+        - generic [ref=e221]:
+          - article [ref=e222]:
+            - generic [ref=e223]:
+              - heading "Find the right people" [level=3] [ref=e224]
+              - paragraph [ref=e225]: Helpers, organizers, and trained volunteers are surfaced by skill, availability, and response speed instead of forcing users through generic contact forms.
+            - link "Open route ->" [ref=e227] [cursor=pointer]:
+              - /url: /connect
+          - article [ref=e228]:
+            - generic [ref=e229]:
+              - heading "Reuse tools and shared playbooks" [level=3] [ref=e230]
+              - paragraph [ref=e231]: Templates, checklists, and shared resources are structured to repeat work safely rather than reinventing every install from scratch.
+            - link "Open route ->" [ref=e233] [cursor=pointer]:
+              - /url: /connect
+          - article [ref=e234]:
+            - generic [ref=e235]:
+              - heading "Move from learning into action" [level=3] [ref=e236]
+              - paragraph [ref=e237]: Guides, project workspaces, and support requests are linked so planning, doing, and maintaining stay in one operational system.
+            - link "Open route ->" [ref=e239] [cursor=pointer]:
+              - /url: /connect
+      - generic [ref=e240]:
+        - generic [ref=e241]:
+          - paragraph [ref=e242]: FAQ
+          - heading "Common questions" [level=2] [ref=e243]
+        - generic [ref=e244]:
+          - generic [ref=e245]:
+            - button "Can I start without a budget?" [expanded] [ref=e246] [cursor=pointer]:
+              - generic [ref=e247]: Can I start without a budget?
+              - img [ref=e248]
+            - generic [ref=e250]: Yes. Pick a comfort band and the navigator will scope a starter or rooftop path.
+          - button "Do I need roof access?" [ref=e252] [cursor=pointer]:
+            - generic [ref=e253]: Do I need roof access?
+            - img [ref=e254]
+          - button "Who handles mains wiring?" [ref=e257] [cursor=pointer]:
+            - generic [ref=e258]: Who handles mains wiring?
+            - img [ref=e259]
+          - button "Can I reuse templates?" [ref=e262] [cursor=pointer]:
+            - generic [ref=e263]: Can I reuse templates?
+            - img [ref=e264]
+          - button "How do I request help?" [ref=e267] [cursor=pointer]:
+            - generic [ref=e268]: How do I request help?
+            - img [ref=e269]
+          - button "Is there a safety guide?" [ref=e272] [cursor=pointer]:
+            - generic [ref=e273]: Is there a safety guide?
+            - img [ref=e274]
+      - generic [ref=e277]:
+        - generic [ref=e278]:
+          - paragraph [ref=e279]: Next step
+          - generic [ref=e280]:
+            - heading "If you already know what you need, go straight to the route that gets you moving." [level=1] [ref=e281]
+            - generic [ref=e282]: Support should shorten the distance between the first question and local action.
+        - generic [ref=e283]:
+          - link "Open helpers ->" [ref=e284] [cursor=pointer]:
+            - /url: /connect
+          - link "Open learning hub ->" [ref=e285] [cursor=pointer]:
+            - /url: /learn
+  - generic [ref=e286]:
+    - button "Eco mode Low battery" [pressed] [ref=e287] [cursor=pointer]:
+      - text: Eco mode
+      - generic [ref=e290]: Low battery
+    - button "Toggle theme" [ref=e291] [cursor=pointer]:
+      - img [ref=e292]
+  - contentinfo [ref=e295]:
+    - generic [ref=e296]:
+      - generic [ref=e297]:
+        - generic [ref=e298]:
+          - generic [ref=e299]: "19"
+          - generic [ref=e300]: Verified helpers
+        - generic [ref=e301]:
+          - generic [ref=e302]: "2"
+          - generic [ref=e303]: Active projects
+        - generic [ref=e304]:
+          - generic [ref=e305]: "8"
+          - generic [ref=e306]: Guides available
+      - generic [ref=e307]:
+        - generic [ref=e308]:
+          - generic [ref=e309]:
+            - img "Solara logo" [ref=e311]
+            - generic [ref=e312]:
+              - generic [ref=e313]: Solara
+              - paragraph [ref=e314]: A platform for planning, finding help, and moving neighborhood solar work forward.
+          - generic [ref=e315]: Start in Connect or Plan, then move into projects and guides as needed.
+        - generic [ref=e316]:
+          - generic [ref=e317]:
+            - heading "Product" [level=4] [ref=e318]
+            - list [ref=e319]:
+              - listitem [ref=e320]:
+                - link "Find Helpers" [ref=e321] [cursor=pointer]:
+                  - /url: /connect
+              - listitem [ref=e322]:
+                - link "Plan Your Solar" [ref=e323] [cursor=pointer]:
+                  - /url: /plan
+              - listitem [ref=e324]:
+                - link "3D Configurator" [ref=e325] [cursor=pointer]:
+                  - /url: /configurator
+              - listitem [ref=e326]:
+                - link "Projects" [ref=e327] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e328]:
+            - heading "Learn" [level=4] [ref=e329]
+            - list [ref=e330]:
+              - listitem [ref=e331]:
+                - link "Getting Started" [ref=e332] [cursor=pointer]:
+                  - /url: /learn
+              - listitem [ref=e333]:
+                - link "Solar Navigator" [ref=e334] [cursor=pointer]:
+                  - /url: /solar-navigator
+              - listitem [ref=e335]:
+                - link "Safety Guide" [ref=e336] [cursor=pointer]:
+                  - /url: /safety
+              - listitem [ref=e337]:
+                - link "Services" [ref=e338] [cursor=pointer]:
+                  - /url: /services
+          - generic [ref=e339]:
+            - heading "Community" [level=4] [ref=e340]
+            - list [ref=e341]:
+              - listitem [ref=e342]:
+                - link "Request Help" [ref=e343] [cursor=pointer]:
+                  - /url: /request-help
+              - listitem [ref=e344]:
+                - link "Become a Helper" [ref=e345] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e346]:
+                - link "Guidelines" [ref=e347] [cursor=pointer]:
+                  - /url: /community-guidelines
+              - listitem [ref=e348]:
+                - link "Projects Board" [ref=e349] [cursor=pointer]:
+                  - /url: /projects
+          - generic [ref=e350]:
+            - heading "Account" [level=4] [ref=e351]
+            - list [ref=e352]:
+              - listitem [ref=e353]:
+                - link "Sign In" [ref=e354] [cursor=pointer]:
+                  - /url: /sign-in
+              - listitem [ref=e355]:
+                - link "Register" [ref=e356] [cursor=pointer]:
+                  - /url: /register
+              - listitem [ref=e357]:
+                - link "My Account" [ref=e358] [cursor=pointer]:
+                  - /url: /my-account
+              - listitem [ref=e359]:
+                - link "Dashboard" [ref=e360] [cursor=pointer]:
+                  - /url: /dashboard
+        - generic [ref=e363]:
+          - generic [ref=e364]:
+            - heading "Get product updates" [level=3] [ref=e365]
+            - paragraph [ref=e366]: New guides, project calls, and major product changes. One short note when there is something worth sending.
+          - generic [ref=e367]:
+            - textbox "you@example.com" [ref=e368]
+            - button "Join update list" [ref=e369] [cursor=pointer]
+          - paragraph [ref=e370]: Unsubscribe any time.
+      - generic [ref=e371]:
+        - generic [ref=e372]: Built for planning, helper matching, project coordination, and learning.
+        - generic [ref=e374]: © 2026 Solara Community

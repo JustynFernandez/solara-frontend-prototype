@@ -1,0 +1,20 @@
+{
+  "name": "solara-overview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "capture": "node capture-screens.cjs",
+    "build": "tsx build-deck.ts",
+    "render": "powershell -ExecutionPolicy Bypass -File .\\export-slides.ps1 -PptxPath .\\output\\solara-overview-deck.pptx -OutDir .\\output\\rendered",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "pptxgenjs": "^4.0.1",
+    "tsx": "^4.21.0"
+  }
+}

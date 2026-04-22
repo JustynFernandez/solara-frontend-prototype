@@ -1,0 +1,129 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e46]:
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - paragraph [ref=e49]: Helpers
+          - heading "23 helpers ready to review" [level=1] [ref=e50]
+          - paragraph [ref=e51]: Start with response speed, location, and certified-work requirements before opening full profiles.
+        - link "Back to Connect ->" [ref=e52] [cursor=pointer]:
+          - /url: /connect
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: Screening desk
+            - paragraph [ref=e57]: Directory
+            - paragraph [ref=e58]: Start with response speed, location, and certified-work requirements before opening full profiles.
+            - paragraph [ref=e59]: Certified roles are required for mains work. Screen that before you open a request.
+          - generic [ref=e61]:
+            - generic "Verified helper roster" [ref=e62]:
+              - generic "Ava Mensah" [ref=e63]:
+                - img "Ava Mensah avatar" [ref=e64]
+              - generic "Elliot P." [ref=e65]:
+                - img "Elliot P. avatar" [ref=e66]
+              - generic "Samir K." [ref=e67]:
+                - img "Samir K. avatar" [ref=e68]
+              - generic "Lina Patel" [ref=e69]:
+                - img "Lina Patel avatar" [ref=e70]
+              - generic "BrightSolar Ltd" [ref=e71]:
+                - img "BrightSolar Ltd avatar" [ref=e72]
+              - generic "Priya S." [ref=e73]:
+                - img "Priya S. avatar" [ref=e74]
+            - paragraph [ref=e75]: 6 verified helpers in the current screening pass
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - generic [ref=e78]: Skill
+            - combobox "Skill" [ref=e79]:
+              - option "All skills" [selected]
+              - option "Rooftop"
+              - option "Shade survey"
+              - option "DC wiring"
+              - option "Safety"
+              - option "Mains wiring"
+              - option "Commissioning"
+              - option "Battery"
+              - option "Backup"
+              - option "Planning"
+              - option "Monitoring"
+              - option "Tool-share"
+              - option "Co-op"
+          - generic [ref=e80]:
+            - generic [ref=e81]: Sort
+            - combobox "Sort" [ref=e82]:
+              - option "Relevance" [selected]
+              - option "Rating"
+              - option "Projects"
+              - option "Fast response"
+          - generic [ref=e83]:
+            - paragraph [ref=e84]: Active filters
+            - paragraph [ref=e85]: No active filters. Showing the full current screen.
+          - button "Clear filters ->" [ref=e86] [cursor=pointer]
+      - generic [ref=e89]:
+        - generic [ref=e90]:
+          - paragraph [ref=e91]: Filters
+          - paragraph [ref=e92]: Set the first pass by role, availability, support type, and rating.
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - text: Search
+            - textbox "Search" [ref=e95]:
+              - /placeholder: Skills, tasks, or people
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - text: Role level
+              - combobox "Role level" [ref=e98]:
+                - option "All" [selected]
+                - option "Community"
+                - option "Trained"
+                - option "Certified"
+            - generic [ref=e99]:
+              - text: Availability
+              - combobox "Availability" [ref=e100]:
+                - option "All" [selected]
+                - option "Available"
+                - option "Limited"
+                - option "Unavailable"
+            - generic [ref=e101]:
+              - text: Support type
+              - combobox "Support type" [ref=e102]:
+                - option "All" [selected]
+                - option "Remote"
+                - option "Visit"
+            - generic [ref=e103]:
+              - text: Minimum rating
+              - combobox "Minimum rating" [ref=e104]:
+                - option "0+" [selected]
+                - option "3+"
+                - option "4+"
+                - option "4.5+"

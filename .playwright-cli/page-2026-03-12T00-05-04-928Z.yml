@@ -1,0 +1,93 @@
+- generic [ref=e3]:
+  - region "Notifications alt+T"
+  - navigation [ref=e5]:
+    - generic [ref=e8]:
+      - link "Solara logo Solara Solar Support Network" [ref=e10] [cursor=pointer]:
+        - /url: /
+        - img "Solara logo" [ref=e13]
+        - generic [ref=e14]:
+          - generic [ref=e15]: Solara
+          - generic [ref=e16]: Solar Support Network
+      - generic [ref=e18]:
+        - link "Home" [ref=e19] [cursor=pointer]:
+          - /url: /
+        - link "Connect" [ref=e20] [cursor=pointer]:
+          - /url: /connect
+        - link "Projects" [ref=e21] [cursor=pointer]:
+          - /url: /projects
+        - link "Learn" [ref=e22] [cursor=pointer]:
+          - /url: /learn
+        - button "More" [ref=e24] [cursor=pointer]:
+          - generic [ref=e25]: More
+          - img [ref=e26]
+      - generic [ref=e28]:
+        - button "Open search (Cmd+K)" [ref=e29] [cursor=pointer]:
+          - img [ref=e30]
+          - generic [ref=e33]: Search
+          - generic [ref=e34]: Cmd+K
+        - link "Sign in / Join" [ref=e35] [cursor=pointer]:
+          - /url: /sign-in
+          - generic [ref=e36]: Sign in / Join
+          - img [ref=e37]
+        - button "Toggle theme" [ref=e39] [cursor=pointer]:
+          - img [ref=e40]
+  - main [ref=e43]:
+    - generic [ref=e48]:
+      - generic [ref=e49]:
+        - generic [ref=e51]:
+          - article [ref=e52]:
+            - paragraph [ref=e53]: Matching
+            - paragraph [ref=e54]: Cleaner fit
+            - paragraph [ref=e55]: Skills and roles improve helper discovery and requests.
+          - article [ref=e56]:
+            - paragraph [ref=e57]: Handoff
+            - paragraph [ref=e58]: Faster context
+            - paragraph [ref=e59]: Projects can understand your role before opening a full profile.
+        - generic [ref=e60]:
+          - paragraph [ref=e61]: Profile setup
+          - heading "Tell Solara how you want to participate." [level=1] [ref=e62]
+          - generic [ref=e63]: Choose your role, add the skills or resources you can share, and upload a profile photo. This setup stays mock-only and in-memory.
+        - generic [ref=e65]:
+          - generic [ref=e66]:
+            - paragraph [ref=e67]: Role
+            - generic [ref=e68]:
+              - button "Helper" [ref=e69] [cursor=pointer]
+              - button "Seeker" [ref=e70] [cursor=pointer]
+          - generic [ref=e71]:
+            - paragraph [ref=e72]: Skills and resources
+            - generic [ref=e73]:
+              - button "Installation" [ref=e74] [cursor=pointer]
+              - button "Wiring" [ref=e75] [cursor=pointer]
+              - button "Safety" [ref=e76] [cursor=pointer]
+              - button "Tools" [ref=e77] [cursor=pointer]
+              - button "Maintenance" [ref=e78] [cursor=pointer]
+              - button "Storage" [ref=e79] [cursor=pointer]
+              - button "Advice & Learning" [ref=e80] [cursor=pointer]
+              - button "Design" [ref=e81] [cursor=pointer]
+              - button "Community Projects" [ref=e82] [cursor=pointer]
+              - button "Fundraising" [ref=e83] [cursor=pointer]
+              - button "Monitoring" [ref=e84] [cursor=pointer]
+          - generic [ref=e85]:
+            - text: Profile photo
+            - button "Profile photo" [ref=e87]
+          - generic [ref=e88]:
+            - button "Save and continue ->" [ref=e89] [cursor=pointer]
+            - button "Skip for now ->" [ref=e90] [cursor=pointer]
+      - complementary [ref=e91]:
+        - generic [ref=e92]:
+          - generic [ref=e98]: What changes after this
+          - generic [ref=e99]:
+            - paragraph [ref=e100]: Profile impact
+            - heading "Your profile becomes usable across Connect and Projects." [level=3] [ref=e101]
+            - paragraph [ref=e102]: Roles and skills shape how you appear in helper discovery, support requests, and project invitations.
+          - generic [ref=e104]:
+            - article [ref=e105]:
+              - generic [ref=e106]:
+                - paragraph [ref=e107]: Cleaner matching
+                - heading "Route requests based on real skills." [level=3] [ref=e108]
+                - paragraph [ref=e109]: Projects and helpers can screen for actual capabilities instead of generic tags.
+            - article [ref=e110]:
+              - generic [ref=e111]:
+                - paragraph [ref=e112]: Faster handoff
+                - heading "Make your role legible before profile expansion." [level=3] [ref=e113]
+                - paragraph [ref=e114]: People can understand fit without reading a full profile first.

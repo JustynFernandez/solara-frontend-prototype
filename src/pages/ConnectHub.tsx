@@ -1,235 +1,282 @@
-import React, { useMemo, useState } from "react";
-import { Link, Navigate, useSearchParams } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ArrowRight, ClipboardPlus, Clock3, FolderKanban, ShieldCheck, Star, Users } from "lucide-react";
-import SectionContainer from "../components/ui/section-container";
+import React, { useMemo } from "react";
+import { Navigate, useSearchParams } from "react-router-dom";
+import { ArrowRight, Clock3, MapPinned, ShieldCheck, Users2 } from "lucide-react";
+import PageFrame from "@/components/ui/page-frame";
+import SurfacePanel from "@/components/ui/surface-panel";
+import InlineAction from "@/components/ui/inline-action";
+import PageReveal from "@/components/ui/page-reveal";
 import TrustSafetyStrip from "../components/connect/TrustSafetyStrip";
-import SketchNote from "../components/ui/SketchNote";
 import { helpers as helperData } from "../data/helpers";
-import { useEcoMode } from "../hooks/useEcoMode";
-
-const quickNeeds = [
-  {
-    id: "helpers",
-    title: "Find helpers",
-    description: "Browse verified profiles by skill, location, and response time.",
-    to: "/connect/helpers",
-    icon: Users,
-  },
-  {
-    id: "request",
-    title: "Request support",
-    description: "Post what you need and let helpers reach out with options.",
-    to: "/request-help",
-    icon: ClipboardPlus,
-  },
-  {
-    id: "projects",
-    title: "Join a project",
-    description: "Contribute time or tools to active community solar builds.",
-    to: "/projects",
-    icon: FolderKanban,
-  },
-] as const;
-
-const helperLevelLabel = {
-  community: "Community volunteer",
-  trained: "Trained volunteer",
-  certified: "Certified installer",
-} as const;
+import HelperAvatar from "../components/connect/HelperAvatar";
 
 const legacyDirectoryParams = ["requestHelp", "helperId", "filter", "view", "search", "sort"];
 
-const ConnectHub: React.FC = () => {
-  const { ecoModeEnabled } = useEcoMode();
-  const [searchParams] = useSearchParams();
-  const [selectedNeed, setSelectedNeed] = useState<(typeof quickNeeds)[number]["id"]>(quickNeeds[0].id);
-  const motionEnabled = !ecoModeEnabled;
+const responseRank = {
+  "Under 8h": 0,
+  "Under 12h": 1,
+  "Same day": 2,
+  "Under 18h": 3,
+  "Under 24h": 4,
+  "Within 1 day": 5,
+  "1 day": 6,
+  "24-48h": 7,
+  "2-3 days": 8,
+};
 
+const intakeBriefs = [
+  {
+    title: "Battery sizing check",
+    detail: "Need trained or certified review before parts are ordered.",
+    lane: "Remote first",
+  },
+  {
+    title: "Roof access and safety check",
+    detail: "Useful when the job needs local presence and a calm first pass.",
+    lane: "Trained support",
+  },
+  {
+    title: "Inspection-ready wiring plan",
+    detail: "Use the certified lane first when sign-off is part of the work.",
+    lane: "Certified route",
+  },
+];
+
+const roleLanes = [
+  {
+    title: "Community",
+    note: "Useful for referrals, plain-language guidance, and starter help.",
+    guardrail: "Do not use for regulated electrical decisions.",
+    filter: "Community volunteers",
+  },
+  {
+    title: "Trained",
+    note: "Best for layout review, battery checks, safety walkthroughs, and practical second opinions.",
+    guardrail: "Good default lane when the job is real but not yet regulated.",
+    filter: "Trained helpers",
+  },
+  {
+    title: "Certified",
+    note: "Use for mains work, inspection prep, commissioning, and sign-off.",
+    guardrail: "Start here if the work touches wiring, panels, or certification.",
+    filter: "Certified installers",
+  },
+];
+
+const connectNotes = [
+  "Local fit matters more than browsing every profile.",
+  "Write the request after the shortlist is clean, not before.",
+  "Keep response speed, role level, and location visible together.",
+];
+
+const rankResponse = (label = "") => responseRank[label] ?? 99;
+
+const LaunchBoard = ({ helpers }: { helpers: typeof helperData }) => {
+  const bestAvailable = helpers
+    .filter((helper) => helper.verified && helper.availabilityStatus === "available")
+    .sort((left, right) => {
+      const responseDelta = rankResponse(left.responseTimeLabel) - rankResponse(right.responseTimeLabel);
+      if (responseDelta !== 0) return responseDelta;
+      return right.rating - left.rating;
+    })
+    .slice(0, 4);
+
+  return (
+    <section className="solara-connect-reboot-board" aria-label="Connect dispatch board">
+      <div className="solara-connect-reboot-board__top">
+        <div>
+          <p className="solara-connect-reboot-board__eyebrow">Dispatch board</p>
+          <h2 className="solara-connect-reboot-board__title">Start with the job shape, then screen the right lane.</h2>
+        </div>
+        <span className="solara-connect-reboot-board__chip">Live roster</span>
+      </div>
+
+      <div className="solara-connect-reboot-board__columns">
+        <div className="solara-connect-reboot-board__stack">
+          <p className="solara-connect-reboot-board__label">Typical starting asks</p>
+          {intakeBriefs.map((brief) => (
+            <article key={brief.title} className="solara-connect-reboot-board__brief">
+              <div>
+                <p className="solara-connect-reboot-board__brief-title">{brief.title}</p>
+                <p className="solara-connect-reboot-board__brief-detail">{brief.detail}</p>
+              </div>
+              <span className="solara-connect-reboot-board__brief-lane">{brief.lane}</span>
+            </article>
+          ))}
+        </div>
+
+        <div className="solara-connect-reboot-board__stack">
+          <p className="solara-connect-reboot-board__label">Fast current shortlist</p>
+          {bestAvailable.map((helper, index) => (
+            <article key={helper.id} className="solara-connect-reboot-board__helper">
+              <span className="solara-connect-reboot-board__helper-index">{String(index + 1).padStart(2, "0")}</span>
+              <HelperAvatar name={helper.name} src={helper.avatar} className="solara-connect-reboot-board__avatar" />
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <p className="solara-connect-reboot-board__helper-name">{helper.name}</p>
+                  {helper.verified ? <ShieldCheck className="h-3 w-3 text-[var(--solara-accent)]" aria-label="Verified helper" /> : null}
+                </div>
+                <p className="solara-connect-reboot-board__helper-meta">{helper.skills[0]} / {helper.coarseLocationLabel}</p>
+              </div>
+              <div className="solara-connect-reboot-board__helper-proof">
+                <p>{helper.responseTimeLabel}</p>
+                <p>{helper.rating.toFixed(1)} rating</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ConnectHub = () => {
+  const [searchParams] = useSearchParams();
   const shouldOpenDirectory = legacyDirectoryParams.some((param) => searchParams.has(param));
   const queryString = searchParams.toString();
+
   if (shouldOpenDirectory) {
     return <Navigate replace to={`/connect/helpers${queryString ? `?${queryString}` : ""}`} />;
   }
 
-  const selectedAction = quickNeeds.find((need) => need.id === selectedNeed) || quickNeeds[0];
-  const featuredHelpers = useMemo(
+  const topHelpers = useMemo(
     () =>
       [...helperData]
         .filter((helper) => helper.verified)
-        .sort((left, right) => right.rating - left.rating)
-        .slice(0, 8),
-    []
+        .sort((left, right) => {
+          const availabilityScore = left.availabilityStatus === "available" ? -1 : 1;
+          const availabilityDelta = availabilityScore - (right.availabilityStatus === "available" ? -1 : 1);
+          if (availabilityDelta !== 0) return availabilityDelta;
+          return right.rating - left.rating;
+        })
+        .slice(0, 4),
+    [],
   );
 
+  const verifiedCount = helperData.filter((helper) => helper.verified).length;
+  const fastResponseCount = helperData.filter((helper) => rankResponse(helper.responseTimeLabel) <= 2).length;
+  const certifiedCount = helperData.filter((helper) => helper.level === "certified" && helper.verified).length;
+  const coverageCount = new Set(helperData.filter((helper) => helper.verified).map((helper) => helper.coarseLocationLabel)).size;
+
   return (
-    <div className="relative min-h-screen overflow-hidden py-14 text-slate-900 dark:text-slate-50">
-      <SectionContainer className="relative space-y-8">
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: motionEnabled ? 0.4 : 0.2 }}
-          className="relative overflow-hidden rounded-[30px] border border-white/70 bg-gradient-to-br from-white/90 via-[#eff5ff]/95 to-[#fdf6e9]/95 p-7 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-gradient-to-br dark:from-[#050a16]/90 dark:via-[#091429]/90 dark:to-[#101d34]/90 sm:p-9"
-        >
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_20%,rgba(0,123,255,0.14),transparent_36%),radial-gradient(circle_at_88%_8%,rgba(212,175,55,0.12),transparent_34%)]" />
-          <div className="relative space-y-6">
-            <div className="space-y-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-solara-navy dark:text-indigo-200">Connect hub</p>
-              <h1 className="text-4xl font-semibold tracking-tight text-slate-900 dark:text-white sm:text-5xl">
-                Choose your next step in one tap.
-              </h1>
-              <p className="max-w-2xl text-base text-slate-700 dark:text-slate-200 sm:text-lg">
-                Start with helpers, post a support request, or join an active community project.
+    <PageFrame family="hub" width="wide" density="comfortable">
+      <PageReveal>
+        <section className="solara-connect-reboot-hero">
+          <div className="solara-connect-reboot-hero__intro">
+            <p className="solara-connect-reboot-hero__eyebrow">Dispatch mode</p>
+            <h1 className="solara-connect-reboot-hero__title">Know which helper lane the job belongs in before you contact anyone.</h1>
+            <p className="solara-connect-reboot-hero__body">
+              Connect is strongest when it behaves like screening, not browsing. Sort by role, response speed, and location first. Open profiles only once the shortlist has a reason to exist.
+            </p>
+
+            <div className="solara-connect-reboot-hero__actions">
+              <InlineAction to="/connect/helpers" emphasis="strong">Open helper desk</InlineAction>
+              <InlineAction to="/request-help">Request support</InlineAction>
+              <InlineAction to="/projects" emphasis="quiet">Open projects</InlineAction>
+            </div>
+
+            <div className="solara-connect-reboot-hero__metrics">
+              <article>
+                <span>Verified roster</span>
+                <strong>{verifiedCount}</strong>
+              </article>
+              <article>
+                <span>Fast reply</span>
+                <strong>{fastResponseCount}</strong>
+              </article>
+              <article>
+                <span>Certified</span>
+                <strong>{certifiedCount}</strong>
+              </article>
+              <article>
+                <span>Coverage</span>
+                <strong>{coverageCount} zones</strong>
+              </article>
+            </div>
+          </div>
+
+          <LaunchBoard helpers={helperData} />
+        </section>
+      </PageReveal>
+
+      <PageReveal delay={0.04}>
+        <div className="solara-connect-reboot-grid">
+          <SurfacePanel as="section" variant="editorial" layout="preview" density="comfortable" className="solara-connect-reboot-card">
+            <div className="solara-route-card__header">
+              <p className="solara-route-card__eyebrow">Role lanes</p>
+              <h2 className="solara-route-card__title">Three lanes. Different jobs. Different trust rules.</h2>
+              <p className="solara-route-card__body">
+                The page should answer one question quickly: who is appropriate to contact for this exact piece of work?
               </p>
             </div>
 
-            <div className="grid gap-3 md:grid-cols-3">
-              {quickNeeds.map((need) => {
-                const Icon = need.icon;
-                const isActive = selectedNeed === need.id;
-                return (
-                  <button
-                    key={need.id}
-                    type="button"
-                    onClick={() => setSelectedNeed(need.id)}
-                    className={`rounded-2xl border p-4 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue ${
-                      isActive
-                        ? "border-solara-blue/35 bg-white/90 shadow-md dark:border-solara-gold/35 dark:bg-white/10"
-                        : "border-white/60 bg-white/75 hover:border-solara-blue/25 hover:shadow-sm dark:border-white/10 dark:bg-white/5 dark:hover:border-white/20"
-                    }`}
-                  >
-                    <div className="mb-2 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-solara-blue/15 to-solara-gold/15 text-solara-navy dark:text-solara-gold">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <p className="text-sm font-semibold text-slate-900 dark:text-white">{need.title}</p>
-                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-300">{need.description}</p>
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-3">
-              <SketchNote text="Quick start" tone="gold" className="hidden sm:inline-flex" />
-              <Link
-                to={selectedAction.to}
-                className="motion-arrow-shift inline-flex items-center gap-2 rounded-full bg-button-primary px-5 py-2.5 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue"
-              >
-                Continue to {selectedAction.title}
-                <ArrowRight className="motion-arrow h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </motion.header>
-
-        <section className="grid gap-4 md:grid-cols-3">
-          {quickNeeds.map((action, index) => {
-            const Icon = action.icon;
-            return (
-              <motion.article
-                key={action.id}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: motionEnabled ? 0.32 : 0.15, delay: motionEnabled ? index * 0.05 : 0 }}
-                className="motion-purpose relative overflow-hidden rounded-3xl card-surface p-6"
-              >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_86%_12%,rgba(0,123,255,0.12),transparent_36%)]" />
-                <div className="relative space-y-3">
-                  <div className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-white/85 text-solara-navy shadow-sm dark:bg-white/10 dark:text-solara-gold">
-                    <Icon className="h-5 w-5" />
+            <div className="solara-connect-reboot-lanes">
+              {roleLanes.map((lane) => (
+                <article key={lane.title} className="solara-connect-reboot-lane">
+                  <div className="solara-connect-reboot-lane__top">
+                    <p className="solara-connect-reboot-lane__title">{lane.title}</p>
+                    <span className="solara-connect-reboot-lane__filter">{lane.filter}</span>
                   </div>
-                  <h2 className="text-xl font-semibold text-slate-900 dark:text-white">{action.title}</h2>
-                  <p className="text-sm text-slate-700 dark:text-slate-200">{action.description}</p>
-                  <Link
-                    to={action.to}
-                    className="motion-arrow-shift inline-flex items-center gap-2 text-sm font-semibold text-solara-navy transition hover:text-solara-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-emerald-200 dark:focus-visible:ring-offset-[#030713]"
-                  >
-                    Open
-                    <ArrowRight className="motion-arrow h-4 w-4" />
-                  </Link>
-                </div>
-              </motion.article>
-            );
-          })}
-        </section>
-
-        <TrustSafetyStrip />
-
-        <section className="space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="space-y-1">
-              <p className="text-sm font-semibold uppercase tracking-[0.16em] text-solara-navy dark:text-indigo-200">Featured helpers</p>
-              <h2 className="text-2xl font-semibold text-slate-900 dark:text-white">Top rated, currently active helpers</h2>
+                  <p className="solara-connect-reboot-lane__note">{lane.note}</p>
+                  <p className="solara-connect-reboot-lane__guardrail">{lane.guardrail}</p>
+                </article>
+              ))}
             </div>
-            <Link
-              to="/connect/helpers?view=full"
-              className="inline-flex items-center gap-2 rounded-full border border-white/70 bg-white/80 px-4 py-2 text-sm font-semibold text-solara-navy shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue dark:border-white/10 dark:bg-white/10 dark:text-white"
-            >
-              Browse full directory
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          </SurfacePanel>
 
-          <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2">
-            {featuredHelpers.map((helper) => (
-              <article
-                key={helper.id}
-                className="min-w-[270px] snap-start rounded-3xl border border-white/70 bg-white/85 p-4 text-slate-900 shadow-md backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85 dark:text-white sm:min-w-[290px]"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-flex h-11 w-11 overflow-hidden rounded-full border border-white/70 bg-white/80 shadow-sm dark:border-white/10 dark:bg-white/10">
-                      {helper.avatar && (
-                        <img src={helper.avatar} alt={`${helper.name} avatar`} className="h-full w-full object-cover" />
-                      )}
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold">{helper.name}</p>
-                      <p className="text-xs text-slate-600 dark:text-slate-300">{helperLevelLabel[helper.level]}</p>
+          <SurfacePanel as="section" variant="editorial" layout="preview" density="comfortable" className="solara-connect-reboot-card">
+            <div className="solara-route-card__header">
+              <p className="solara-route-card__eyebrow">Current handoff</p>
+              <h2 className="solara-route-card__title">Use Connect to tighten the shortlist, then move out fast.</h2>
+              <p className="solara-route-card__body">
+                The route works when it makes the next move obvious: save helpers, send one clear request, or hand off into a live project.
+              </p>
+            </div>
+
+            <div className="solara-connect-reboot-shortlist">
+              {topHelpers.map((helper) => (
+                <article key={helper.id} className="solara-connect-reboot-shortlist__card">
+                  <div className="solara-connect-reboot-shortlist__identity">
+                    <HelperAvatar name={helper.name} src={helper.avatar} className="solara-connect-reboot-shortlist__avatar" />
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <p className="solara-connect-reboot-shortlist__name">{helper.name}</p>
+                        {helper.verified ? <ShieldCheck className="h-3 w-3 text-[var(--solara-accent)]" aria-label="Verified helper" /> : null}
+                      </div>
+                      <p className="solara-connect-reboot-shortlist__meta">{helper.bio}</p>
                     </div>
                   </div>
-                  {helper.verified && <ShieldCheck className="h-4 w-4 text-solara-gold" aria-label="Verified helper" />}
-                </div>
+                  <div className="solara-connect-reboot-shortlist__facts">
+                    <span>{helper.coarseLocationLabel}</span>
+                    <span>{helper.responseTimeLabel}</span>
+                    <span>{helper.skills[0]}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
 
-                <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/70 bg-white/80 px-2 py-1 shadow-sm dark:border-white/10 dark:bg-white/10">
-                    <Star className="h-3.5 w-3.5 text-solara-gold" />
-                    {helper.rating.toFixed(1)}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/70 bg-white/80 px-2 py-1 shadow-sm dark:border-white/10 dark:bg-white/10">
-                    <Clock3 className="h-3.5 w-3.5" />
-                    {helper.responseTimeLabel}
-                  </span>
-                  <span className="rounded-full border border-white/70 bg-white/80 px-2 py-1 shadow-sm dark:border-white/10 dark:bg-white/10">
-                    {helper.coarseLocationLabel}
-                  </span>
-                </div>
+            <div className="solara-connect-reboot-notes">
+              {connectNotes.map((note) => (
+                <article key={note} className="solara-connect-reboot-notes__item">
+                  <Users2 className="h-4 w-4" />
+                  <span>{note}</span>
+                </article>
+              ))}
+            </div>
 
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {helper.skills.slice(0, 3).map((skill) => (
-                    <span
-                      key={`${helper.id}-${skill}`}
-                      className="rounded-full border border-white/70 bg-white/80 px-2 py-1 text-[11px] font-semibold text-slate-700 shadow-sm dark:border-white/10 dark:bg-white/10 dark:text-slate-200"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
+            <div className="solara-connect-reboot-card__actions">
+              <InlineAction to="/connect/helpers" emphasis="strong">Go to screening desk</InlineAction>
+              <InlineAction to="/community-guidelines" emphasis="quiet">Guidelines</InlineAction>
+            </div>
+          </SurfacePanel>
+        </div>
+      </PageReveal>
 
-                <div className="mt-4">
-                  <Link
-                    to={`/connect/helpers?helperId=${helper.id}`}
-                    className="motion-arrow-shift inline-flex items-center gap-2 text-sm font-semibold text-solara-navy transition hover:text-solara-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-solara-blue/60 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:text-emerald-200 dark:focus-visible:ring-offset-[#030713]"
-                  >
-                    View helper
-                    <ArrowRight className="motion-arrow h-4 w-4" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      </SectionContainer>
-    </div>
+      <PageReveal delay={0.08}>
+        <SurfacePanel variant="editorial" layout="split" density="compact" className="solara-route-card solara-route-card--trust">
+          <TrustSafetyStrip />
+        </SurfacePanel>
+      </PageReveal>
+    </PageFrame>
   );
 };
 

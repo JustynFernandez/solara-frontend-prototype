@@ -15,6 +15,12 @@ import {
 import { useConfiguratorStore } from "./hooks/useConfiguratorStore";
 import { useEnergyEstimate } from "./hooks/useEnergyEstimate";
 
+const sectionClassName =
+  "rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-1)] p-4 shadow-[var(--solara-shadow-soft)]";
+
+const metricCardClassName =
+  "rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] p-3";
+
 const ConfiguratorPanel: React.FC = () => {
   const { roof, panels, obstacles, battery } = useConfiguratorStore();
   const [pdfLoading, setPdfLoading] = useState(false);
@@ -37,14 +43,12 @@ const ConfiguratorPanel: React.FC = () => {
       exportedAt: new Date().toISOString(),
     };
 
-    const blob = new Blob([JSON.stringify(config, null, 2)], {
-      type: "application/json",
-    });
+    const blob = new Blob([JSON.stringify(config, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `solar-config-${Date.now()}.json`;
-    a.click();
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `solar-config-${Date.now()}.json`;
+    anchor.click();
     URL.revokeObjectURL(url);
   };
 
@@ -52,13 +56,7 @@ const ConfiguratorPanel: React.FC = () => {
     setPdfLoading(true);
     try {
       const { generateConfiguratorPdf } = await import("./utils/pdfGenerator");
-      await generateConfiguratorPdf({
-        roof,
-        panels,
-        obstacles,
-        battery,
-        estimate,
-      });
+      await generateConfiguratorPdf({ roof, panels, obstacles, battery, estimate });
     } finally {
       setPdfLoading(false);
     }
@@ -66,175 +64,147 @@ const ConfiguratorPanel: React.FC = () => {
 
   return (
     <div className="flex h-full flex-col gap-4 overflow-y-auto">
-      <section className="rounded-xl border border-white/60 bg-white/80 p-4 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Your System
-        </h3>
+      <section className={sectionClassName}>
+        <div className="space-y-1">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">Your system</p>
+          <h3 className="text-lg font-semibold text-[var(--solara-text-strong)]">Current layout snapshot</h3>
+        </div>
 
-        <div className="mb-4 flex items-center justify-between rounded-lg bg-gradient-to-r from-blue-500 to-blue-600 p-4 text-white">
-          <div>
-            <p className="text-2xl font-bold">{estimate.panelCount}</p>
-            <p className="text-sm opacity-90">Solar Panels</p>
+        <div className="mt-4 grid grid-cols-2 gap-3">
+          <div className={metricCardClassName}>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">Panels</p>
+            <p className="mt-1 text-2xl font-semibold text-[var(--solara-text-strong)]">{estimate.panelCount}</p>
           </div>
-          <div className="text-right">
-            <p className="text-2xl font-bold">{estimate.systemSizeKw} kW</p>
-            <p className="text-sm opacity-90">System Size</p>
+          <div className={metricCardClassName}>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">System size</p>
+            <p className="mt-1 text-2xl font-semibold text-[var(--solara-text-strong)]">{estimate.systemSizeKw} kW</p>
           </div>
         </div>
 
-        {battery.count > 0 && (
-          <div className="mb-4 flex items-center justify-between rounded-lg bg-gradient-to-r from-purple-500 to-purple-600 p-4 text-white">
+        {battery.count > 0 ? (
+          <div className="mt-3 flex items-center justify-between rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] p-3">
             <div className="flex items-center gap-3">
-              <Battery className="h-6 w-6" />
+              <Battery className="h-5 w-5 text-[var(--solara-accent-strong)]" />
               <div>
-                <p className="text-lg font-bold">{battery.count} Battery{battery.count > 1 ? " Units" : ""}</p>
-                <p className="text-sm opacity-90">{estimate.batteryCapacityKwh} kWh Storage</p>
+                <p className="font-semibold text-[var(--solara-text-strong)]">
+                  {battery.count} battery{battery.count > 1 ? " units" : ""}
+                </p>
+                <p className="text-sm text-[var(--solara-text-muted)]">{estimate.batteryCapacityKwh} kWh storage</p>
               </div>
             </div>
             <div className="text-right">
-              <p className="text-lg font-bold">{estimate.selfConsumptionRate}%</p>
-              <p className="text-sm opacity-90">Self-use Rate</p>
+              <p className="text-sm font-semibold text-[var(--solara-text-strong)]">{estimate.selfConsumptionRate}%</p>
+              <p className="text-xs uppercase tracking-[0.14em] text-[var(--solara-text-muted)]">Self-use</p>
             </div>
           </div>
-        )}
+        ) : null}
 
-        {panels.length === 0 && (
-          <div className="rounded-lg bg-amber-50 p-3 text-sm text-amber-700 dark:bg-amber-900/20 dark:text-amber-300">
-            <p className="flex items-center gap-2">
-              <Info className="h-4 w-4" />
-              Click on the roof to place your first panel
-            </p>
+        {panels.length === 0 ? (
+          <div className="mt-3 rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] p-3 text-sm text-[var(--solara-text-muted)]">
+            Click on the roof to place your first panel.
           </div>
-        )}
+        ) : null}
       </section>
 
-      {panels.length > 0 && (
-        <section className="rounded-xl border border-white/60 bg-white/80 p-4 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-          <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-            Estimated Performance
+      {panels.length > 0 ? (
+        <section className={sectionClassName}>
+          <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">
+            Estimated performance
           </h3>
 
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-lg bg-emerald-50 p-3 dark:bg-emerald-900/20">
-              <div className="mb-1 flex items-center gap-2 text-emerald-600 dark:text-emerald-400">
-                <Zap className="h-4 w-4" />
-                <span className="text-xs font-medium">Annual Generation</span>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            <div className={metricCardClassName}>
+              <div className="mb-1 flex items-center gap-2 text-[var(--solara-text-muted)]">
+                <Zap className="h-4 w-4 text-[var(--solara-accent-strong)]" />
+                <span className="text-xs font-semibold uppercase tracking-[0.14em]">Generation</span>
               </div>
-              <p className="text-lg font-bold text-emerald-700 dark:text-emerald-300">
-                {estimate.annualKwh.toLocaleString()} kWh
-              </p>
+              <p className="text-lg font-semibold text-[var(--solara-text-strong)]">{estimate.annualKwh.toLocaleString()} kWh</p>
             </div>
-
-            <div className="rounded-lg bg-amber-50 p-3 dark:bg-amber-900/20">
-              <div className="mb-1 flex items-center gap-2 text-amber-600 dark:text-amber-400">
-                <PoundSterling className="h-4 w-4" />
-                <span className="text-xs font-medium">Annual Savings</span>
+            <div className={metricCardClassName}>
+              <div className="mb-1 flex items-center gap-2 text-[var(--solara-text-muted)]">
+                <PoundSterling className="h-4 w-4 text-[var(--solara-accent-strong)]" />
+                <span className="text-xs font-semibold uppercase tracking-[0.14em]">Savings</span>
               </div>
-              <p className="text-lg font-bold text-amber-700 dark:text-amber-300">
-                £{estimate.annualSavingsGbp.toLocaleString()}
-              </p>
+              <p className="text-lg font-semibold text-[var(--solara-text-strong)]">GBP {estimate.annualSavingsGbp.toLocaleString()}</p>
             </div>
-
-            <div className="rounded-lg bg-green-50 p-3 dark:bg-green-900/20">
-              <div className="mb-1 flex items-center gap-2 text-green-600 dark:text-green-400">
-                <Leaf className="h-4 w-4" />
-                <span className="text-xs font-medium">CO2 Saved</span>
+            <div className={metricCardClassName}>
+              <div className="mb-1 flex items-center gap-2 text-[var(--solara-text-muted)]">
+                <Leaf className="h-4 w-4 text-[var(--solara-accent-strong)]" />
+                <span className="text-xs font-semibold uppercase tracking-[0.14em]">CO2 saved</span>
               </div>
-              <p className="text-lg font-bold text-green-700 dark:text-green-300">
-                {(estimate.annualCo2Kg / 1000).toFixed(1)} tonnes
-              </p>
+              <p className="text-lg font-semibold text-[var(--solara-text-strong)]">{(estimate.annualCo2Kg / 1000).toFixed(1)} tonnes</p>
             </div>
-
-            <div className="rounded-lg bg-blue-50 p-3 dark:bg-blue-900/20">
-              <div className="mb-1 flex items-center gap-2 text-blue-600 dark:text-blue-400">
-                <Clock className="h-4 w-4" />
-                <span className="text-xs font-medium">Payback Period</span>
+            <div className={metricCardClassName}>
+              <div className="mb-1 flex items-center gap-2 text-[var(--solara-text-muted)]">
+                <Clock className="h-4 w-4 text-[var(--solara-accent-strong)]" />
+                <span className="text-xs font-semibold uppercase tracking-[0.14em]">Payback</span>
               </div>
-              <p className="text-lg font-bold text-blue-700 dark:text-blue-300">
-                ~{estimate.paybackYears} years
-              </p>
+              <p className="text-lg font-semibold text-[var(--solara-text-strong)]">~{estimate.paybackYears} years</p>
             </div>
           </div>
 
-          <div className="mt-4 space-y-2 text-xs text-slate-500 dark:text-slate-400">
+          <div className="mt-4 space-y-2 border-t border-[var(--solara-rule-soft)] pt-3 text-sm text-[var(--solara-text-muted)]">
             <div className="flex justify-between">
               <span>Self-consumed ({estimate.selfConsumptionRate}%)</span>
-              <span className="font-mono">{estimate.selfConsumedKwh.toLocaleString()} kWh</span>
+              <span className="font-medium">{estimate.selfConsumedKwh.toLocaleString()} kWh</span>
             </div>
             <div className="flex justify-between">
               <span>Exported to grid</span>
-              <span className="font-mono">{estimate.exportedKwh.toLocaleString()} kWh</span>
+              <span className="font-medium">{estimate.exportedKwh.toLocaleString()} kWh</span>
             </div>
-            {battery.count > 0 && (
-              <div className="flex justify-between text-purple-600 dark:text-purple-400">
-                <span>Battery storage</span>
-                <span className="font-mono">{estimate.batteryCapacityKwh} kWh</span>
+            {battery.count > 0 ? (
+              <div className="flex justify-between">
+                <span>Battery capacity</span>
+                <span className="font-medium">{estimate.batteryCapacityKwh} kWh</span>
               </div>
-            )}
-            <div className="flex justify-between border-t border-slate-200 pt-2 dark:border-slate-700">
+            ) : null}
+            <div className="flex justify-between">
               <span>25-year savings</span>
-              <span className="font-mono font-medium text-emerald-600 dark:text-emerald-400">
-                £{estimate.lifetimeSavingsGbp.toLocaleString()}
-              </span>
+              <span className="font-semibold text-[var(--solara-text-strong)]">GBP {estimate.lifetimeSavingsGbp.toLocaleString()}</span>
             </div>
           </div>
         </section>
-      )}
+      ) : null}
 
-      <section className="rounded-xl border border-white/60 bg-white/80 p-4 shadow-lg backdrop-blur dark:border-white/10 dark:bg-white/5">
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-slate-600 dark:text-slate-300">
-          Next Steps
+      <section className={sectionClassName}>
+        <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[var(--solara-accent-strong)]">
+          Next steps
         </h3>
 
-        <div className="flex flex-col gap-2">
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              onClick={handleExportPdf}
-              disabled={panels.length === 0 || pdfLoading}
-              className="flex items-center justify-center gap-2 rounded-lg bg-red-50 px-4 py-2.5 text-sm font-medium text-red-700 transition-colors hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50"
-            >
-              {pdfLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Download className="h-4 w-4" />
-              )}
-              {pdfLoading ? "Generating..." : "PDF Report"}
-            </button>
-            <button
-              onClick={handleExportJson}
-              disabled={panels.length === 0}
-              className="flex items-center justify-center gap-2 rounded-lg bg-slate-100 px-4 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-200 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-slate-700 dark:text-slate-200 dark:hover:bg-slate-600"
-            >
-              <Download className="h-4 w-4" />
-              JSON Data
-            </button>
-          </div>
-
-          <Link
-            to="/solar-navigator"
-            className="flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 px-4 py-2.5 text-sm font-medium text-white shadow-md transition-all hover:from-blue-700 hover:to-blue-800 hover:shadow-lg"
+        <div className="mt-3 grid gap-2">
+          <button
+            onClick={handleExportPdf}
+            disabled={panels.length === 0 || pdfLoading}
+            className="solara-inline-action solara-inline-action--default justify-center disabled:cursor-not-allowed disabled:opacity-50"
           >
+            {pdfLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Download className="h-4 w-4" />}
+            {pdfLoading ? "Generating..." : "Export PDF"}
+          </button>
+          <button
+            onClick={handleExportJson}
+            disabled={panels.length === 0}
+            className="solara-inline-action solara-inline-action--quiet justify-center disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <Download className="h-4 w-4" />
+            Export JSON
+          </button>
+          <Link to="/solar-navigator" className="solara-inline-action solara-inline-action--strong justify-center">
             <Sun className="h-4 w-4" />
             Continue to Solar Navigator
             <ArrowRight className="h-4 w-4" />
           </Link>
-
-          <Link
-            to="/connect"
-            className="flex items-center justify-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50"
-          >
-            Find Local Helpers
+          <Link to="/connect" className="solara-inline-action solara-inline-action--default justify-center">
+            Find local helpers
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
 
-      <div className="rounded-lg bg-slate-50 p-3 text-xs text-slate-500 dark:bg-slate-800/50 dark:text-slate-400">
+      <div className="rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] p-3 text-xs text-[var(--solara-text-muted)]">
         <p className="flex items-start gap-2">
           <Info className="mt-0.5 h-3 w-3 flex-shrink-0" />
           <span>
-            Estimates based on typical UK conditions for London region. Actual
-            performance depends on shading, weather, and installation quality.
+            Estimates use typical UK conditions for the London region. Real performance depends on shading, weather, and installation quality.
           </span>
         </p>
       </div>

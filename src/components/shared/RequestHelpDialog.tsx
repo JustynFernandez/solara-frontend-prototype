@@ -4,6 +4,13 @@ import ValidatedInput from "../ui/ValidatedInput";
 import ValidatedTextarea from "../ui/ValidatedTextarea";
 import SubmitButton from "../ui/SubmitButton";
 import { requestHelpSchema, validateField, getDisabledReason } from "../../lib/validationSchemas";
+import {
+  type BackendHelpRequest,
+  buildHelpRequestContext,
+  createHelpRequest,
+  resolveBackendHelperUserId,
+  toBackendProjectId,
+} from "@/lib/solaraApi";
 
 type RequestHelpDialogProps = {
   open: boolean;
@@ -13,6 +20,7 @@ type RequestHelpDialogProps = {
   projectId?: string;
   context?: string;
   guideSlug?: string;
+  onSubmitted?: (helpRequest: BackendHelpRequest) => void;
 };
 
 const STORAGE_KEY = "solara.requestHelpDraft.v1";
@@ -36,7 +44,16 @@ type TouchedState = {
   contactMethod: boolean;
 };
 
-const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChange, helperId, helperName, projectId, context, guideSlug }) => {
+const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({
+  open,
+  onOpenChange,
+  helperId,
+  helperName,
+  projectId,
+  context,
+  guideSlug,
+  onSubmitted,
+}) => {
   const [draft, setDraft] = useState<Draft>({
     whatNeeded: "",
     whenNeeded: "",
@@ -56,9 +73,12 @@ const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChang
   });
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   useEffect(() => {
     if (open) {
+      setSubmitted(false);
+      setSubmitError(null);
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         try {
@@ -85,6 +105,13 @@ const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChang
     localStorage.setItem(STORAGE_KEY, JSON.stringify(draft));
   }, [draft, open]);
 
+  useEffect(() => {
+    if (!open) {
+      setIsSubmitting(false);
+      setSubmitError(null);
+    }
+  }, [open]);
+
   // Validation errors
   const errors = useMemo(() => ({
     whatNeeded: validateField(requestHelpSchema, "whatNeeded", draft.whatNeeded),
@@ -99,7 +126,7 @@ const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChang
   );
 
   const disabledReason = useMemo(
-    () => getDisabledReason(requestHelpSchema, draft),
+    () => getDisabledReason(draft, ["whatNeeded", "whenNeeded", "description", "contactMethod"]),
     [draft]
   );
 
@@ -119,27 +146,47 @@ const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChang
     if (!canSubmit) return;
 
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsSubmitting(false);
-    setSubmitted(true);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...draft, submittedAt: Date.now() }));
+    setSubmitError(null);
+
+    try {
+      const resolvedHelperId = resolveBackendHelperUserId(draft.helperId, draft.helperName);
+      const projectId = toBackendProjectId(draft.projectId);
+
+      const createdHelpRequest = await createHelpRequest({
+        whatNeeded: draft.whatNeeded.trim(),
+        whenNeeded: draft.whenNeeded.trim(),
+        description: draft.description.trim(),
+        contactMethod: draft.contactMethod.trim(),
+        helperId: resolvedHelperId,
+        projectId,
+        guideSlug: draft.guideSlug || undefined,
+        context: buildHelpRequestContext(draft.context, draft.helperName, resolvedHelperId),
+      });
+
+      setSubmitted(true);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...draft, submittedAt: Date.now() }));
+      onSubmitted?.(createdHelpRequest);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "Unable to submit request right now.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     open && (
       <div className="fixed inset-0 z-50 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => onOpenChange(false)} aria-hidden />
-        <div className="relative z-10 w-[95vw] max-w-xl rounded-2xl border border-white/10 bg-white/90 p-6 text-slate-900 shadow-2xl backdrop-blur-2xl dark:bg-[#0a0f1e] dark:text-white">
+        <div className="relative z-10 w-[95vw] max-w-xl rounded-lg border border-[var(--solara-rule)] bg-[var(--solara-surface-1)] p-6 text-[var(--solara-text-strong)] shadow-[var(--solara-shadow-strong)] backdrop-blur-xl">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-lg font-semibold">Request support</p>
-              <p className="text-sm text-slate-700 dark:text-slate-200">Share context so the right helper can respond quickly.</p>
+              <p className="text-sm text-[var(--solara-text-muted)]">Share context so the right helper can respond quickly.</p>
             </div>
             <button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="rounded-full border border-white/40 bg-white/60 px-2 py-1 text-xs font-semibold text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#007bff] dark:border-white/15 dark:bg-white/10 dark:text-white"
+              className="solara-inline-action solara-inline-action--quiet"
             >
               Close
             </button>
@@ -192,9 +239,8 @@ const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChang
                 placeholder="Email or phone number"
                 required
               />
-              {helperName && (
-                <p className="text-xs text-slate-600 dark:text-slate-300">You're requesting support from {helperName}.</p>
-              )}
+              {helperName && <p className="text-xs text-[var(--solara-text-muted)]">You're requesting support from {helperName}.</p>}
+              {submitError ? <p className="text-sm text-red-500">{submitError}</p> : null}
               <div className="flex flex-wrap justify-end gap-2 pt-2">
                 <AnimatedButton variant="outline" onClick={() => onOpenChange(false)} className="px-4 py-2">
                   Cancel
@@ -212,9 +258,9 @@ const RequestHelpDialog: React.FC<RequestHelpDialogProps> = ({ open, onOpenChang
             </div>
           ) : (
             <div className="mt-6 space-y-3">
-              <div className="rounded-xl bg-emerald-50 p-4 dark:bg-emerald-900/20">
-                <p className="font-semibold text-emerald-700 dark:text-emerald-300">Request submitted!</p>
-                <p className="mt-1 text-sm text-emerald-600 dark:text-emerald-400">A helper will respond soon. Check your contact method for updates.</p>
+              <div className="rounded-md border border-[var(--solara-accent-soft)] bg-[var(--solara-accent-soft)]/55 p-4">
+                <p className="font-semibold text-[var(--solara-text-strong)]">Request submitted</p>
+                <p className="mt-1 text-sm text-[var(--solara-text-muted)]">A helper will respond soon. Check your contact method for updates.</p>
               </div>
               <div className="flex flex-wrap gap-2">
                 <AnimatedButton href="/projects" className="px-4 py-2">

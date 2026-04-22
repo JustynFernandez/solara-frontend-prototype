@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-import SectionContainer from "../components/ui/section-container";
+import ActionRail from "@/components/ui/action-rail";
+import InlineAction from "@/components/ui/inline-action";
+import MetricBand from "@/components/ui/metric-band";
+import PageFrame from "@/components/ui/page-frame";
+import FormShell from "@/components/ui/form-shell";
+import PageHeroStage from "@/components/ui/page-hero-stage";
+import PageReveal from "@/components/ui/page-reveal";
+import PreviewFrame from "@/components/ui/preview-frame";
 import SketchNote from "../components/ui/SketchNote";
 
 const categories = ["Installation", "Tools", "Advice & Learning", "Maintenance", "Community Projects"];
+const fieldClassName =
+  "w-full rounded-md border border-[var(--solara-rule)] bg-[var(--solara-surface-2)] px-4 py-3 text-sm text-[var(--solara-text-strong)] outline-none transition placeholder:text-[var(--solara-text-muted)] focus:border-[var(--solara-accent)] focus:ring-2 focus:ring-[var(--solara-accent-soft)]";
 
 const RequestHelp = () => {
   const [submitted, setSubmitted] = useState(false);
@@ -13,29 +22,83 @@ const RequestHelp = () => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden px-6 py-14 text-slate-900 dark:text-slate-50">
-      <SectionContainer className="relative max-w-3xl space-y-8">
-        {/* Hero header card */}
-        <header className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-8 shadow-xl backdrop-blur-xl dark:border-white/10 dark:bg-[#050a16]/85">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(0,123,255,0.1),transparent_40%)]" />
-          <div className="relative space-y-3">
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-solara-navy dark:text-indigo-200">Request help</p>
-            <h1 className="text-4xl font-semibold text-slate-900 dark:text-white">Tell the community what you need.</h1>
-            <p className="text-lg text-slate-700 dark:text-slate-200">A simple, soft-styled form to capture requests. No submission logic is wired in.</p>
-          </div>
-        </header>
+    <PageFrame family="hub" width="wide" density="compact">
+      <PageReveal mode="mount" className="space-y-8">
+        <PageHeroStage
+          family="hub"
+          eyebrow="Request help"
+          title="Tell the community what you need."
+          body="A simple request form for matching support, tools, and guidance, with enough context for helpers to respond quickly."
+          actions={
+            <div className="flex flex-wrap gap-3">
+              <InlineAction to="/connect" emphasis="strong">Browse helpers first</InlineAction>
+              <InlineAction to="/plan">Open planning routes</InlineAction>
+            </div>
+          }
+          metrics={[
+            { label: "Matching", value: "Clear brief", meta: "Good details improve response quality." },
+            { label: "Support", value: "Local + remote", meta: "Ask for hands-on help or guidance." },
+            { label: "Visibility", value: "One intake", meta: "Requests stay visible to the right routes." },
+          ]}
+          preview={
+            <PreviewFrame
+              chromeLabel="Request flow"
+              eyebrow="What happens next"
+              title="A short request still needs enough signal."
+              body="Category, location, and a practical description are enough to start matching help."
+            >
+              <ActionRail
+                compact
+                items={[
+                  { eyebrow: "1", title: "Describe the real blocker", body: "State the task, risk, or tool gap as clearly as possible." },
+                  { eyebrow: "2", title: "Choose the right lane", body: "Installation, tools, advice, maintenance, or community work." },
+                  { eyebrow: "3", title: "Surface the next response", body: "Helpers can respond with fit, availability, or a better route." },
+                ]}
+              />
+            </PreviewFrame>
+          }
+        />
 
-        {submitted && (
-          <div className="rounded-2xl border border-solara-blue/30 bg-solara-blue/10 px-4 py-3 text-sm font-semibold text-solara-navy shadow-sm dark:border-solara-gold/30 dark:bg-solara-gold/10 dark:text-solara-gold">
-            Thanks! This mock alert confirms your request would be visible to helpers.
-          </div>
-        )}
+        <FormShell
+          eyebrow="Request intake"
+          title="Send a request helpers can act on."
+          body="Keep it short, but specific enough that someone can tell whether they fit."
+          layout="split"
+          lead={
+            <MetricBand
+              compact
+              items={[
+                { label: "Best requests", value: "Specific brief", meta: "Name the work, location, and any safety constraints." },
+                { label: "Fastest replies", value: "Clear category", meta: "Helpers can route themselves faster when the lane is obvious." },
+              ]}
+            />
+          }
+          aside={
+            <PreviewFrame chromeLabel="Before you submit" viewportClassName="pt-0">
+              <ActionRail
+                compact
+                items={[
+                  { eyebrow: "Include", title: "Location and job type", body: "City, neighborhood, and the category that best matches the work." },
+                  { eyebrow: "Mention", title: "Urgency and constraints", body: "Access issues, timing, budget guardrails, or safety concerns." },
+                  { eyebrow: "Keep", title: "The ask practical", body: "Enough detail to respond, without turning this into a full project brief." },
+                ]}
+              />
+            </PreviewFrame>
+          }
+        >
+          {submitted && (
+            <div
+              role="status"
+              aria-live="polite"
+              className="rounded-[1rem] border border-[var(--solara-accent-soft)] bg-[var(--solara-accent-soft)]/50 px-4 py-3 text-sm font-semibold text-[var(--solara-text-strong)]"
+            >
+              Thanks. This mock request is now staged as a visible helper handoff.
+            </div>
+          )}
 
-        <form onSubmit={handleSubmit} className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/85 p-6 shadow-xl backdrop-blur dark:border-white/10 dark:bg-[#050a16]/85">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(212,175,55,0.06),transparent_40%)]" />
-          <div className="relative space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div className="space-y-2">
-              <label htmlFor="name" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+              <label htmlFor="name" className="text-sm font-semibold text-[var(--solara-text-strong)]">
                 Name
               </label>
               <input
@@ -43,20 +106,20 @@ const RequestHelp = () => {
                 name="name"
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+                className={fieldClassName}
                 placeholder="Your name"
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="category" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+              <label htmlFor="category" className="text-sm font-semibold text-[var(--solara-text-strong)]">
                 Help category
               </label>
               <select
                 id="category"
                 name="category"
                 required
-                className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+                className={fieldClassName}
               >
                 <option value="">Choose a category</option>
                 {categories.map((category) => (
@@ -68,7 +131,7 @@ const RequestHelp = () => {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="description" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+              <label htmlFor="description" className="text-sm font-semibold text-[var(--solara-text-strong)]">
                 Description
               </label>
               <textarea
@@ -76,13 +139,13 @@ const RequestHelp = () => {
                 name="description"
                 rows="4"
                 required
-                className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+                className={fieldClassName}
                 placeholder="Describe what you need help with..."
               />
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="location" className="text-sm font-semibold text-slate-800 dark:text-slate-100">
+              <label htmlFor="location" className="text-sm font-semibold text-[var(--solara-text-strong)]">
                 Location
               </label>
               <input
@@ -90,7 +153,7 @@ const RequestHelp = () => {
                 name="location"
                 type="text"
                 required
-                className="w-full rounded-xl border border-white/60 bg-white/80 px-4 py-3 text-sm text-slate-900 shadow-sm outline-none ring-1 ring-white/60 transition-all duration-200 placeholder:text-slate-400 focus:border-solara-blue focus:ring-solara-blue/50 dark:border-white/10 dark:bg-white/10 dark:text-white dark:ring-white/10 dark:placeholder:text-slate-400 dark:focus:border-solara-gold dark:focus:ring-solara-gold/50"
+                className={fieldClassName}
                 placeholder="City or neighborhood"
               />
             </div>
@@ -107,10 +170,10 @@ const RequestHelp = () => {
                 </svg>
               </button>
             </div>
-          </div>
-        </form>
-      </SectionContainer>
-    </div>
+          </form>
+        </FormShell>
+      </PageReveal>
+    </PageFrame>
   );
 };
 

@@ -4,7 +4,7 @@ import { useEcoMode } from "../../hooks/useEcoMode";
 
 const stats = [
   { label: "Active Helpers", value: "2,500+", color: "blue" },
-  { label: "kWh Shared", value: "1.2M", color: "gold" },
+  { label: "kWh Shared", value: "1.2M", color: "sky" },
   { label: "Communities", value: "150+", color: "sky" },
 ];
 
